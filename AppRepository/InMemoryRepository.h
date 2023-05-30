@@ -2,18 +2,21 @@
 #define SCOOTER_RENTAL_GUI_INMEMORYREPOSITORY_H
 
 #include "CrudRepository.h"
+#include "ISubject.h"
+#include "../Utils/auxiliaryFunctions.h"
 
 #include <vector>
 #include <sstream>
 #include <fstream>
 
-using repository::CrudRepository;
+using repository::CrudRepository, repository::ISubject;
+using utils::compareDates, utils::checkDateFormat;
 using std::ifstream;
 
 namespace repository
 {
 
-    class InMemoryRepository : public CrudRepository{
+    class InMemoryRepository : public CrudRepository, public ISubject{
     protected:
         string dataFileName;
 
@@ -79,7 +82,7 @@ namespace repository
         /// \return scooters with given id
         Scooter getScooterById (string id) override;
 
-//        /// Gets all scooters reserved by an user
+//        /// Gets all scooters reserved by a user
 //        /// \param userName
 //        /// \return matching scooters
 //        vector<Scooter> getAllScootersReservedByAnUser (string userName) override;

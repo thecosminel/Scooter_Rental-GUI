@@ -113,10 +113,10 @@ namespace repository
         for (const Scooter& scooter : scooters)
         {
             string date = scooter.getDate();
-//            if (compareManufacturingDates(dateMin, date) && compareManufacturingDates(date, dateMax))
-//            {
-//                result.push_back(scooter);
-//            }
+            if (compareDates(dateMin, date) && compareDates(date, dateMax))
+            {
+                result.push_back(scooter);
+            }
         }
         return result;
     }
@@ -173,6 +173,10 @@ namespace repository
                 std::getline(ss, identifier, ',');
                 std::getline(ss, model, ',');
                 std::getline(ss, date, ',');
+                if (!checkDateFormat(date))
+                {
+                    throw std::invalid_argument("File contains invalid dates!");
+                }
                 ss >> kilometers;
                 ss.ignore(); // Ignore the comma after 'kilometers'
                 std::getline(ss, location, ',');
