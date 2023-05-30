@@ -11,7 +11,7 @@ scooter::Scooter::Scooter()
     this->manufacturingDate = "";
     this->kilometers = 0.0;
     this->location = "";
-    this->status = PARKED;
+    this->status = UNKNOWN;
 }
 
 scooter::Scooter::Scooter(string identifier, string model, string date, double kilometers, string location, ScooterStatus status)

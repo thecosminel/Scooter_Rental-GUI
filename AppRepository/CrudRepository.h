@@ -2,12 +2,11 @@
 #define SCOOTER_RENTAL_GUI_CRUDREPOSITORY_H
 
 #include <vector>
-#include <cstring>
 
 #include "../Domain/Scooter.h"
 using namespace scooter;
 
-using std::vector, std::string, std::strcmp;
+using std::vector, std::string;
 
 namespace repository
 {
