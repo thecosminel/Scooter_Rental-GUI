@@ -6,6 +6,8 @@ set(CMAKE_CXX_STANDARD 20)
 include_directories(Domain)
 
 add_executable(ScooterRental_GUI
+        Main.cpp
         Domain/Scooter.cpp
         Domain/Scooter.h
-        Main.cpp)
+        AppRepository/CrudRepository.h
+        AppRepository/CrudRepository.cpp)
