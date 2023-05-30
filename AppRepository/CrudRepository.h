@@ -77,10 +77,10 @@ namespace repository
         /// \return scooters with given id
         virtual Scooter getScooterById (string id) = 0;
 
-        /// Gets all scooters reserved by an user
-        /// \param userName
-        /// \return matching scooters
-        virtual vector<Scooter> getAllScootersReservedByAnUser (string userName) = 0;
+//        /// Gets all scooters reserved by an user
+//        /// \param userName
+//        /// \return matching scooters
+//        virtual vector<Scooter> getAllScootersReservedByAnUser (string userName) = 0;
     };
 }
 

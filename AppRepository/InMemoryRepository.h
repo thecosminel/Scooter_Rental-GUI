@@ -17,13 +17,16 @@ namespace repository
 {
 
     class InMemoryRepository : public CrudRepository, public ISubject{
+    private:
+        void loadFromFile();
+
     protected:
         string dataFileName;
 
     public:
         // Constructors & destructors
-        /// Default constructor
-        explicit InMemoryRepository(const string& fileName = "./Database/data.csv");
+        /// Constructor
+        explicit InMemoryRepository(const string& fileName = "Database/data.csv");
 
         /// Default copy constructor
         InMemoryRepository(InMemoryRepository &repository) = default;
@@ -87,10 +90,6 @@ namespace repository
 //        /// \return matching scooters
 //        vector<Scooter> getAllScootersReservedByAnUser (string userName) override;
 
-
-        // -----------------------------------------------
-        // New methods
-        void loadFromFile(const string& fileName);
     };
 
 }

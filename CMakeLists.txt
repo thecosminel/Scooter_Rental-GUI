@@ -10,4 +10,4 @@ add_executable(ScooterRental_GUI
         Domain/Scooter.cpp
         Domain/Scooter.h
         AppRepository/CrudRepository.h
-        AppRepository/CrudRepository.cpp AppRepository/InMemoryRepository.h AppRepository/InMemoryRepository.cpp Utils/auxiliaryFunctions.h Utils/auxiliaryFunctions.cpp AppRepository/ISubject.h AppRepository/ISubject.cpp AppController/IObserver.h AppController/IObserver.cpp)
+        AppRepository/CrudRepository.cpp AppRepository/InMemoryRepository.h AppRepository/InMemoryRepository.cpp Utils/auxiliaryFunctions.h Utils/auxiliaryFunctions.cpp AppRepository/ISubject.h AppRepository/ISubject.cpp AppController/IObserver.h AppController/IObserver.cpp AppRepository/CsvFileRepository.h AppRepository/CsvRepository.cpp AppController/AbstractController.h AppController/AbstractController.cpp)

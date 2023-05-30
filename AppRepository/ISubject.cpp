@@ -3,12 +3,12 @@
 namespace repository
 {
 
-    void ISubject::attach(IObserver *newObserver)
+    void ISubject::attach(const shared_ptr<IObserver>& newObserver)
     {
         observers.insert(newObserver);
     }
 
-    void ISubject::detach(IObserver *removedObserver)
+    void ISubject::detach(const shared_ptr<IObserver>& removedObserver)
     {
         auto it = std::find(observers.begin(), observers.end(), removedObserver);
         if (it != observers.end())
@@ -19,7 +19,7 @@ namespace repository
 
     void ISubject::notify(const string &data)
     {
-        for (auto observer : observers) {
+        for (const auto& observer : observers) {
             observer->update(data);
         }
     }

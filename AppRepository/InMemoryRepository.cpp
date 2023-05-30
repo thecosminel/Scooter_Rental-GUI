@@ -7,7 +7,7 @@ namespace repository
     repository::InMemoryRepository::InMemoryRepository(const string& fileName)
     {
         dataFileName = fileName;
-        loadFromFile(dataFileName);
+        loadFromFile();
     }
 
     InMemoryRepository &repository::InMemoryRepository::operator=(const repository::InMemoryRepository &other) {
@@ -68,6 +68,7 @@ namespace repository
         auto result = std::vector<Scooter>();
         for (const auto& scooter : scooters)
             result.push_back(scooter);
+        notify("getAllScootersFromRepo!");
         return result;
     }
 
@@ -149,9 +150,9 @@ namespace repository
 
     // -----------------------------------------------
     // New methods
-    void InMemoryRepository::loadFromFile(const std::string& fileName)
+    void InMemoryRepository::loadFromFile()
     {
-        ifstream file(fileName);
+        ifstream file(dataFileName);
         std::string line;
         std::getline(file, line);
         if (file.is_open())
@@ -166,7 +167,6 @@ namespace repository
                 std::string date;
                 double kilometers;
                 std::string location;
-                string userName;
                 int status;
 
                 // Read each element separated by commas
@@ -180,7 +180,6 @@ namespace repository
                 ss >> kilometers;
                 ss.ignore(); // Ignore the comma after 'kilometers'
                 std::getline(ss, location, ',');
-                std::getline(ss, userName, ',');
                 ss >> status;
 
                 auto scooterStatus = static_cast<ScooterStatus>(status);

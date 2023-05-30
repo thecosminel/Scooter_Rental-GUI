@@ -9,7 +9,10 @@ namespace controller {
 
     class IObserver {
     public:
-        virtual void update(const string& data) = 0;
+        IObserver() = default;
+
+//        virtual void update(const string& data) = 0;
+        void update(const string& data);
     };
 
 }
