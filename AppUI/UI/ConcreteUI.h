@@ -1,8 +1,8 @@
 #ifndef SCOOTER_RENTAL_GUI_CONCRETEUI_H
 #define SCOOTER_RENTAL_GUI_CONCRETEUI_H
 
-#include "AbstractUI.h"
-#include "../Utils/UI_printFunctions.h"
+#include "../AbstractUI.h"
+#include "../../Utils/UI_printFunctions.h"
 
 #include <iostream>
 
@@ -12,7 +12,7 @@ using std::cout, std::endl;
 
 namespace ui {
 
-    class ConcreteUI : AbstractUI {
+    class ConcreteUI : public AbstractUI{
     public:
         // ------------------------
         // Constructors & destructors
@@ -31,15 +31,16 @@ namespace ui {
         /// Default destructor
         ~ConcreteUI() = default;
 
-        // ------------------------
-        // Menu
-
-
-        // ------------------------
         // Printing methods
         void printScooterContainer(vector<Scooter> scooters) override;
 
         void printMessage(string message) override;
+
+        // ------------------------
+        // Non override
+//        void printScootersSortedByID();
+
+//        void printScootersSortedByManufacturingDate();
     };
 
 } // ui

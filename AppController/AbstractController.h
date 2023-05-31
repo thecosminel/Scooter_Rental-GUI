@@ -1,12 +1,14 @@
 #ifndef SCOOTER_RENTAL_GUI_ABSTRACTCONTROLLER_H
 #define SCOOTER_RENTAL_GUI_ABSTRACTCONTROLLER_H
 
-#include "../AppRepository/InMemoryRepository.h"
+#include "../AppRepository/CrudRepository.h"
+#include "../AppUI/AbstractUI.h"
 #include "../Domain/Scooter.h"
 
 #include "memory"
 
 using repository::CrudRepository;
+using ui::AbstractUI;
 using namespace scooter;
 using std::shared_ptr;
 
@@ -15,14 +17,14 @@ namespace controller {
     class AbstractController{
     protected:
         shared_ptr<CrudRepository> repo;
-        vector<Scooter> lastContainer;
+        shared_ptr<AbstractUI> ui;
 
     public:
         // ----------------------------
         // Constructors & destructors
         /// Constructor
         /// \param repo
-        explicit AbstractController(shared_ptr<CrudRepository> repo);
+        explicit AbstractController(shared_ptr<CrudRepository> repo, shared_ptr<AbstractUI> ui);
 
         ///Copy-constructor
         AbstractController(AbstractController& controller) = default;

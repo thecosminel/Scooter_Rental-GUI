@@ -13,8 +13,8 @@ add_executable(ScooterRental_GUI
         AppRepository/CrudRepository.cpp
         AppRepository/InMemoryRepository.h
         AppRepository/InMemoryRepository.cpp
-        Utils/auxiliaryFunctions.h
-        Utils/auxiliaryFunctions.cpp
+        Utils/data_validation_functions.h
+        Utils/data_validation_functions.cpp
         AppRepository/ISubject.h
         AppRepository/ISubject.cpp
         AppController/IObserver.h
@@ -27,9 +27,9 @@ add_executable(ScooterRental_GUI
         AppController/ConcreteController.h
         AppUI/AbstractUI.cpp
         AppUI/AbstractUI.h
-        AppUI/ConcreteUI.cpp
-        AppUI/ConcreteUI.h
+        AppUI/UI/ConcreteUI.cpp
+        AppUI/UI/ConcreteUI.h
         AppUI/ISubject.cpp
         AppUI/ISubject.h
         Utils/UI_printFunctions.cpp
-        Utils/UI_printFunctions.h)
+        Utils/UI_printFunctions.h AppUI/UI/ManagerUI.cpp AppUI/UI/ManagerUI.h AppUI/UI/UserUI.cpp AppUI/UI/UserUI.h AppUI/UI/MainUI.cpp AppUI/UI/MainUI.h Utils/UI_enterData.cpp Utils/UI_enterData.h)

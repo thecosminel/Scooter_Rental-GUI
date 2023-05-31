@@ -1,7 +1,12 @@
 #include "AbstractUI.h"
 
-namespace ui {
+namespace ui
+{
 
-
+    AbstractUI::AbstractUI()
+    {
+        user = "";
+        password = "";
+    }
 
 } // ui

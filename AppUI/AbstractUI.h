@@ -12,12 +12,15 @@ using std::vector, std::string;
 namespace ui {
 
     class AbstractUI {
+    protected:
+        string user;
+        string password;
 
     public:
         // ------------------------
         // Constructors & destructors
         /// Default constructor
-        AbstractUI() = default;
+        AbstractUI();
 
         /// Default copy constructor
         /// \param ui
@@ -36,8 +39,6 @@ namespace ui {
         virtual void printScooterContainer(vector<Scooter>) = 0;
 
         virtual void printMessage(string message) = 0;
-
-
     };
 
 } // ui

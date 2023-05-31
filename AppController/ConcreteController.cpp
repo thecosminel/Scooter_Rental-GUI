@@ -6,7 +6,7 @@ namespace controller
 {
     // ----------------------------
     // Constructors & destructors
-    ConcreteController::ConcreteController(shared_ptr<CrudRepository> repo) : AbstractController(std::move(repo)) {}
+    ConcreteController::ConcreteController(shared_ptr<CrudRepository> repo, shared_ptr<AbstractUI> ui) : AbstractController(std::move(repo), std::move(ui)) {}
 
 
     // ----------------------------

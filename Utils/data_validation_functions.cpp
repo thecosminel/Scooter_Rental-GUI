@@ -1,4 +1,4 @@
-#include "auxiliaryFunctions.h"
+#include "data_validation_functions.h"
 
 namespace utils
 {
@@ -52,5 +52,17 @@ namespace utils
         else if (day1 >= day2)
             return false;
         return false; // To avoid error
+    }
+
+    bool checkAlphanumericString(const string& str)
+    {
+        for(char c : str) // NOLINT
+        {
+            if (!isalnum(c))
+            {
+                return false;
+            }
+        }
+        return true;
     }
 }

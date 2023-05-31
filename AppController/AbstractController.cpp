@@ -8,8 +8,9 @@ namespace controller
         UPDATE
     };
 
-    AbstractController::AbstractController(shared_ptr<CrudRepository> repo)
+    AbstractController::AbstractController(shared_ptr<CrudRepository> repo, shared_ptr<AbstractUI> ui)
     {
         this->repo = repo; // NOLINT
+        this->ui = ui; //NOLINT
     }
 }

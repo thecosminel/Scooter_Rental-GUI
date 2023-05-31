@@ -14,7 +14,7 @@ namespace controller {
         // Constructors & destructors
         /// Constructor
         /// \param repo
-        explicit ConcreteController(shared_ptr<CrudRepository> repo);
+        explicit ConcreteController(shared_ptr<CrudRepository> repo, shared_ptr<AbstractUI> ui);
 
         ///Copy-constructor
         ConcreteController(ConcreteController& controller) = default;

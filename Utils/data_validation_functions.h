@@ -22,6 +22,11 @@ namespace utils {
     /// \return date 1 < date 2
     bool compareDates(const string& date1, const string& date2);
 
+    /// Checks if a string is alphanumeric
+    /// \param str
+    /// \return true/false
+    bool checkAlphanumericString(const string& str);
+
 }
 
 #endif
