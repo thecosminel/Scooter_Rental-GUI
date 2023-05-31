@@ -41,14 +41,15 @@ namespace repository
             }
             it++;
         }
+        notify("No scooter deleted! Invalid ID");
     }
 
-    void InMemoryRepository::updateScooterInfo(const Scooter &oldScooter, const Scooter &updatedScooter)
+    void InMemoryRepository::updateScooterInfo(const Scooter &updatedScooter)
     {
         // Searches the oldScooter in the repository based on its identifier
         //iterator to find 'oldScooter' object in the 'electricScooters' vector
         auto it = scooters.begin();
-        while (it != scooters.end() && !(*it).checkIfSameIdentifier(oldScooter))
+        while (it != scooters.end() && !(*it).checkIfSameIdentifier(updatedScooter))
         {
             it++;
         }
@@ -188,6 +189,11 @@ namespace repository
             }
             file.close();
         }
+    }
+
+    vector<Scooter> InMemoryRepository::getAllScootersReservedByAnUser(string userName)
+    {
+        //TODO - Implementation
     }
 
 

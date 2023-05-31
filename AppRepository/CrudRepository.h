@@ -43,7 +43,7 @@ namespace repository
         /// Updates an existing electric oldScooter in the repository
         /// \param oldScooter
         /// \param updatedScooter
-        virtual void updateScooterInfo(const Scooter& oldScooter, const Scooter& updatedScooter) = 0;
+        virtual void updateScooterInfo(const Scooter& updatedScooter) = 0;
 
         /// Gets all the electric scooters in the repository
         /// \return
@@ -77,10 +77,10 @@ namespace repository
         /// \return scooters with given id
         virtual Scooter getScooterById (string id) = 0;
 
-//        /// Gets all scooters reserved by an user
-//        /// \param userName
-//        /// \return matching scooters
-//        virtual vector<Scooter> getAllScootersReservedByAnUser (string userName) = 0;
+        /// Gets all scooters reserved by an user
+        /// \param userName
+        /// \return matching scooters
+        virtual vector<Scooter> getAllScootersReservedByAnUser (string userName) = 0;
     };
 }
 

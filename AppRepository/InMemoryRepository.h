@@ -51,7 +51,7 @@ namespace repository
 
         /// Updates an existing electric oldScooter in the repository
         /// \param oldScooter
-        void updateScooterInfo(const Scooter& oldScooter, const Scooter& updatedScooter) override;
+        void updateScooterInfo(const Scooter& updatedScooter) override;
 
         /// Gets all the electric scooters in the repository
         /// \return
@@ -85,10 +85,10 @@ namespace repository
         /// \return scooters with given id
         Scooter getScooterById (string id) override;
 
-//        /// Gets all scooters reserved by a user
-//        /// \param userName
-//        /// \return matching scooters
-//        vector<Scooter> getAllScootersReservedByAnUser (string userName) override;
+        /// Gets all scooters reserved by a user
+        /// \param userName
+        /// \return matching scooters
+        vector<Scooter> getAllScootersReservedByAnUser (string userName) override;
 
     };
 

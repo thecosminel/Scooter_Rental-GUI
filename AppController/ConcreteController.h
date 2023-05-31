@@ -1,90 +1,83 @@
-#ifndef SCOOTER_RENTAL_GUI_ABSTRACTCONTROLLER_H
-#define SCOOTER_RENTAL_GUI_ABSTRACTCONTROLLER_H
+#ifndef SCOOTER_RENTAL_GUI_CONCRETECONTROLLER_H
+#define SCOOTER_RENTAL_GUI_CONCRETECONTROLLER_H
 
-#include "../AppRepository/InMemoryRepository.h"
-#include "../Domain/Scooter.h"
+#include "IObserver.h"
+#include "AbstractController.h"
 
-#include "memory"
-
-using repository::CrudRepository;
-using namespace scooter;
-using std::shared_ptr;
+using controller::AbstractController;
 
 namespace controller {
 
-    class AbstractController{
-    protected:
-        shared_ptr<CrudRepository> repo;
-
+    class ConcreteController  : public AbstractController, public IObserver {
     public:
         // ----------------------------
         // Constructors & destructors
         /// Constructor
         /// \param repo
-        explicit AbstractController(shared_ptr<CrudRepository> repo);
+        explicit ConcreteController(shared_ptr<CrudRepository> repo);
 
         ///Copy-constructor
-        AbstractController(AbstractController& controller) = default;
+        ConcreteController(ConcreteController& controller) = default;
 
         ///Assignment operator
-        AbstractController& operator=(const AbstractController& repository) = default;
+        ConcreteController& operator=(const ConcreteController& repository) = default;
 
         ///Destructor
-        ~AbstractController() = default;
+        ~ConcreteController() = default;
 
         // ----------------------------
         // Create, Update, Delete
         /// Adds scooter to repo
         /// \param newScooter
-        virtual void addScooterToRepo(Scooter newScooter) = 0;
+        void addScooterToRepo(Scooter newScooter) override;
 
         /// Removes scooter from repo
         /// \param removedScooter
-        virtual void deleteScooterFomRepo(Scooter removedScooter) = 0;
+        void deleteScooterFomRepo(Scooter removedScooter) override;
 
         /// Update scooter in repo
         /// \param updatedScooter
-        virtual void updateScooterFromRepo(Scooter updatedScooter) = 0;
+        void updateScooterFromRepo(Scooter updatedScooter) override;
 
         /// Reserve scooter
         /// \param ID scooter ID
         /// \return true if the scooter was successfully reserved, false otherwise
-        virtual void reserveScooter(const string& ID, const string& username) = 0;
+        void reserveScooter(const string& ID, const string& username) override;
 
         // ----------------------------
         // Read - filter
         /// Filter scooters by location
         /// \param location string after which to search scooter
         /// \return shared pointer to a vector of scooters that contain the given location string
-        virtual void filterScootersByLocation(string location) = 0;
+        void filterScootersByLocation(string location) override;
 
         /// Filter scooters that have Km in between two specified values
         /// \param kmMin minimum value to filter
         /// \param kmMax maximum value to filter
         /// \return shared pointer to a vector of scooters that have a km value in between the given values
-        virtual void filterScootersByKmBetweenTwoValues(double kmMin, double kmMax) = 0;
+        void filterScootersByKmBetweenTwoValues(double kmMin, double kmMax) override;
 
         /// Filter scooters that have been manufactured in between the given dates
         /// \param dateMin minimum date to filter
         /// \param dateMax maximum date to filter
         /// \return shared pointer to a vector of scooters that have been manufactured in between the given dates
-        virtual void filterScootersByAgeBetweenTwoDates(string dateMin, string dateMax) = 0;
+        void filterScootersByAgeBetweenTwoDates(string dateMin, string dateMax) override;
 
         /// Filter parked scooters
         /// \return shared pointer to a vector of scooters that are currently parked
-        virtual void filterParkedScooters() = 0;
+        void filterParkedScooters() override;
 
         // ----------------------------
         // Read - sort
         /// Sort scooters by ID lexicographically
         /// \return shared pointer to a vector of scooters that have been sorted by their ID
-        virtual void sortScootersByID() = 0;
+        void sortScootersByID() override;
 
         /// Sort scooters by manufacturing date ascending
         /// \return shared pointer to a vector of scooters that have been sorted by their age
-        virtual void sortScootersByManufacturingDate() = 0;
+        void sortScootersByManufacturingDate() override;
     };
 
 } // controller
 
-#endif //SCOOTER_RENTAL_GUI_ABSTRACTCONTROLLER_H
+#endif //SCOOTER_RENTAL_GUI_CONCRETECONTROLLER_H
