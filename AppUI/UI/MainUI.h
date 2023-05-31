@@ -40,6 +40,10 @@ namespace ui
 
         void logIn();
 
+        // ------------------------
+        // Manager & User methods
+        void displayAllScootersSortedByAge();
+        void displayAllScootersSortedByID();
     };
 
 } // ui

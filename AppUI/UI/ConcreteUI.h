@@ -2,17 +2,19 @@
 #define SCOOTER_RENTAL_GUI_CONCRETEUI_H
 
 #include "../AbstractUI.h"
+#include "../ISubject.h"
 #include "../../Utils/UI_printFunctions.h"
 
 #include <iostream>
 
 using ui::AbstractUI;
+
 using namespace utils;
 using std::cout, std::endl;
 
 namespace ui {
 
-    class ConcreteUI : public AbstractUI{
+    class ConcreteUI : public AbstractUI, public ISubject{
     public:
         // ------------------------
         // Constructors & destructors

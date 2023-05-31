@@ -9,18 +9,19 @@ using std::make_shared;
 
 void function()
 {
-    auto r = make_shared<CsvFileRepository>();
+    auto repo = make_shared<CsvFileRepository>();
     auto ui = make_shared<MainUI>();
 
-    auto c = make_shared<ConcreteController>(r, ui);
-    r->attach(c);
+    auto ctrl = make_shared<ConcreteController>(repo, ui);
+
+    repo->attach(ctrl);
+    ui->attach(ctrl);
 
     ui->run();
-    r->getAllScootersFromRepo();
+    repo->getAllScootersFromRepo();
 
-
-
-    r->detach(c);
+    ui->detach(ctrl);
+    repo->detach(ctrl);
 }
 
 int main()
