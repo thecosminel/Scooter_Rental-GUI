@@ -15,6 +15,7 @@ namespace controller {
     class AbstractController{
     protected:
         shared_ptr<CrudRepository> repo;
+        vector<Scooter> lastContainer;
 
     public:
         // ----------------------------

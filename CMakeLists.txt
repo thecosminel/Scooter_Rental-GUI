@@ -22,4 +22,14 @@ add_executable(ScooterRental_GUI
         AppRepository/CsvFileRepository.h
         AppRepository/CsvRepository.cpp
         AppController/AbstractController.h
-        AppController/AbstractController.cpp AppController/ConcreteController.cpp AppController/ConcreteController.h)
+        AppController/AbstractController.cpp
+        AppController/ConcreteController.cpp
+        AppController/ConcreteController.h
+        AppUI/AbstractUI.cpp
+        AppUI/AbstractUI.h
+        AppUI/ConcreteUI.cpp
+        AppUI/ConcreteUI.h
+        AppUI/ISubject.cpp
+        AppUI/ISubject.h
+        Utils/UI_printFunctions.cpp
+        Utils/UI_printFunctions.h)
