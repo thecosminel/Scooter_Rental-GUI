@@ -57,7 +57,7 @@ namespace ui
             {
                 case '1':
                     cout << "Add new scooter: ";
-    //                addNewScooter();
+                    addNewScooter();
                     break;
                 case '2':
                     cout << "Delete existing scooter: ";
@@ -129,6 +129,25 @@ namespace ui
     void MainUI::displayAllScootersSortedByID()
     {
 
+    }
+
+    void MainUI::addNewScooter()
+    {
+        cout << endl << "You have selected to add a new Scooter";
+//        string model = enterModel();
+//        string identifier = "NIL";
+//        string manufacturingDate = enterManufacturingDate();
+//        double km = enterKm();
+//        string location = enterLocation();
+//        ScooterStatus status = enterStatus();
+        string model = "Yamaha";
+        string identifier = "NIL";
+        string manufacturingDate = "10.10.2020";
+        double km = 12.34;
+        string location = "Bosanci";
+        ScooterStatus status = PARKED;
+        Scooter newScooter(identifier, model, manufacturingDate, km, location, status);
+        ConcreteUI::callCUD(controller::ADD,newScooter);
     }
 
 } // ui

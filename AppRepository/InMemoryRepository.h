@@ -10,7 +10,7 @@
 #include <fstream>
 
 using repository::CrudRepository, repository::ISubject;
-using utils::compareDates, utils::checkDateFormat;
+using utils::compareDates, utils::checkDateFormat, utils::compareNamesAlphabetically;
 using std::ifstream;
 
 namespace repository
@@ -26,7 +26,7 @@ namespace repository
     public:
         // Constructors & destructors
         /// Constructor
-        explicit InMemoryRepository(const string& fileName = "Database/data.csv");
+        explicit InMemoryRepository(const string& fileName = "../Database/data.csv");
 
         /// Default copy constructor
         InMemoryRepository(InMemoryRepository &repository) = default;
@@ -90,6 +90,8 @@ namespace repository
         /// \return matching scooters
         vector<Scooter> getAllScootersReservedByAnUser (string userName) override;
 
+        /// Gets all identifiers in repo
+        vector<string> getAllIdentifiers() override;
     };
 
 }

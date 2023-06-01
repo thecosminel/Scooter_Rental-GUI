@@ -44,6 +44,10 @@ namespace ui
         // Manager & User methods
         void displayAllScootersSortedByAge();
         void displayAllScootersSortedByID();
+
+        // -------------------------
+        // Manager UI only
+        void addNewScooter();
     };
 
 } // ui

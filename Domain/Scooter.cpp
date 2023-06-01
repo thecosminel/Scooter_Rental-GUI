@@ -80,6 +80,11 @@ ScooterStatus scooter::Scooter::getStatus() const
 
 
 // Setters
+void scooter::Scooter::setIdentifier(string id)
+{
+    this->identifier = std::move(id);
+}
+
 void scooter::Scooter::setModel(string newModel)
 {
     this->model = std::move(newModel);
@@ -110,3 +115,5 @@ bool scooter::Scooter::checkIfSameIdentifier(const Scooter &scooter)
 {
     return this->identifier == scooter.identifier;
 }
+
+

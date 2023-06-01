@@ -13,6 +13,8 @@ namespace controller
     // Create, Update, Delete
     void ConcreteController::addScooterToRepo(Scooter newScooter)
     {
+        string newIdentifier = generateNewId();
+        newScooter.setIdentifier(newIdentifier);
         repo->addScooter(newScooter);
     }
 
@@ -76,6 +78,56 @@ namespace controller
         //TODO - Implementation
         // Sort by date
         // Print the result in UI
+    }
+
+    // ------------------------------
+    // IObserver override
+    void ConcreteController::update(const string &data)
+    {
+        ui->printMessage(data);
+    }
+
+    void ConcreteController::scooterCUD(Operations operation, const Scooter& scooter)
+    {
+        switch (operation)
+        {
+            case ADD:
+                addScooterToRepo(scooter);
+                break;
+            case REMOVE:
+                deleteScooterFomRepo(scooter);
+                break;
+            case UPDATE:
+                updateScooterFromRepo(scooter);
+                break;
+            default:
+                throw std::invalid_argument("Not a CUD operation!!");
+        }
+    }
+
+    // Utils
+    string ConcreteController::generateNewId()
+    {
+        vector<string> allIdsInRepo = repo->getAllIdentifiers();
+        string newId;
+        bool usable;
+        do 
+        {
+            newId = generateRandomID();
+            usable = true;
+            for (const auto& id : allIdsInRepo)
+            {
+                if (newId == id)
+                {
+                    usable = false;
+                    break;
+                }
+            }
+            if (usable)
+            {
+                return newId;
+            }
+        } while (true);
     }
 
 

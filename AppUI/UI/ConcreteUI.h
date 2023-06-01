@@ -2,13 +2,12 @@
 #define SCOOTER_RENTAL_GUI_CONCRETEUI_H
 
 #include "../AbstractUI.h"
-#include "../ISubject.h"
 #include "../../Utils/UI_printFunctions.h"
+#include "../ISubject.h"
 
 #include <iostream>
 
 using ui::AbstractUI;
-
 using namespace utils;
 using std::cout, std::endl;
 
@@ -39,10 +38,16 @@ namespace ui {
         void printMessage(string message) override;
 
         // ------------------------
+        // ISubject
+        void callCUD(Operations operation, const Scooter &scooter);
+
+        // ------------------------
         // Non override
 //        void printScootersSortedByID();
 
 //        void printScootersSortedByManufacturingDate();
+
+
     };
 
 } // ui

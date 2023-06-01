@@ -15,7 +15,7 @@ namespace repository {
 
     public:
         /// Default constructor
-        explicit CsvFileRepository(const string& fileName = "Database/data.csv");
+        explicit CsvFileRepository(const string& fileName = "../Database/data.csv");
 
         /// Default copy constructor
         CsvFileRepository(CsvFileRepository &repository) = default;

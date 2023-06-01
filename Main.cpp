@@ -3,8 +3,8 @@
 #include "AppUI/UI/MainUI.h"
 
 using controller::AbstractController, controller::ConcreteController;
-using namespace ui;
-using namespace repository;
+using repository::CsvFileRepository;
+using ui::MainUI;
 using std::make_shared;
 
 void function()

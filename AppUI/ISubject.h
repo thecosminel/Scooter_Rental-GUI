@@ -1,5 +1,5 @@
-#ifndef SCOOTER_RENTAL_GUI_ISUBJECT_H
-#define SCOOTER_RENTAL_GUI_ISUBJECT_H
+#ifndef SCOOTER_RENTAL_GUI_ISUBJECTUI_H
+#define SCOOTER_RENTAL_GUI_ISUBJECTUI_H
 
 #include <../AppController/IObserver.h>
 
@@ -7,12 +7,15 @@
 #include <memory>
 
 using controller::IObserver;
+using controller::Operations;
+using controller::ADD, controller::UPDATE, controller::REMOVE;
+using controller::Operations;
 using std::set, std::shared_ptr, std::string;
 
 namespace ui {
 
     class ISubject {
-    private:
+    protected:
         set<shared_ptr<IObserver>> observers;
 
     public:
@@ -23,8 +26,13 @@ namespace ui {
         void detach(const shared_ptr<IObserver>& removedObserver);
 
         void notify(const string& data);
+
+        /// Add, update, remove scooter
+        /// \param operation
+        /// \param scooter
+        virtual void callCUD(Operations operation, const Scooter& scooter) = 0;
     };
 
 } // ui
 
-#endif //SCOOTER_RENTAL_GUI_ISUBJECT_H
+#endif //SCOOTER_RENTAL_GUI_ISUBJECTUI_H

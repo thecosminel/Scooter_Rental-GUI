@@ -3,12 +3,16 @@
 
 #include "IObserver.h"
 #include "AbstractController.h"
+#include "../Utils/data_validation_functions.h"
 
-using controller::AbstractController;
+using namespace controller;
+using utils::generateRandomID;
 
 namespace controller {
 
     class ConcreteController  : public AbstractController, public IObserver {
+    private:
+        string generateNewId();
     public:
         // ----------------------------
         // Constructors & destructors
@@ -76,6 +80,15 @@ namespace controller {
         /// Sort scooters by manufacturing date ascending
         /// \return shared pointer to a vector of scooters that have been sorted by their age
         void sortScootersByManufacturingDate() override;
+
+        // ------------------------------
+        // IObserver override
+        void update(const string &data) override;
+
+        /// Create, Update, Remove scooter
+        /// \param operation
+        /// \param scooter
+        void scooterCUD(Operations operation, const Scooter& scooter) override;
     };
 
 } // controller

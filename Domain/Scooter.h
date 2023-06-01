@@ -57,6 +57,9 @@ namespace scooter
         /// Getter method for the scooter's status
         [[nodiscard]] ScooterStatus getStatus() const;
 
+        /// Setter method for the scooter identifier
+        void setIdentifier(string id);
+
         /// Setter method for the scooter model
         void setModel(string model);
 

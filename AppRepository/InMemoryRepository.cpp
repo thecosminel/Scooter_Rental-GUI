@@ -25,7 +25,18 @@ namespace repository
     // CRUD
     void InMemoryRepository::addScooter(const Scooter &scooter)
     {
-        scooters.push_back(scooter);
+        int index = 0;
+        while (index < scooters.size() && compareNamesAlphabetically(scooters[index].getIdentifier(), scooter.getIdentifier()))
+        {
+            index++;
+        }
+        if (index == scooters.size())
+            scooters.push_back(scooter);
+        else
+        {
+            scooters.insert(scooters.begin() + index, scooter);
+        }
+        notify("Scooter added!");
     }
 
     void InMemoryRepository::deleteScooter(const Scooter &scooter)
@@ -194,6 +205,16 @@ namespace repository
     vector<Scooter> InMemoryRepository::getAllScootersReservedByAnUser(string userName)
     {
         //TODO - Implementation
+    }
+
+    vector<string> InMemoryRepository::getAllIdentifiers()
+    {
+        vector<string> identifiers;
+        for (const auto& scooter : scooters)
+        {
+            identifiers.push_back(scooter.getIdentifier());
+        }
+        return identifiers;
     }
 
 

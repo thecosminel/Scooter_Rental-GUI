@@ -31,4 +31,14 @@ namespace ui {
         cout << endl << endl;
         cout << "Message: " << message << endl;
     }
+
+    // ------------------------
+    // ISubject
+    void ConcreteUI::callCUD(Operations operation, const Scooter &scooter)
+    {
+        for (const auto& observer : observers)
+        {
+            observer->scooterCUD(operation, scooter);
+        }
+    }
 } // ui

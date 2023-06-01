@@ -81,6 +81,10 @@ namespace repository
         /// \param userName
         /// \return matching scooters
         virtual vector<Scooter> getAllScootersReservedByAnUser (string userName) = 0;
+
+        /// Gets all identifiers
+        /// \return
+        virtual vector<string> getAllIdentifiers() = 0;
     };
 }
 

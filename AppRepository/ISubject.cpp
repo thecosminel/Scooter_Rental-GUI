@@ -19,7 +19,8 @@ namespace repository
 
     void ISubject::notify(const string &data)
     {
-        for (const auto& observer : observers) {
+        for (const auto& observer : observers)
+        {
             observer->update(data);
         }
     }

@@ -6,6 +6,7 @@
 #include <vector>
 #include <iostream>
 #include <cctype>
+#include <random>
 
 using std::string;
 
@@ -27,6 +28,9 @@ namespace utils {
     /// \return true/false
     bool checkAlphanumericString(const string& str);
 
+    bool compareNamesAlphabetically(string name1, string name2);
+
+    string generateRandomID();
 }
 
 #endif

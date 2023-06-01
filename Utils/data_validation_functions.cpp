@@ -65,4 +65,40 @@ namespace utils
         }
         return true;
     }
+
+    bool compareNamesAlphabetically(string name1, string name2)
+    {
+        // Convert strings to lowercase
+        for (char& c : name1)
+        {
+            c = tolower(c); //NOLINT
+        }
+        for (char& c : name2)
+        {
+            c = tolower(c); //NOLINT
+        }
+        if (name1 <= name2)
+        {
+            return true;
+        }
+        return false;
+    }
+
+    string generateRandomID() {
+        std::random_device rd;
+        std::mt19937 gen(rd());
+
+        // Possible characters for the ID
+        const string characters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
+        std::uniform_int_distribution<> dis(0, characters.size() - 1);
+
+        std::string id;
+        for (int i = 0; i < 3; ++i)
+        {
+            id += characters[dis(gen)];
+        }
+
+        return id;
+    }
 }
