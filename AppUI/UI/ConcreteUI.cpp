@@ -10,6 +10,7 @@ namespace ui {
         cout << endl;
         for (int i = 0; i < scooters.size(); ++i)
         {
+            scooter = scooters[i];
             printIndexing(i);
             cout << "ID: " << scooter.getIdentifier() << "  ";
             cout << "Model: " << scooter.getModel();
@@ -41,4 +42,30 @@ namespace ui {
             observer->scooterCUD(operation, scooter);
         }
     }
+
+    void ConcreteUI::callVectorNoFiler(Operations operation)
+    {
+        for (const auto& observer : observers)
+        {
+            observer->scooterVectorNoFiler(operation);
+        }
+    }
+
+    void ConcreteUI::callFilterLocation(Operations operation, string location)
+    {
+        for (const auto& observer : observers)
+        {
+            observer->scooterVectorFilterLocation(operation, location);
+        }
+    }
+
+    void ConcreteUI::callFilterDates(Operations operation, std::pair<string, string> dates)
+    {
+        for (const auto& observer : observers)
+        {
+            observer->scooterVectorFilterDates(operation, dates);
+        }
+    }
+
+
 } // ui

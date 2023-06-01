@@ -18,7 +18,10 @@ namespace controller {
         REMOVE,
         UPDATE,
         SortedId,
-        SortedDate
+        SortedDate,
+        FilteredParked,
+        FilteredLocation,
+        FilteredDates
     };
 
     class IObserver {
@@ -30,6 +33,11 @@ namespace controller {
 
         virtual void scooterCUD(Operations operation, const Scooter& scooter) = 0;
 
+        virtual void scooterVectorNoFiler(Operations operation) = 0;
+
+        virtual void scooterVectorFilterLocation(Operations operation, string location) = 0;
+
+        virtual void scooterVectorFilterDates(Operations operation, std::pair<string, string> dates) = 0;
     };
 
 }

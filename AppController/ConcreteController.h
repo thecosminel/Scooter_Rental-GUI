@@ -6,7 +6,7 @@
 #include "../Utils/data_validation_functions.h"
 
 using namespace controller;
-using utils::generateRandomID;
+using utils::generateRandomID, utils::compareScooterByDate;
 
 namespace controller {
 
@@ -89,6 +89,12 @@ namespace controller {
         /// \param operation
         /// \param scooter
         void scooterCUD(Operations operation, const Scooter& scooter) override;
+
+        void scooterVectorNoFiler(Operations operation) override;
+
+        void scooterVectorFilterLocation(Operations operation, string location) override;
+
+        void scooterVectorFilterDates(Operations operation, std::pair<string, string> dates) override;
     };
 
 } // controller

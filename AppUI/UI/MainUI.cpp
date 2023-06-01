@@ -48,6 +48,7 @@ namespace ui
             cout << "  6. Display scooters manufactured between two dates" << endl;
             cout << "  7. Display all scooters sorted ascending by manufacturing date" << endl;
             cout << "  8. Display all scooters sorted ascending by ID" << endl;
+            cout << "  9. Display all parked scooters" << endl;
             cout << "  R. Return to main ui" << endl;
             cout << "  X. Close app" << endl;
             cin >> choice;
@@ -71,18 +72,16 @@ namespace ui
                     break;
                 case '4':
                     cout << "Search scooter by location: ";
-                    //TODO - Implementation
-                    //searchScooterByLocation();
+                    searchScooterByLocation();
                     break;
                 case '5':
-                    cout << "Display scooters with km less than:  ";
+                    cout << "Display scooters with km between:  ";
                     //TODO - Implementation
-                    //displayScootersFilteredByKm();
+//                    displayScootersFilteredByKm();
                     break;
                 case '6':
-                    cout << "Display scooters newer than date:  ";
-                    //TODO - Implementation
-                    //displayScootersFilteredByAge();
+                    cout << "Display scooters with manufacturing date between:  ";
+                    displayScootersFilteredByDates();
                     break;
                 case '7':
                     cout << "Display all scooters sorted ascending by age: ";
@@ -91,6 +90,10 @@ namespace ui
                 case '8':
                     cout << "Display all scooters sorted ascending by ID: ";
                     displayAllScootersSortedByID();
+                    break;
+                case '9':
+                    cout << "Display all parked scooters: ";
+                    displayAllParkedScooters();
                     break;
                 case 'R':
                 case 'r':
@@ -128,12 +131,29 @@ namespace ui
     // Manager & User methods
     void MainUI::displayAllScootersSortedByAge()
     {
-        //TODO - Implementation
+        ConcreteUI::callVectorNoFiler(controller::SortedDate);
     }
 
     void MainUI::displayAllScootersSortedByID()
     {
-        //TODO - Implementation
+        ConcreteUI::callVectorNoFiler(controller::SortedId);
+    }
+
+    void MainUI::displayAllParkedScooters()
+    {
+        ConcreteUI::callVectorNoFiler(controller::FilteredParked);
+    }
+
+    void MainUI::searchScooterByLocation()
+    {
+        string location = enterLocation();
+        ConcreteUI::callFilterLocation(controller::FilteredLocation, location);
+    }
+
+    void MainUI::displayScootersFilteredByDates()
+    {
+        pair<string, string> dates = enterManufacturingDates();
+        ConcreteUI::callFilterDates(controller::FilteredDates, dates);
     }
 
     void MainUI::addNewScooter()

@@ -9,7 +9,7 @@
 using namespace utils;
 using scooter::ScooterStatus, scooter::PARKED, scooter::MAINTENANCE, scooter::RESERVED;
 using scooter::IN_USE, scooter::OUT_OF_SERVICE, scooter::UNKNOWN;
-using std::endl, std::cout, std::string, std::cin;
+using std::endl, std::cout, std::string, std::cin, std::pair;
 
 namespace utils {
 
@@ -27,7 +27,9 @@ namespace utils {
     string enterManufacturingDate();
     double enterKm();
     string enterLocation();
+    pair <string, string> enterManufacturingDates();
     ScooterStatus enterStatus();
+
 
 } // utils
 

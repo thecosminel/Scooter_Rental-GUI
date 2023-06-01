@@ -31,6 +31,12 @@ namespace ui {
         /// \param operation
         /// \param scooter
         virtual void callCUD(Operations operation, const Scooter& scooter) = 0;
+
+        virtual void callVectorNoFiler(Operations operation) = 0;
+
+        virtual void callFilterLocation(Operations operations, string location) = 0;
+
+        virtual void callFilterDates(Operations operation, std::pair<string, string> dates) = 0;
     };
 
 } // ui

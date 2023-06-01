@@ -44,6 +44,9 @@ namespace ui
         // Manager & User methods
         void displayAllScootersSortedByAge();
         void displayAllScootersSortedByID();
+        void displayAllParkedScooters();
+        void searchScooterByLocation();
+        void displayScootersFilteredByDates();
 
         // -------------------------
         // Manager UI only

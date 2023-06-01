@@ -81,7 +81,6 @@ namespace repository
         auto result = std::vector<Scooter>();
         for (const auto& scooter : scooters)
             result.push_back(scooter);
-        notify("getAllScootersFromRepo!");
         return result;
     }
 
@@ -103,6 +102,10 @@ namespace repository
             {
                 result.push_back(scooter);
             }
+        }
+        if (result.empty())
+        {
+            notify("No scooters with matching location");
         }
         return result;
     }
@@ -131,6 +134,10 @@ namespace repository
             {
                 result.push_back(scooter);
             }
+        }
+        if (result.empty())
+        {
+            notify("No scooters with matching manufacturing dates!");
         }
         return result;
     }

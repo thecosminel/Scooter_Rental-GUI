@@ -9,6 +9,7 @@
 #include <random>
 
 using std::string;
+using scooter::Scooter;
 
 namespace utils {
 
@@ -25,6 +26,12 @@ namespace utils {
     /// \param date2
     /// \return date 1 < date 2
     bool compareDates(const string& date1, const string& date2);
+
+    /// Checks if (date 1 < date 2)
+    /// \param scooter1
+    /// \param scooter2
+    /// \return date 1 < date 2
+    bool compareScooterByDate(const Scooter& scooter1, const Scooter& scooter2);
 
     /// Checks if a string is alphanumeric
     /// \param str

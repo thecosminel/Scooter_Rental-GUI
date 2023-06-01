@@ -39,15 +39,13 @@ namespace ui {
 
         // ------------------------
         // ISubject
-        void callCUD(Operations operation, const Scooter &scooter);
+        void callCUD(Operations operation, const Scooter &scooter) override;
 
-        // ------------------------
-        // Non override
-//        void printScootersSortedByID();
+        void callVectorNoFiler(Operations operation) override;
 
-//        void printScootersSortedByManufacturingDate();
+        void callFilterLocation(Operations operations, string location) override;
 
-
+        void callFilterDates(Operations operation, std::pair<string, string> dates) override;
     };
 
 } // ui

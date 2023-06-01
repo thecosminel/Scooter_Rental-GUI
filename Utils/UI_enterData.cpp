@@ -75,6 +75,32 @@ namespace utils
         return manufacturingDate;
     }
 
+    pair <string, string> enterManufacturingDates()
+    {
+        pair <string, string> dates;
+        string manufacturingDateMin;
+        cout << endl;
+        cout << "Enter minimum manufacturing date: ";
+        cin >> manufacturingDateMin;
+        while (!checkDateFormat(manufacturingDateMin))
+        {
+            cout << endl << "Please enter a valid manufacturing date:";
+            cin >> manufacturingDateMin;
+        }
+        dates.first = manufacturingDateMin;
+        string manufacturingDateMax;
+        cout << endl;
+        cout << "Enter maximum manufacturing date: ";
+        cin >> manufacturingDateMax;
+        while (!checkDateFormat(manufacturingDateMax))
+        {
+            cout << endl << "Please enter a valid manufacturing date:";
+            cin >> manufacturingDateMax;
+        }
+        dates.second = manufacturingDateMax;
+        return dates;
+    }
+
     double enterKm()
     {
         double km;

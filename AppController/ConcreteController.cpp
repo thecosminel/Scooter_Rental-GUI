@@ -36,8 +36,7 @@ namespace controller
     void ConcreteController::filterScootersByLocation(string location)
     {
         auto scooters = repo->getAllScootersByLocation(location);
-        //TODO - Implementation
-        // Print the result in UI
+        ui->printScooterContainer(scooters);
     }
 
     void ConcreteController::filterScootersByKmBetweenTwoValues(double kmMin, double kmMax)
@@ -51,15 +50,13 @@ namespace controller
     void ConcreteController::filterScootersByAgeBetweenTwoDates(string dateMin, string dateMax)
     {
         auto scooters = repo->getAllScootersByAgeBetweenTwoDates(dateMin, dateMax);
-        //TODO - Implementation
-        // Print the result in UI
+        ui->printScooterContainer(scooters);
     }
 
     void ConcreteController::filterParkedScooters()
     {
         auto scooters = repo->getAllParkedScooters();
-        //TODO - Implementation
-        // Print the result in UI
+        ui->printScooterContainer(scooters);
     }
 
 
@@ -68,16 +65,14 @@ namespace controller
     void ConcreteController::sortScootersByID()
     {
         auto scooters = repo->getAllScootersFromRepo();
-        //TODO - Implementation
-        // Print the result in UI
+        ui->printScooterContainer(scooters);
     }
 
     void ConcreteController::sortScootersByManufacturingDate()
     {
         auto scooters = repo->getAllScootersFromRepo();
-        //TODO - Implementation
-        // Sort by date
-        // Print the result in UI
+        std::sort(scooters.begin(), scooters.end(), compareScooterByDate);
+        ui->printScooterContainer(scooters);
     }
 
     // ------------------------------
@@ -105,6 +100,38 @@ namespace controller
         }
     }
 
+    void ConcreteController::scooterVectorNoFiler(Operations operation)
+    {
+        switch (operation)
+        {
+            case SortedId:
+                sortScootersByID();
+                break;
+            case SortedDate:
+                sortScootersByManufacturingDate();
+                break;
+            case FilteredParked:
+                filterParkedScooters();
+                break;
+            default:
+                throw std::invalid_argument("Not a scooterVectorNoFile operation!!");
+        }
+    }
+
+    void ConcreteController::scooterVectorFilterLocation(Operations operation, string location)
+    {
+        if (operation != FilteredLocation)
+            throw std::invalid_argument("Not FilteredParked operation");
+        filterScootersByLocation(location);
+    }
+
+    void ConcreteController::scooterVectorFilterDates(Operations operation, std::pair<string, string> dates)
+    {
+        if (operation != FilteredDates)
+            throw std::invalid_argument("Not FilteredDates operation");
+        filterScootersByAgeBetweenTwoDates(dates.first, dates.second);
+    }
+
     // Utils
     string ConcreteController::generateNewId()
     {
@@ -129,6 +156,8 @@ namespace controller
             }
         } while (true);
     }
+
+
 
 
 } // controller

@@ -29,6 +29,17 @@ namespace utils
         return true;
     }
 
+    bool compareScooterByDate(const Scooter& scooter1, const Scooter& scooter2)
+    {
+        string date1 = scooter1.getDate();
+        if (!checkDateFormat(date1))
+            throw std::invalid_argument("Invalid date in repo! Data corrupted");
+        string date2 = scooter2.getDate();
+        if (!checkDateFormat(date2))
+            throw std::invalid_argument("Invalid date in repo! Data corrupted");
+        return compareDates(date1, date2);
+    }
+
     bool checkIdFormat(const string& ID)
     {
         if (ID.length() != 3) {
