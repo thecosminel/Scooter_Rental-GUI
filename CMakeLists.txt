@@ -32,4 +32,4 @@ add_executable(ScooterRental_GUI
         AppUI/ISubject.cpp
         AppUI/ISubject.h
         Utils/UI_printFunctions.cpp
-        Utils/UI_printFunctions.h AppUI/UI/ManagerUI.cpp AppUI/UI/ManagerUI.h AppUI/UI/UserUI.cpp AppUI/UI/UserUI.h AppUI/UI/MainUI.cpp AppUI/UI/MainUI.h Utils/UI_enterData.cpp Utils/UI_enterData.h)
+        Utils/UI_printFunctions.h AppUI/UI/MainUI.cpp AppUI/UI/MainUI.h Utils/UI_enterData.cpp Utils/UI_enterData.h)
