@@ -65,20 +65,24 @@ namespace ui
                     break;
                 case '3':
                     cout << "Modify existing scooter: ";
-    //                modifyExistingScooter()
+                    //TODO - Implementation
+                    //modifyExistingScooter()
 
                     break;
                 case '4':
                     cout << "Search scooter by location: ";
-    //                searchScooterByLocation();
+                    //TODO - Implementation
+                    //searchScooterByLocation();
                     break;
                 case '5':
                     cout << "Display scooters with km less than:  ";
-    //                displayScootersFilteredByKm();
+                    //TODO - Implementation
+                    //displayScootersFilteredByKm();
                     break;
                 case '6':
                     cout << "Display scooters newer than date:  ";
-    //                displayScootersFilteredByAge();
+                    //TODO - Implementation
+                    //displayScootersFilteredByAge();
                     break;
                 case '7':
                     cout << "Display all scooters sorted ascending by age: ";
@@ -107,7 +111,8 @@ namespace ui
 
     bool MainUI::runUser()
     {
-        logIn();
+        //logIn();
+        //TODO - Implementation
         return false;
     }
 
@@ -123,12 +128,12 @@ namespace ui
     // Manager & User methods
     void MainUI::displayAllScootersSortedByAge()
     {
-
+        //TODO - Implementation
     }
 
     void MainUI::displayAllScootersSortedByID()
     {
-
+        //TODO - Implementation
     }
 
     void MainUI::addNewScooter()
