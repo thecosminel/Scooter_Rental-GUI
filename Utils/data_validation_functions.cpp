@@ -29,6 +29,20 @@ namespace utils
         return true;
     }
 
+    bool checkIdFormat(const string& ID)
+    {
+        if (ID.length() != 3) {
+            return false;
+        }
+
+        for (char c : ID) { // NOLINT
+            if (!std::isalpha(c)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     bool compareDates(const string& date1, const string& date2)
     {
         //Format dd.mm.yyyy

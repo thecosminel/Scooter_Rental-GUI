@@ -61,7 +61,7 @@ namespace ui
                     break;
                 case '2':
                     cout << "Delete existing scooter: ";
-    //                deleteExistingScooter();
+                    deleteExistingScooter();
                     break;
                 case '3':
                     cout << "Modify existing scooter: ";
@@ -134,20 +134,29 @@ namespace ui
     void MainUI::addNewScooter()
     {
         cout << endl << "You have selected to add a new Scooter";
-//        string model = enterModel();
-//        string identifier = "NIL";
-//        string manufacturingDate = enterManufacturingDate();
-//        double km = enterKm();
-//        string location = enterLocation();
-//        ScooterStatus status = enterStatus();
-        string model = "Yamaha";
+        string model = enterModel();
         string identifier = "NIL";
-        string manufacturingDate = "10.10.2020";
-        double km = 12.34;
-        string location = "Bosanci";
-        ScooterStatus status = PARKED;
+        string manufacturingDate = enterManufacturingDate();
+        double km = enterKm();
+        string location = enterLocation();
+        ScooterStatus status = enterStatus();
+//        string model = "Yamaha";
+//        string identifier = "NIL";
+//        string manufacturingDate = "10.10.2020";
+//        double km = 12.34;
+//        string location = "Bosanci";
+//        ScooterStatus status = PARKED;
         Scooter newScooter(identifier, model, manufacturingDate, km, location, status);
         ConcreteUI::callCUD(controller::ADD,newScooter);
+    }
+
+    void MainUI::deleteExistingScooter()
+    {
+        cout << endl << "You have selected to delete an existing Scooter";
+        string identifier = enterID();
+//        string identifier = "NIL";
+        Scooter removedScooter(identifier, "", "10.10.2010", 1, "", UNKNOWN);
+        ConcreteUI::callCUD(controller::REMOVE, removedScooter);
     }
 
 } // ui

@@ -22,6 +22,7 @@ namespace utils {
     void pressEnterToContinue();
 
     // For scooter attributes
+    string enterID();
     string enterModel();
     string enterManufacturingDate();
     double enterKm();

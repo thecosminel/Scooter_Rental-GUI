@@ -38,6 +38,20 @@ namespace utils
 
 
     // Scooter attributes
+    string enterID()
+    {
+        string ID;
+        cout << endl;
+        cout << "Enter an id: ";
+        cin >> ID;
+        while (!checkIdFormat(ID))
+        {
+            cout << endl << "Please enter a valid ID format (ex. xyz): ";
+            cin >> ID;
+        }
+        return ID;
+    }
+
     string enterModel()
     {
         string model;

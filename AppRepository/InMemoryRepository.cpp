@@ -48,6 +48,7 @@ namespace repository
             if ((*it).checkIfSameIdentifier(scooter))
             {
                 scooters.erase(it);
+                notify("Scooter deleted!");
                 return;
             }
             it++;

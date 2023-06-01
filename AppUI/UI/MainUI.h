@@ -48,6 +48,7 @@ namespace ui
         // -------------------------
         // Manager UI only
         void addNewScooter();
+        void deleteExistingScooter();
     };
 
 } // ui

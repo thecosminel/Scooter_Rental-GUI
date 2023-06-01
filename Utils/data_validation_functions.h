@@ -17,6 +17,9 @@ namespace utils {
     /// \return true if valid
     bool checkDateFormat(const string& date);
 
+    bool checkIdFormat(const string& ID);
+
+
     /// Checks if (date 1 < date 2)
     /// \param date1
     /// \param date2
