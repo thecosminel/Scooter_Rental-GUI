@@ -48,6 +48,8 @@ namespace ui {
         this->currentScooter = scooter;
     }
 
+
+
     // ------------------------
     // ISubject
     void ConcreteUI::requestScooter(string identifier)
@@ -98,6 +100,11 @@ namespace ui {
         }
     }
 
-
-
+    void ConcreteUI::tryToLogAsManager(string user, string pass)
+    {
+        for (const auto& observer : observers)
+        {
+            observer->logInAsManager(user, pass);
+        }
+    }
 } // ui

@@ -29,6 +29,8 @@ namespace controller {
     public:
         IObserver() = default;
 
+        virtual void logInAsManager(string user, string pass) = 0;
+
         virtual void update(const string& data) = 0;
 
         virtual void scooterSetCurrent(string identifier) = 0;

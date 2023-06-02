@@ -41,6 +41,8 @@ namespace utils {
     bool compareNamesAlphabetically(string name1, string name2);
 
     string generateRandomID();
+
+    string generateAccessKey();
 }
 
 #endif

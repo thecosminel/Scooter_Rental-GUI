@@ -7,6 +7,8 @@ namespace repository
     repository::InMemoryRepository::InMemoryRepository(const string& fileName)
     {
         dataFileName = fileName;
+        accountsFileName = "../Database/Accounts/accounts.csv";
+        loadAccountsFromFile();
         loadFromFile();
     }
 
@@ -89,7 +91,17 @@ namespace repository
         return result;
     }
 
-
+    // -----------------------------------------------
+    // Access
+    bool InMemoryRepository::checkManagerCredentials(string user, string pass)
+    {
+        for (const auto& account : managerAccounts) //NOLINT
+        {
+            if (account.first == user && account.second == pass)
+                return true;
+        }
+        return false;
+    }
 
     // -----------------------------------------------
     // Override methods
@@ -180,6 +192,34 @@ namespace repository
 
     // -----------------------------------------------
     // New methods
+    void InMemoryRepository::loadAccountsFromFile()
+    {
+        ifstream file(accountsFileName);
+        std::string line;
+        std::getline(file, line);
+        if (file.is_open())
+        {
+            while (std::getline(file, line))
+            {
+                std::stringstream ss(line);
+                string user;
+                string password;
+                string userType;
+                std::getline(ss, user, ',');
+                std::getline(ss, password, ',');
+                std::getline(ss, userType, ',');
+                pair<string, string> userPass;
+                userPass.first = user;
+                userPass.second = password;
+                if (userType == "manager")
+                    managerAccounts.push_back(userPass);
+                else
+                    userAccounts.push_back(userPass);
+            }
+            file.close();
+        }
+    }
+
     void InMemoryRepository::loadFromFile()
     {
         ifstream file(dataFileName);
@@ -218,6 +258,10 @@ namespace repository
             }
             file.close();
         }
+        else
+        {
+            throw std::invalid_argument("Invalid file");
+        }
     }
 
     vector<Scooter> InMemoryRepository::getAllScootersReservedByAnUser(string userName)
@@ -234,6 +278,7 @@ namespace repository
         }
         return identifiers;
     }
+
 
 
 }

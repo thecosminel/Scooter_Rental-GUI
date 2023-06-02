@@ -34,7 +34,8 @@ namespace ui
     bool MainUI::runManager()
     {
         cout << "\n\n\nManager interface -->" << endl;
-//        logIn();
+        cout << "Use following manager account (user: 'Tud'; pass: 'bmw')" << endl;
+        logIn();
         char choice;
         do
         {
@@ -112,16 +113,29 @@ namespace ui
 
     bool MainUI::runUser()
     {
-        //logIn();
+        //logInAsManager();
         //TODO - Implementation
         return false;
     }
 
     void MainUI::logIn()
     {
-        cout << "You have to log in..." << endl;
-        this->user = enterUserName();
-        this->password = enterPassword();
+        bool retry = true;
+        while (retry)
+        {
+            cout << "You have to log in..." << endl;
+            this->user = enterUserName();
+            this->password = enterPassword();
+            try {
+                ConcreteUI::tryToLogAsManager(user, password);
+                retry = false;
+            }
+            catch (const std::invalid_argument& e)
+            {
+                cout << "Exception: " << e.what() << endl;
+                retry = true;
+            }
+        }
     }
 
 

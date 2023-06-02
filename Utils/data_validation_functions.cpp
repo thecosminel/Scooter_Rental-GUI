@@ -116,7 +116,7 @@ namespace utils
         // Possible characters for the ID
         const string characters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
-        std::uniform_int_distribution<> dis(0, characters.size() - 1);
+        std::uniform_int_distribution<> dis(0, characters.size() - 1); // NOLINT
 
         std::string id;
         for (int i = 0; i < 3; ++i)
@@ -125,5 +125,24 @@ namespace utils
         }
 
         return id;
+    }
+
+    string generateAccessKey()
+    {
+        std::random_device rd;
+        std::mt19937 gen(rd());
+
+        // Possible characters for the ID
+        const string characters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+-=;:'<>,./?~`{}[]";
+
+        std::uniform_int_distribution<> dis(0, characters.size() - 1); // NOLINT
+
+        std::string accessKey;
+        for (int i = 0; i < 25; ++i)
+        {
+            accessKey += characters[dis(gen)];
+        }
+
+        return accessKey;
     }
 }

@@ -27,6 +27,8 @@ namespace ui {
 
         void notify(const string& data);
 
+        virtual void tryToLogAsManager(string user, string pass) = 0;
+
         virtual void requestScooter (string identifier) = 0;
 
         /// Add, update, remove scooter

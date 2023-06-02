@@ -43,6 +43,9 @@ namespace ui {
 
         // ------------------------
         // ISubject
+
+        void tryToLogAsManager(string user, string pass) override;
+
         void requestScooter (string identifier) override;
 
         void callCUD(Operations operation, const Scooter &scooter) override;

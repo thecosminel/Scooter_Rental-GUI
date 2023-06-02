@@ -19,9 +19,11 @@ namespace repository
     class InMemoryRepository : public CrudRepository, public ISubject{
     private:
         void loadFromFile();
+        void loadAccountsFromFile();
 
     protected:
         string dataFileName;
+        string accountsFileName;
 
     public:
         // Constructors & destructors
@@ -56,6 +58,10 @@ namespace repository
         /// Gets all the electric scooters in the repository
         /// \return
         vector<Scooter> getAllScootersFromRepo() override;
+
+        // -----------------------------------------------
+        // Access
+        bool checkManagerCredentials(string user, string pass) override;
 
         // -----------------------------------------------
         // Override methods

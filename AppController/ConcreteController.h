@@ -85,6 +85,8 @@ namespace controller {
         // IObserver override
         void update(const string &data) override;
 
+        void logInAsManager(string user, string pass) override;
+
         void scooterSetCurrent(string identifier) override;
 
         /// Create, Update, Remove scooter

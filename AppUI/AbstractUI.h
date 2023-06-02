@@ -7,7 +7,7 @@
 #include <string>
 
 using scooter::Scooter;
-using std::vector, std::string;
+using std::vector, std::string, std::pair;
 
 namespace ui {
 
@@ -15,6 +15,7 @@ namespace ui {
     protected:
         string user;
         string password;
+        string accessKey;
         Scooter currentScooter;
 
     public:

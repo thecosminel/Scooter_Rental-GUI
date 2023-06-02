@@ -6,13 +6,15 @@
 #include "../Domain/Scooter.h"
 using namespace scooter;
 
-using std::vector, std::string;
+using std::vector, std::string, std::pair;
 
 namespace repository
 {
     class CrudRepository{
     protected:
         vector<Scooter> scooters;
+        vector<pair<string, string>> managerAccounts;
+        vector<pair<string, string>> userAccounts;
 
     public:
         /// Default constructor
@@ -48,6 +50,10 @@ namespace repository
         /// Gets all the electric scooters in the repository
         /// \return
         virtual vector<Scooter> getAllScootersFromRepo() = 0;
+
+        // -----------------------------------------------
+        // Access
+        virtual bool checkManagerCredentials(string user, string pass) = 0;
 
         // -----------------------------------------------
         // Other methods

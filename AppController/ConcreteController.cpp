@@ -81,6 +81,18 @@ namespace controller
         ui->printMessage(data);
     }
 
+    void ConcreteController::logInAsManager(string user, string pass)
+    {
+        if (repo->checkManagerCredentials(user, pass))
+        {
+            ui->printMessage("Login as manager successful!");
+        }
+        else
+        {
+            throw std::invalid_argument("Manager username or password incorrect");
+        }
+    }
+
     void ConcreteController::scooterSetCurrent(string identifier)
     {
         Scooter requestedScooter = repo->getScooterById(identifier);

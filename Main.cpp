@@ -18,7 +18,6 @@ void function()
     ui->attach(ctrl);
 
     ui->run();
-    repo->getAllScootersFromRepo();
 
     ui->detach(ctrl);
     repo->detach(ctrl);
