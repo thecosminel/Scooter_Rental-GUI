@@ -1,6 +1,6 @@
-5
-ADY,VajVaj,18.07.2018,12.34,Bosanci,2
-dvq,Yamaha,10.10.2020,12.34,Australia,0
-NIL,,10.10.2010,1,,5
-GIJ,Anton,09.10.2020,100,Ipotesti,1
-yXG,Yamaha,10.10.2020,12.34,Bosanci,0
+Identifier,Model,ManufacturingDate,Km,Location,User,Status
+ADY,VajVaj,18.07.2018,12.34,Bosanci,,2
+dvq,,10.10.2010,1,,geo,0
+NIL,,10.10.2010,1,,,5
+GIJ,Anton,09.10.2020,100,Ipotesti,,1
+yXG,Yamaha,10.10.2020,12.34,Bosanci,,0

@@ -40,6 +40,10 @@ namespace ui {
         /// \param scooter
         virtual void callCUD(Operations operation, const Scooter& scooter) = 0;
 
+        virtual void callRUP(Operations operation, const Scooter& scooter, string user) = 0;
+
+        virtual void callVectorAllScootersOfUser(string userName) = 0;
+
         virtual void callVectorNoFiler(Operations operation) = 0;
 
         virtual void callFilterLocation(Operations operations, string location) = 0;

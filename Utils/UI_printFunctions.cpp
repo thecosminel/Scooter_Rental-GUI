@@ -3,6 +3,7 @@
 namespace utils {
     void printIndexing(int index)
     {
+        index++;
         if (index < 10)
         {
             cout << 0 << index << "-> ";

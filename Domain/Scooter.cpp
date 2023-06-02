@@ -12,6 +12,7 @@ scooter::Scooter::Scooter()
     this->kilometers = 0.0;
     this->location = "";
     this->status = UNKNOWN;
+    this->user = "";
 }
 
 scooter::Scooter::Scooter(string identifier, string model, string date, double kilometers, string location, ScooterStatus status)
@@ -22,6 +23,7 @@ scooter::Scooter::Scooter(string identifier, string model, string date, double k
     this->kilometers = kilometers;
     this->location = std::move(location);
     this->status = status;
+    this->user = "";
 }
 
 scooter::Scooter::Scooter(const scooter::Scooter &scooter)
@@ -32,6 +34,7 @@ scooter::Scooter::Scooter(const scooter::Scooter &scooter)
     this->location = scooter.location;
     this->status = scooter.status;
     this->kilometers = scooter.kilometers;
+    this->user = scooter.user;
 }
 
 scooter::Scooter &scooter::Scooter::operator=(const Scooter &scooter){
@@ -43,6 +46,7 @@ scooter::Scooter &scooter::Scooter::operator=(const Scooter &scooter){
     this->location = scooter.location;
     this->status = scooter.status;
     this->kilometers = scooter.kilometers;
+    this->user = scooter.user;
     return *this;
 }
 
@@ -78,6 +82,11 @@ ScooterStatus scooter::Scooter::getStatus() const
     return this->status;
 }
 
+string scooter::Scooter::getUser() const
+{
+    return this->user;
+}
+
 
 // Setters
 void scooter::Scooter::setIdentifier(string id)
@@ -110,6 +119,11 @@ void scooter::Scooter::setStatus(ScooterStatus newStatus)
     this->status = newStatus;
 }
 
+void scooter::Scooter::setUser(string newUser)
+{
+    this->user = std::move(newUser);
+}
+
 // Utils
 bool scooter::Scooter::checkIfSameIdentifier(const Scooter &scooter)
 {
@@ -128,5 +142,8 @@ bool scooter::Scooter::checkIfNullScooter() //NOLINT
         return true;
     return false;
 }
+
+
+
 
 

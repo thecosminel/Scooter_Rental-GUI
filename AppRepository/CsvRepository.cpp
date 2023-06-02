@@ -28,13 +28,15 @@ namespace repository
         std::ofstream file(dataFileName);
         if (file.is_open())
         {
-            file << scooters.size() << std::endl;
+            file << "Identifier" << ',' << "Model" << ',' << "ManufacturingDate" << ',';
+            file << "Km" << ',' << "Location" << ',' << "User" << ',' << "Status" << endl;
             for (const auto& scooter : scooters) {
                 file << scooter.getIdentifier() << ',';
                 file << scooter.getModel() << ',';
                 file << scooter.getDate() << ',';
                 file << scooter.getKilometers() << ',';
                 file << scooter.getLocation() << ',';
+                file << scooter.getUser() << ',';
                 file << static_cast<int>(scooter.getStatus()) << std::endl;
             }
             file.close();

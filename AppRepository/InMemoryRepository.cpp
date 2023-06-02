@@ -75,11 +75,12 @@ namespace repository
             (*it).setKilometers(updatedScooter.getKilometers());
             (*it).setLocation(updatedScooter.getLocation());
             (*it).setStatus(updatedScooter.getStatus());
+            (*it).setUser(updatedScooter.getUser());
             notify("Scooter updated!");
         }
         if (it == scooters.end())
         {
-            notify("No scooter updated. Invalid ID!");
+            notify("Invalid scooter ID!");
         }
     }
 
@@ -265,6 +266,7 @@ namespace repository
                 double kilometers;
                 std::string location;
                 int status;
+                std::string user;
 
                 // Read each element separated by commas
                 std::getline(ss, identifier, ',');
@@ -277,10 +279,12 @@ namespace repository
                 ss >> kilometers;
                 ss.ignore(); // Ignore the comma after 'kilometers'
                 std::getline(ss, location, ',');
+                std::getline(ss, user, ',');
                 ss >> status;
 
                 auto scooterStatus = static_cast<ScooterStatus>(status);
                 Scooter scooter(identifier, model, date, kilometers, location, scooterStatus);
+                scooter.setUser(user);
                 scooters.push_back(scooter);
             }
             file.close();
@@ -291,9 +295,25 @@ namespace repository
         }
     }
 
-    vector<Scooter> InMemoryRepository::getAllScootersReservedByAnUser(string userName)
+    vector<Scooter> InMemoryRepository::getAllScootersOfAnUser(string userName)
     {
-        //TODO - Implementation
+        vector<Scooter> result;
+        for (const Scooter& scooter : scooters)
+        {
+            if (scooter.getUser() == userName)
+            {
+                ScooterStatus status = scooter.getStatus();
+                if (status == scooter::RESERVED || status == scooter::IN_USE)
+                {
+                    result.push_back(scooter);
+                }
+            }
+        }
+        if (result.empty())
+        {
+            notify("User doesn't have any scooters!");
+        }
+        return result;
     }
 
     vector<string> InMemoryRepository::getAllIdentifiers()
@@ -306,7 +326,26 @@ namespace repository
         return identifiers;
     }
 
+    void InMemoryRepository::reserveScooter(Scooter scooter, string user)
+    {
+        scooter.setUser(user);
+        scooter.setStatus(scooter::RESERVED);
+        updateScooterInfo(scooter);
+    }
 
+    void InMemoryRepository::useScooter(Scooter scooter, string user)
+    {
+        scooter.setUser(user);
+        scooter.setStatus(scooter::IN_USE);
+        updateScooterInfo(scooter);
+    }
+
+    void InMemoryRepository::parkScooter(Scooter scooter, string user)
+    {
+        scooter.setUser(user);
+        scooter.setStatus(scooter::PARKED);
+        updateScooterInfo(scooter);
+    }
 
 
 }

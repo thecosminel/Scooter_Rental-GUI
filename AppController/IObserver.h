@@ -17,6 +17,9 @@ namespace controller {
         ADD,
         REMOVE,
         UPDATE,
+        RESERVE,
+        USE,
+        PARK,
         SortedId,
         SortedDate,
         FilteredParked,
@@ -39,7 +42,12 @@ namespace controller {
 
         virtual void scooterSetCurrent(string identifier) = 0;
 
+        /// Create, Update, Remove scooter
         virtual void scooterCUD(Operations operation, const Scooter& scooter) = 0;
+
+        virtual void scooterRUP(Operations operation , const Scooter& scooter, string user) = 0;
+
+        virtual void displayAllScootersOfAnUser(string user) = 0;
 
         virtual void scooterVectorNoFiler(Operations operation) = 0;
 

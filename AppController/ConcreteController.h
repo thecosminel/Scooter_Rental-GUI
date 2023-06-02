@@ -46,7 +46,11 @@ namespace controller {
         /// Reserve scooter
         /// \param ID scooter ID
         /// \return true if the scooter was successfully reserved, false otherwise
-        void reserveScooter(const string& ID, const string& username) override;
+        void reserveScooter(Scooter scooter, const string& username) override;
+
+        void useScooter(Scooter usedScooter, const string& username) override;
+
+        void parkScooter(Scooter toParkScooter, const string& username) override;
 
         // ----------------------------
         // Read - filter
@@ -97,6 +101,13 @@ namespace controller {
         /// \param operation
         /// \param scooter
         void scooterCUD(Operations operation, const Scooter& scooter) override;
+
+        /// Reserve, Use, Park scooter
+        /// \param operation
+        /// \param scooter
+        void scooterRUP(Operations operation , const Scooter& scooter, string user) override;
+
+        void displayAllScootersOfAnUser(string user) override;
 
         void scooterVectorNoFiler(Operations operation) override;
 

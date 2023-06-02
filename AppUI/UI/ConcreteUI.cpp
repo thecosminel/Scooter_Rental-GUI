@@ -92,6 +92,22 @@ namespace ui {
         }
     }
 
+    void ConcreteUI::callRUP(Operations operation, const Scooter &scooter, string user)
+    {
+        for (const auto& observer : observers)
+        {
+            observer->scooterRUP(operation, scooter, user);
+        }
+    }
+
+    void ConcreteUI::callVectorAllScootersOfUser(string userName)
+    {
+        for (const auto& observer : observers)
+        {
+            observer->displayAllScootersOfAnUser(userName);
+        }
+    }
+
     void ConcreteUI::callVectorNoFiler(Operations operation)
     {
         for (const auto& observer : observers)

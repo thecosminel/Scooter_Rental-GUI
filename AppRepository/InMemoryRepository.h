@@ -98,10 +98,18 @@ namespace repository
         /// Gets all scooters reserved by a user
         /// \param userName
         /// \return matching scooters
-        vector<Scooter> getAllScootersReservedByAnUser (string userName) override;
+        vector<Scooter> getAllScootersOfAnUser (string userName) override;
 
         /// Gets all identifiers in repo
         vector<string> getAllIdentifiers() override;
+
+
+        // User operations
+        void reserveScooter(Scooter scooter, string user) override;
+
+        void useScooter(Scooter scooter, string user) override;
+
+        void parkScooter(Scooter scooter, string user) override;
     };
 
 }

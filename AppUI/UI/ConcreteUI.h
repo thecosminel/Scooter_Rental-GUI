@@ -52,6 +52,10 @@ namespace ui {
 
         void callCUD(Operations operation, const Scooter &scooter) override;
 
+        void callRUP(Operations operation, const Scooter &scooter, string user) override;
+
+        void callVectorAllScootersOfUser(string userName) override;
+
         void callVectorNoFiler(Operations operation) override;
 
         void callFilterLocation(Operations operations, string location) override;

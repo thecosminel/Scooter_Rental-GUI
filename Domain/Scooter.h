@@ -24,6 +24,7 @@ namespace scooter
         double kilometers;
         string location;
         ScooterStatus status;
+        string user;
 
     public:
         /// Default constructor
@@ -57,6 +58,9 @@ namespace scooter
         /// Getter method for the scooter's status
         [[nodiscard]] ScooterStatus getStatus() const;
 
+        /// Getter method for the scooter's user
+        [[nodiscard]] string getUser() const;
+
         /// Setter method for the scooter identifier
         void setIdentifier(string id);
 
@@ -74,6 +78,9 @@ namespace scooter
 
         /// Setter method for the scooter's status
         void setStatus(ScooterStatus status);
+
+        /// Setter method for the scooter's user
+        void setUser(string newUser);
 
         /// Checks if two scooters have the same identifier
         /// \param scooter

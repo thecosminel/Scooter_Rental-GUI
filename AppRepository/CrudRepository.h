@@ -90,11 +90,19 @@ namespace repository
         /// Gets all scooters reserved by an user
         /// \param userName
         /// \return matching scooters
-        virtual vector<Scooter> getAllScootersReservedByAnUser (string userName) = 0;
+        virtual vector<Scooter> getAllScootersOfAnUser (string userName) = 0;
 
         /// Gets all identifiers
         /// \return
         virtual vector<string> getAllIdentifiers() = 0;
+
+
+        // User operations
+        virtual void reserveScooter(Scooter scooter, string user) = 0;
+
+        virtual void useScooter(Scooter scooter, string user) = 0;
+
+        virtual void parkScooter(Scooter scooter, string user) = 0;
     };
 }
 

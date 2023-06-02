@@ -163,16 +163,20 @@ namespace ui
                     break;
                 case '7':
                     cout << "Display all my scooters:" << endl;
+                    displayMyScooters();
                     break;
                 case '8':
                     cout << "Reserve scooter:" << endl;
+                    reserveScooter();
                     break;
                 case '9':
                     cout << "Use scooter:" << endl;
+                    useScooter();
                     break;
                 case 'p':
                 case 'P':
                     cout << "Park scooter:" << endl;
+                    parkScooter();
                     break;
                 case 'R':
                 case 'r':
@@ -373,6 +377,72 @@ namespace ui
         ConcreteUI::callCUD(controller::UPDATE, updatedScooter);
     }
 
+    // -------------------------
+    // User UI only
+    void MainUI::reserveScooter()
+    {
+        string identifier = enterID();
+        try {
+            ConcreteUI::getCurrentScooter(identifier);
+        }
+        catch (const std::logic_error& exception)
+        {
+            cout << endl << "Error: " << exception.what() << endl;
+            return;
+        }
+        if (currentScooter.getStatus() != PARKED)
+        {
+            cout << "Scooter cannot be reserved, it is not parked" << endl;
+            return;
+        }
+        Scooter scooter = currentScooter;
+        ConcreteUI::callRUP(controller::RESERVE, scooter, user);
+    }
+
+    void MainUI::parkScooter()
+    {
+        string identifier = enterID();
+        try {
+            ConcreteUI::getCurrentScooter(identifier);
+        }
+        catch (const std::logic_error& exception)
+        {
+            cout << endl << "Error: " << exception.what() << endl;
+            return;
+        }
+        if (currentScooter.getStatus() != IN_USE)
+        {
+            cout << "Scooter cannot be parked, it is not used" << endl;
+            return;
+        }
+        Scooter scooter = currentScooter;
+        ConcreteUI::callRUP(controller::PARK, scooter, user);
+    }
+
+    void MainUI::useScooter()
+    {
+        string identifier = enterID();
+        try {
+            ConcreteUI::getCurrentScooter(identifier);
+        }
+        catch (const std::logic_error& exception)
+        {
+            cout << endl << "Error: " << exception.what() << endl;
+            return;
+        }
+        if (currentScooter.getStatus() != RESERVED)
+        {
+            cout << "Scooter cannot be used, it is not reserved" << endl;
+            return;
+        }
+        Scooter scooter = currentScooter;
+        ConcreteUI::callRUP(controller::USE, scooter, user);
+    }
+
+    void MainUI::displayMyScooters()
+    {
+        ConcreteUI::callVectorAllScootersOfUser(this->user);
+    }
 
 
 } // ui

@@ -56,6 +56,14 @@ namespace ui
         void addNewScooter();
         void deleteExistingScooter();
         void modifyExistingScooter();
+
+        // -------------------------
+        // User UI only
+        void reserveScooter();
+        void parkScooter();
+        void useScooter();
+        void displayMyScooters();
+
     };
 
 } // ui

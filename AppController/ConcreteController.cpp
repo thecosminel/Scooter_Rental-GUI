@@ -28,9 +28,19 @@ namespace controller
         repo->updateScooterInfo(updatedScooter);
     }
 
-    void ConcreteController::reserveScooter(const string &ID, const string &username)
+    void ConcreteController::reserveScooter(Scooter scooter, const string &username)
     {
-        //TODO - Implementation
+        repo->reserveScooter(scooter, username);
+    }
+
+    void ConcreteController::useScooter(Scooter usedScooter, const string &username)
+    {
+        repo->useScooter(usedScooter, username);
+    }
+
+    void ConcreteController::parkScooter(Scooter toParkScooter, const string& username)
+    {
+        repo->parkScooter(toParkScooter, username);
     }
 
     void ConcreteController::filterScootersByLocation(string location)
@@ -136,6 +146,32 @@ namespace controller
             default:
                 throw std::invalid_argument("Not a CUD operation!!");
         }
+    }
+
+    void ConcreteController::scooterRUP(Operations operation , const Scooter& scooter, string user)
+    {
+        switch (operation)
+        {
+
+            case RESERVE:
+                reserveScooter(scooter, user);
+                break;
+            case USE:
+                useScooter(scooter, user);
+                break;
+            case PARK:
+                parkScooter(scooter, user);
+                break;
+            default:
+                throw std::invalid_argument("Not a RUP operation!!");
+        }
+
+    }
+
+    void ConcreteController::displayAllScootersOfAnUser(string user)
+    {
+        auto scooters = repo->getAllScootersOfAnUser(user);
+        ui->printScooterContainer(scooters);
     }
 
     void ConcreteController::scooterVectorNoFiler(Operations operation)

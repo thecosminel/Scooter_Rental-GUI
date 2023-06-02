@@ -52,7 +52,11 @@ namespace controller {
         /// Reserve scooter
         /// \param ID scooter ID
         /// \return true if the scooter was successfully reserved, false otherwise
-        virtual void reserveScooter(const string& ID, const string& username) = 0;
+        virtual void reserveScooter(Scooter updatedScooter, const string& username) = 0;
+
+        virtual void useScooter(Scooter updatedScooter, const string& username) = 0;
+
+        virtual void parkScooter(Scooter updatedScooter, const string& username) = 0;
 
         // ----------------------------
         // Read - filter
