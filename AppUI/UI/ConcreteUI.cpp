@@ -52,6 +52,30 @@ namespace ui {
 
     // ------------------------
     // ISubject
+    void ConcreteUI::tryToLogAsManager(string user, string pass)
+    {
+        for (const auto& observer : observers)
+        {
+            observer->logInAsManager(user, pass);
+        }
+    }
+
+    void ConcreteUI::tryToLogAsUser(string user, string pass)
+    {
+        for (const auto& observer : observers)
+        {
+            observer->logInAsUser(user, pass);
+        }
+    }
+
+    void ConcreteUI::createUserAccount(string user, string pass)
+    {
+        for (const auto& observer : observers)
+        {
+            observer->createUserAccount(user, pass);
+        }
+    }
+
     void ConcreteUI::requestScooter(string identifier)
     {
         for (const auto& observer : observers)
@@ -100,11 +124,7 @@ namespace ui {
         }
     }
 
-    void ConcreteUI::tryToLogAsManager(string user, string pass)
-    {
-        for (const auto& observer : observers)
-        {
-            observer->logInAsManager(user, pass);
-        }
-    }
+
+
+
 } // ui

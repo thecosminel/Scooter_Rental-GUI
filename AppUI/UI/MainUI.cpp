@@ -35,7 +35,7 @@ namespace ui
     {
         cout << "\n\n\nManager interface -->" << endl;
         cout << "Use following manager account (user: 'Tud'; pass: 'bmw')" << endl;
-        logIn();
+        logInAsManager();
         char choice;
         do
         {
@@ -113,12 +113,85 @@ namespace ui
 
     bool MainUI::runUser()
     {
-        //logInAsManager();
-        //TODO - Implementation
+        cout << "\n\n\nUser interface -->" << endl;
+        logInAsUser();
+        char choice;
+        do
+        {
+            pressEnterToContinue();
+            cout << "Choose option: " << endl;
+            cout << "  1.  Search scooter by location" << endl;
+            cout << "  2.  Display scooters with km between two values" << endl;
+            cout << "  3.  Display scooters manufactured between two dates" << endl;
+            cout << "  4.  Display all scooters sorted ascending by manufacturing date" << endl;
+            cout << "  5.  Display all scooters sorted ascending by ID" << endl;
+            cout << "  6.  Display all parked scooters" << endl;
+            cout << "  7.  Display all my scooters" << endl;
+            cout << "  8.  Reserve scooter" << endl;
+            cout << "  9.  Use scooter" << endl;
+            cout << "  P. Park scooter" << endl;
+            cout << "  R. Return to main ui" << endl;
+            cout << "  X. Close app" << endl;
+            cin >> choice;
+            cout << endl;
+
+            switch (choice)
+            {
+                case '1':
+                    cout << "Search scooter by location: ";
+                    searchScooterByLocation();
+                    break;
+                case '2':
+                    cout << "Display scooters with km between:  ";
+                    displayScootersFilteredByKm();
+                    break;
+                case '3':
+                    cout << "Display scooters with manufacturing date between:  ";
+                    displayScootersFilteredByDates();
+                    break;
+                case '4':
+                    cout << "Display all scooters sorted ascending by age: ";
+                    displayAllScootersSortedByAge();
+                    break;
+                case '5':
+                    cout << "Display all scooters sorted ascending by ID: ";
+                    displayAllScootersSortedByID();
+                    break;
+                case '6':
+                    cout << "Display all parked scooters: ";
+                    displayAllParkedScooters();
+                    break;
+                case '7':
+                    cout << "Display all my scooters:" << endl;
+                    break;
+                case '8':
+                    cout << "Reserve scooter:" << endl;
+                    break;
+                case '9':
+                    cout << "Use scooter:" << endl;
+                    break;
+                case 'p':
+                case 'P':
+                    cout << "Park scooter:" << endl;
+                    break;
+                case 'R':
+                case 'r':
+                    cout << "+++ Closing app +++ ";
+                    return true;
+                case 'X':
+                case 'x':
+                    cout << "+++ Closing app +++ ";
+                    return false;
+                default:
+                    cout << "Not an option...";
+                    break;
+            }
+        }
+        while (choice);
         return false;
     }
 
-    void MainUI::logIn()
+    void MainUI::logInAsManager()
     {
         bool retry = true;
         while (retry)
@@ -133,6 +206,35 @@ namespace ui
             catch (const std::invalid_argument& e)
             {
                 cout << "Exception: " << e.what() << endl;
+                retry = true;
+            }
+        }
+    }
+
+    void MainUI::logInAsUser()
+    {
+        bool retry = true;
+        while (retry)
+        {
+            cout << "You have to log in..." << endl;
+            this->user = enterUserName();
+            this->password = enterPassword();
+            try {
+                ConcreteUI::tryToLogAsUser(user, password);
+                retry = false;
+            }
+            catch (const std::invalid_argument& e)
+            {
+                cout << "Exception: " << e.what() << endl << endl;
+                cout << "Enter 1 to try again or any key to create new account" << endl;
+                char choice;
+                cout << "My choice: "; cin >> choice;
+                if (choice != '1')
+                {
+                    this->user = enterUserName();
+                    this->password = enterPassword();
+                    ConcreteUI::createUserAccount(user, password);
+                }
                 retry = true;
             }
         }
@@ -270,5 +372,7 @@ namespace ui
         } while (!done);
         ConcreteUI::callCUD(controller::UPDATE, updatedScooter);
     }
+
+
 
 } // ui

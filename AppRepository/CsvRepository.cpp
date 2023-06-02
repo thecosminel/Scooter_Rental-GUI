@@ -8,6 +8,7 @@ namespace repository
     CsvFileRepository::~CsvFileRepository()
     {
         saveToFile();
+        saveAccountsToFile();
     }
 
     CsvFileRepository &CsvFileRepository::operator=(const CsvFileRepository &other){
@@ -35,6 +36,30 @@ namespace repository
                 file << scooter.getKilometers() << ',';
                 file << scooter.getLocation() << ',';
                 file << static_cast<int>(scooter.getStatus()) << std::endl;
+            }
+            file.close();
+        }
+    }
+
+    void CsvFileRepository::saveAccountsToFile()
+    {
+        std::ofstream file(accountsFileName);
+        if (file.is_open())
+        {
+            file << userAccounts.size() + managerAccounts.size() << std::endl;
+            for (const auto& accounts : managerAccounts)
+            {
+                file << accounts.first << ',';
+                file << accounts.second << ',';
+                file << "manager" << ',';
+                file << endl;
+            }
+            for (const auto& accounts : userAccounts)
+            {
+                file << accounts.first << ',';
+                file << accounts.second << ',';
+                file << "user" << ',';
+                file << endl;
             }
             file.close();
         }

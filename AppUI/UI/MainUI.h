@@ -38,7 +38,9 @@ namespace ui
 
         bool runUser();
 
-        void logIn();
+        void logInAsManager();
+
+        void logInAsUser();
 
         // ------------------------
         // Manager & User methods

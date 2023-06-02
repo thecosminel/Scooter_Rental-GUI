@@ -87,6 +87,10 @@ namespace controller {
 
         void logInAsManager(string user, string pass) override;
 
+        void logInAsUser(string user, string pass) override;
+
+        void createUserAccount(string user, string pass) override;
+
         void scooterSetCurrent(string identifier) override;
 
         /// Create, Update, Remove scooter

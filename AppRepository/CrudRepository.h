@@ -55,6 +55,10 @@ namespace repository
         // Access
         virtual bool checkManagerCredentials(string user, string pass) = 0;
 
+        virtual bool checkUserCredentials(string user, string pass) = 0;
+
+        virtual void createUserAccount(string user, string pass) = 0;
+
         // -----------------------------------------------
         // Other methods
         /// Gets all scooters with matching location from repo

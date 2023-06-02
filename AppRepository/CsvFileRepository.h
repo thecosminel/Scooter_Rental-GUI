@@ -12,6 +12,7 @@ namespace repository {
     class CsvFileRepository : public InMemoryRepository{
     private:
         void saveToFile();
+        void saveAccountsToFile();
 
     public:
         /// Default constructor

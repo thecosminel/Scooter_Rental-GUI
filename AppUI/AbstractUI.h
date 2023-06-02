@@ -15,7 +15,6 @@ namespace ui {
     protected:
         string user;
         string password;
-        string accessKey;
         Scooter currentScooter;
 
     public:

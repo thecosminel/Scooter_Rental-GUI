@@ -63,6 +63,10 @@ namespace repository
         // Access
         bool checkManagerCredentials(string user, string pass) override;
 
+        bool checkUserCredentials(string user, string pass) override;
+
+        void createUserAccount(string user, string pass) override;
+
         // -----------------------------------------------
         // Override methods
         /// Gets all scooters with matching location from repo

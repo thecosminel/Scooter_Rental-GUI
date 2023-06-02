@@ -103,6 +103,33 @@ namespace repository
         return false;
     }
 
+    bool InMemoryRepository::checkUserCredentials(string user, string pass)
+    {
+        for (const auto& account : userAccounts) //NOLINT
+        {
+            if (account.first == user && account.second == pass)
+                return true;
+        }
+        return false;
+    }
+
+    void InMemoryRepository::createUserAccount(string user, string pass)
+    {
+        for (const auto& account : userAccounts) //NOLINT
+        {
+            if (account.first == user && account.second == pass)
+            {
+                notify("Account already exits!");
+                return;
+            }
+        }
+        pair <string, string> newUserAccount;
+        newUserAccount.first = user;
+        newUserAccount.second = pass;
+        userAccounts.push_back(newUserAccount);
+        notify("New user account created!");
+    }
+
     // -----------------------------------------------
     // Override methods
     vector<Scooter> InMemoryRepository::getAllScootersByLocation(string location)
@@ -278,6 +305,7 @@ namespace repository
         }
         return identifiers;
     }
+
 
 
 

@@ -45,6 +45,8 @@ namespace ui {
         // ISubject
 
         void tryToLogAsManager(string user, string pass) override;
+        void tryToLogAsUser(string user, string pass) override;
+        void createUserAccount(string user, string pass) override;
 
         void requestScooter (string identifier) override;
 

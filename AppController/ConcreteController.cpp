@@ -93,6 +93,23 @@ namespace controller
         }
     }
 
+    void ConcreteController::logInAsUser(string user, string pass)
+    {
+        if (repo->checkUserCredentials(user, pass))
+        {
+            ui->printMessage("Login as client successful!");
+        }
+        else
+        {
+            throw std::invalid_argument("Client username or password incorrect");
+        }
+    }
+
+    void ConcreteController::createUserAccount(string user, string pass)
+    {
+        repo->createUserAccount(user, pass);
+    }
+
     void ConcreteController::scooterSetCurrent(string identifier)
     {
         Scooter requestedScooter = repo->getScooterById(identifier);
