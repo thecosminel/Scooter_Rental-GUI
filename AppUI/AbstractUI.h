@@ -15,6 +15,7 @@ namespace ui {
     protected:
         string user;
         string password;
+        Scooter currentScooter;
 
     public:
         // ------------------------
@@ -39,6 +40,11 @@ namespace ui {
         virtual void printScooterContainer(vector<Scooter>) = 0;
 
         virtual void printMessage(string message) = 0;
+
+        // Getters & setters
+        virtual void getCurrentScooter(string identifier) = 0;
+        virtual void setCurrentScooter(Scooter scooter) = 0;
+
     };
 
 } // ui

@@ -25,9 +25,10 @@ namespace utils {
     string enterID();
     string enterModel();
     string enterManufacturingDate();
-    double enterKm();
-    string enterLocation();
     pair <string, string> enterManufacturingDates();
+    double enterKm();
+    pair <double, double> enterKmMultiple();
+    string enterLocation();
     ScooterStatus enterStatus();
 
 

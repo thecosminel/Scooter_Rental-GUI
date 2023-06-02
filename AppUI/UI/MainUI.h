@@ -47,11 +47,13 @@ namespace ui
         void displayAllParkedScooters();
         void searchScooterByLocation();
         void displayScootersFilteredByDates();
+        void displayScootersFilteredByKm();
 
         // -------------------------
         // Manager UI only
         void addNewScooter();
         void deleteExistingScooter();
+        void modifyExistingScooter();
     };
 
 } // ui

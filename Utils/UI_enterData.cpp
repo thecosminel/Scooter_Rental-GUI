@@ -110,6 +110,21 @@ namespace utils
         return km;
     }
 
+    pair<double, double> enterKmMultiple()
+    {
+        double kmMin, kmMax;
+        cout << endl;
+        cout << "Enter km min: ";
+        cin >> kmMin;
+        cout << endl;
+        cout << "Enter km max: ";
+        cin >> kmMax;
+        pair<double, double> km;
+        km.first = kmMin;
+        km.second = kmMax;
+        return km;
+    }
+
     string enterLocation()
     {
         string location;
@@ -122,7 +137,7 @@ namespace utils
     ScooterStatus enterStatus()
     {
         cout << endl;
-        cout << "Select status: 1.PARKED / 2.RESERVED / 3.IN_USE / 4.MAINTENANCE / 5.OUT_OF_SERVICE / 6.UNKNOWN)";
+        cout << "Select status: 1.PARKED / 2.RESERVED / 3.IN_USE / 4.MAINTENANCE / 5.OUT_OF_SERVICE / 6.UNKNOWN)" << endl;
         char choice;
         cout << "My choice: "; cin >> choice;
         switch (choice)

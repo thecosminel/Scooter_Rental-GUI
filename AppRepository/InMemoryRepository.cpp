@@ -73,6 +73,11 @@ namespace repository
             (*it).setKilometers(updatedScooter.getKilometers());
             (*it).setLocation(updatedScooter.getLocation());
             (*it).setStatus(updatedScooter.getStatus());
+            notify("Scooter updated!");
+        }
+        if (it == scooters.end())
+        {
+            notify("No scooter updated. Invalid ID!");
         }
     }
 
@@ -121,6 +126,10 @@ namespace repository
                 result.push_back(scooter);
             }
         }
+        if (result.empty())
+        {
+            notify("No scooters with matching km");
+        }
         return result;
     }
 
@@ -164,6 +173,7 @@ namespace repository
                 return scooter;
             }
         }
+        notify("No scooter with given ID found");
         return {};
     }
 

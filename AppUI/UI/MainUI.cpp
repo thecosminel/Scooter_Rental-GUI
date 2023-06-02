@@ -66,8 +66,7 @@ namespace ui
                     break;
                 case '3':
                     cout << "Modify existing scooter: ";
-                    //TODO - Implementation
-                    //modifyExistingScooter()
+                    modifyExistingScooter();
 
                     break;
                 case '4':
@@ -76,8 +75,7 @@ namespace ui
                     break;
                 case '5':
                     cout << "Display scooters with km between:  ";
-                    //TODO - Implementation
-//                    displayScootersFilteredByKm();
+                    displayScootersFilteredByKm();
                     break;
                 case '6':
                     cout << "Display scooters with manufacturing date between:  ";
@@ -156,6 +154,12 @@ namespace ui
         ConcreteUI::callFilterDates(controller::FilteredDates, dates);
     }
 
+    void MainUI::displayScootersFilteredByKm()
+    {
+        pair<double, double> km = enterKmMultiple();
+        ConcreteUI::callFilterKm(controller::FilterKm, km);
+    }
+
     void MainUI::addNewScooter()
     {
         cout << endl << "You have selected to add a new Scooter";
@@ -165,12 +169,6 @@ namespace ui
         double km = enterKm();
         string location = enterLocation();
         ScooterStatus status = enterStatus();
-//        string model = "Yamaha";
-//        string identifier = "NIL";
-//        string manufacturingDate = "10.10.2020";
-//        double km = 12.34;
-//        string location = "Bosanci";
-//        ScooterStatus status = PARKED;
         Scooter newScooter(identifier, model, manufacturingDate, km, location, status);
         ConcreteUI::callCUD(controller::ADD,newScooter);
     }
@@ -179,9 +177,84 @@ namespace ui
     {
         cout << endl << "You have selected to delete an existing Scooter";
         string identifier = enterID();
-//        string identifier = "NIL";
         Scooter removedScooter(identifier, "", "10.10.2010", 1, "", UNKNOWN);
         ConcreteUI::callCUD(controller::REMOVE, removedScooter);
+    }
+
+    void MainUI::modifyExistingScooter()
+    {
+        cout << endl << "You have selected to modify an existing Scooter";
+        string identifier = enterID();
+        try {
+            ConcreteUI::getCurrentScooter(identifier);
+        }
+        catch (const std::logic_error& exception)
+        {
+            cout << endl << "Error: " << exception.what() << endl;
+            return;
+        }
+        vector<Scooter> scooterInVector;
+        Scooter updatedScooter = currentScooter;
+        char choice;
+        bool done = false;
+        do
+        {
+            scooterInVector.clear();
+            scooterInVector.push_back(updatedScooter);
+            cout << "Current updated scooter:" << endl;
+            ConcreteUI::printScooterContainer(scooterInVector);
+            cout << "What do you want to modify: " << endl;
+            cout << "  1. Model" << endl;
+            cout << "  2. Manufacturing date" << endl;
+            cout << "  3. Km" << endl;
+            cout << "  4. Location" << endl;
+            cout << "  5. Status" << endl;
+            cout << "  x. That's all"<< endl;
+            cout << "My choice: "; cin >> choice;
+            switch (choice)
+            {
+                case '1':
+                {
+                    string model = enterModel();
+                    updatedScooter.setModel(model);
+                    break;
+                }
+
+                case '2':
+                {
+                    string date = enterManufacturingDate();
+                    updatedScooter.setDate(date);
+                    break;
+                }
+
+                case '3':
+                {
+                    double km = enterKm();
+                    updatedScooter.setKilometers(km);
+                    break;
+                }
+
+                case '4':
+                {
+                    string location = enterLocation();
+                    updatedScooter.setLocation(location);
+                    break;
+                }
+                case '5':
+                {
+                    ScooterStatus status = enterStatus();
+                    updatedScooter.setStatus(status);
+                    break;
+                }
+                case 'x':
+                case 'X':
+                    done = true;
+                    break;
+                default:
+                    cout << "Not an option!" << endl;
+            }
+        } while (!done);
+        ConcreteUI::callCUD(controller::UPDATE, updatedScooter);
     }
 
 } // ui

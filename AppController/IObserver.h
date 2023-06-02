@@ -21,7 +21,8 @@ namespace controller {
         SortedDate,
         FilteredParked,
         FilteredLocation,
-        FilteredDates
+        FilteredDates,
+        FilterKm
     };
 
     class IObserver {
@@ -29,7 +30,8 @@ namespace controller {
         IObserver() = default;
 
         virtual void update(const string& data) = 0;
-//        void update(const string& data);
+
+        virtual void scooterSetCurrent(string identifier) = 0;
 
         virtual void scooterCUD(Operations operation, const Scooter& scooter) = 0;
 
@@ -38,6 +40,8 @@ namespace controller {
         virtual void scooterVectorFilterLocation(Operations operation, string location) = 0;
 
         virtual void scooterVectorFilterDates(Operations operation, std::pair<string, string> dates) = 0;
+
+        virtual void scooterVectorFilterKm(Operations operation, std::pair<double, double> km) = 0;
     };
 
 }

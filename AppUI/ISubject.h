@@ -27,6 +27,8 @@ namespace ui {
 
         void notify(const string& data);
 
+        virtual void requestScooter (string identifier) = 0;
+
         /// Add, update, remove scooter
         /// \param operation
         /// \param scooter
@@ -37,6 +39,8 @@ namespace ui {
         virtual void callFilterLocation(Operations operations, string location) = 0;
 
         virtual void callFilterDates(Operations operation, std::pair<string, string> dates) = 0;
+
+        virtual void callFilterKm(Operations operation, std::pair<double, double> km) = 0;
     };
 
 } // ui

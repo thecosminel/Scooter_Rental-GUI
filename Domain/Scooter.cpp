@@ -116,4 +116,17 @@ bool scooter::Scooter::checkIfSameIdentifier(const Scooter &scooter)
     return this->identifier == scooter.identifier;
 }
 
+bool scooter::Scooter::checkIfNullScooter() //NOLINT
+{
+    if ( identifier.empty()
+    && model.empty()
+    && manufacturingDate.empty()
+    && kilometers == 0.0
+    && location.empty()
+    && status == UNKNOWN
+    )
+        return true;
+    return false;
+}
+
 

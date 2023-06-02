@@ -37,8 +37,14 @@ namespace ui {
 
         void printMessage(string message) override;
 
+        // Getters & setters
+        void getCurrentScooter(string identifier) override;
+        void setCurrentScooter(Scooter scooter) override;
+
         // ------------------------
         // ISubject
+        void requestScooter (string identifier) override;
+
         void callCUD(Operations operation, const Scooter &scooter) override;
 
         void callVectorNoFiler(Operations operation) override;
@@ -46,6 +52,8 @@ namespace ui {
         void callFilterLocation(Operations operations, string location) override;
 
         void callFilterDates(Operations operation, std::pair<string, string> dates) override;
+
+        void callFilterKm(Operations operation, std::pair<double, double> km) override;
     };
 
 } // ui

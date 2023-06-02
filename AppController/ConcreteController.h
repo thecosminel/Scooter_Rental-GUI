@@ -85,6 +85,8 @@ namespace controller {
         // IObserver override
         void update(const string &data) override;
 
+        void scooterSetCurrent(string identifier) override;
+
         /// Create, Update, Remove scooter
         /// \param operation
         /// \param scooter
@@ -95,6 +97,8 @@ namespace controller {
         void scooterVectorFilterLocation(Operations operation, string location) override;
 
         void scooterVectorFilterDates(Operations operation, std::pair<string, string> dates) override;
+
+        void scooterVectorFilterKm(Operations operation, std::pair<double, double> km) override;
     };
 
 } // controller

@@ -42,8 +42,7 @@ namespace controller
     void ConcreteController::filterScootersByKmBetweenTwoValues(double kmMin, double kmMax)
     {
         auto scooters = repo->getAllScootersByKmBetweenTwoValues(kmMin, kmMax);
-        //TODO - Implementation
-        // Print the result in UI
+        ui->printScooterContainer(scooters);
 
     }
 
@@ -80,6 +79,16 @@ namespace controller
     void ConcreteController::update(const string &data)
     {
         ui->printMessage(data);
+    }
+
+    void ConcreteController::scooterSetCurrent(string identifier)
+    {
+        Scooter requestedScooter = repo->getScooterById(identifier);
+        if (requestedScooter.checkIfNullScooter())
+        {
+            throw std::logic_error("No scooter with matching ID");
+        }
+        ui->setCurrentScooter(requestedScooter);
     }
 
     void ConcreteController::scooterCUD(Operations operation, const Scooter& scooter)
@@ -130,6 +139,13 @@ namespace controller
         if (operation != FilteredDates)
             throw std::invalid_argument("Not FilteredDates operation");
         filterScootersByAgeBetweenTwoDates(dates.first, dates.second);
+    }
+
+    void ConcreteController::scooterVectorFilterKm(Operations operation, std::pair<double, double> km)
+    {
+        if (operation != FilterKm)
+            throw std::invalid_argument("Not FilterKm operation");
+        filterScootersByKmBetweenTwoValues(km.first, km.second);
     }
 
     // Utils
