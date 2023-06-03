@@ -90,6 +90,10 @@ namespace repository
         auto result = std::vector<Scooter>();
         for (const auto& scooter : scooters)
             result.push_back(scooter);
+        if (result.empty())
+        {
+            notify("Repository empty");
+        }
         return result;
     }
 
