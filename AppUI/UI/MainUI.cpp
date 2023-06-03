@@ -41,61 +41,90 @@ namespace ui
         {
             pressEnterToContinue();
             cout << "Choose option: " << endl;
-            cout << "  1. Add new scooter" << endl;
-            cout << "  2. Delete existing scooter" << endl;
-            cout << "  3. Modify existing scooter" << endl;
-            cout << "  4. Search scooter by location" << endl;
-            cout << "  5. Display scooters with km between two values" << endl;
-            cout << "  6. Display scooters manufactured between two dates" << endl;
-            cout << "  7. Display all scooters sorted ascending by manufacturing date" << endl;
-            cout << "  8. Display all scooters sorted ascending by ID" << endl;
+            cout << "CUD methods:" << endl;
+            cout << "  A. Add new scooter" << endl;
+            cout << "  D. Delete existing scooter" << endl;
+            cout << "  M. Modify existing scooter" << endl;
+            cout << "All scooters sort methods: " << endl;
+            cout << "  1. Display all scooters sorted ascending by ID" << endl;
+            cout << "  2. Display all scooters sorted ascending by model" << endl;
+            cout << "  3. Display all scooters sorted ascending by manufacturing date" << endl;
+            cout << "  4. Display all scooters sorted ascending by Km" << endl;
+            cout << "  5. Display all scooters sorted ascending by location" << endl;
+            cout << "  6. Display all scooters sorted ascending by status" << endl;
+            cout << "Search methods: " << endl;
+            cout << "  L. Search scooter by location" << endl;
+            cout << "  7. Display scooters with km between two values" << endl;
+            cout << "  8. Display scooters manufactured between two dates" << endl;
             cout << "  9. Display all parked scooters" << endl;
-            cout << "  R. Return to main ui" << endl;
+            cout << "  B. Return to main ui" << endl;
             cout << "  X. Close app" << endl;
             cin >> choice;
             cout << endl;
 
             switch (choice)
             {
-                case '1':
+                case 'A':
+                case 'a':
                     cout << "Add new scooter: ";
                     addNewScooter();
                     break;
-                case '2':
+                case 'D':
+                case 'd':
                     cout << "Delete existing scooter: ";
                     deleteExistingScooter();
                     break;
-                case '3':
+                case 'M':
+                case 'm':
                     cout << "Modify existing scooter: ";
                     modifyExistingScooter();
-
                     break;
-                case '4':
-                    cout << "Search scooter by location: ";
-                    searchScooterByLocation();
-                    break;
-                case '5':
-                    cout << "Display scooters with km between:  ";
-                    displayScootersFilteredByKm();
-                    break;
-                case '6':
-                    cout << "Display scooters with manufacturing date between:  ";
-                    displayScootersFilteredByDates();
-                    break;
-                case '7':
-                    cout << "Display all scooters sorted ascending by age: ";
-                    displayAllScootersSortedByAge();
-                    break;
-                case '8':
+                // All scooters sort methods
+                case '1':
                     cout << "Display all scooters sorted ascending by ID: ";
                     displayAllScootersSortedByID();
                     break;
+                case '2':
+                    cout << "Display all scooters sorted ascending by model: ";
+                    displayAllScootersSortedByModel();
+                    break;
+                case '3':
+                    cout << "Display all scooters sorted ascending by age: ";
+                    displayAllScootersSortedByAge();
+                    break;
+                case '4':
+                    cout << "Display all scooters sorted ascending by km: ";
+                    displayAllScootersSortedByKm();
+                    break;
+                case '5':
+                    cout << "Display all scooters sorted ascending by location: ";
+                    displayAllScootersSortedByLocation();
+                    break;
+                case '6':
+                    cout << "Display all scooters sorted ascending by status: ";
+                    displayAllScootersSortedByStatus();
+                    break;
+                // Search methods
+                case 'L':
+                case 'l':
+                    cout << "Search scooter by location: ";
+                    searchScooterByLocation();
+                    break;
+                case '7':
+                    cout << "Display scooters with km between:  ";
+                    displayScootersFilteredByKm();
+                    break;
+                case '8':
+                    cout << "Display scooters with manufacturing date between:  ";
+                    displayScootersFilteredByDates();
+                    break;
+
                 case '9':
                     cout << "Display all parked scooters: ";
                     displayAllParkedScooters();
                     break;
-                case 'R':
-                case 'r':
+                case 'B':
+                case 'b':
                     cout << "+++ Closing app +++ ";
                     return true;
                 case 'X':
@@ -120,56 +149,89 @@ namespace ui
         {
             pressEnterToContinue();
             cout << "Choose option: " << endl;
-            cout << "  1.  Search scooter by location" << endl;
-            cout << "  2.  Display scooters with km between two values" << endl;
-            cout << "  3.  Display scooters manufactured between two dates" << endl;
-            cout << "  4.  Display all scooters sorted ascending by manufacturing date" << endl;
-            cout << "  5.  Display all scooters sorted ascending by ID" << endl;
-            cout << "  6.  Display all parked scooters" << endl;
-            cout << "  7.  Display all my scooters" << endl;
-            cout << "  8.  Reserve scooter" << endl;
-            cout << "  9.  Use scooter" << endl;
+            cout << "All scooters sort methods: " << endl;
+            cout << "  1. Display all scooters sorted ascending by ID" << endl;
+            cout << "  2. Display all scooters sorted ascending by model" << endl;
+            cout << "  3. Display all scooters sorted ascending by manufacturing date" << endl;
+            cout << "  4. Display all scooters sorted ascending by Km" << endl;
+            cout << "  5. Display all scooters sorted ascending by location" << endl;
+            cout << "  6. Display all scooters sorted ascending by status" << endl;
+
+            cout << "Search methods: " << endl;
+            cout << "  L. Search scooter by location" << endl;
+            cout << "  7. Display scooters with km between two values" << endl;
+            cout << "  8. Display scooters manufactured between two dates" << endl;
+            cout << "  9. Display all parked scooters" << endl;
+
+            cout << "  M.  Display all my scooters" << endl;
+            cout << "  R.  Reserve scooter" << endl;
+            cout << "  U.  Use scooter" << endl;
             cout << "  P. Park scooter" << endl;
-            cout << "  R. Return to main ui" << endl;
+            cout << "  B. Return to main ui" << endl;
             cout << "  X. Close app" << endl;
             cin >> choice;
             cout << endl;
 
             switch (choice)
             {
+                // All scooters sort methods
                 case '1':
-                    cout << "Search scooter by location: ";
-                    searchScooterByLocation();
-                    break;
-                case '2':
-                    cout << "Display scooters with km between:  ";
-                    displayScootersFilteredByKm();
-                    break;
-                case '3':
-                    cout << "Display scooters with manufacturing date between:  ";
-                    displayScootersFilteredByDates();
-                    break;
-                case '4':
-                    cout << "Display all scooters sorted ascending by age: ";
-                    displayAllScootersSortedByAge();
-                    break;
-                case '5':
                     cout << "Display all scooters sorted ascending by ID: ";
                     displayAllScootersSortedByID();
                     break;
+                case '2':
+                    cout << "Display all scooters sorted ascending by model: ";
+                    displayAllScootersSortedByModel();
+                    break;
+                case '3':
+                    cout << "Display all scooters sorted ascending by age: ";
+                    displayAllScootersSortedByAge();
+                    break;
+                case '4':
+                    cout << "Display all scooters sorted ascending by km: ";
+                    displayAllScootersSortedByKm();
+                    break;
+                case '5':
+                    cout << "Display all scooters sorted ascending by location: ";
+                    displayAllScootersSortedByLocation();
+                    break;
                 case '6':
+                    cout << "Display all scooters sorted ascending by status: ";
+                    displayAllScootersSortedByStatus();
+                    break;
+                    // Search methods
+                case 'L':
+                case 'l':
+                    cout << "Search scooter by location: ";
+                    searchScooterByLocation();
+                    break;
+                case '7':
+                    cout << "Display scooters with km between:  ";
+                    displayScootersFilteredByKm();
+                    break;
+                case '8':
+                    cout << "Display scooters with manufacturing date between:  ";
+                    displayScootersFilteredByDates();
+                    break;
+
+                case '9':
                     cout << "Display all parked scooters: ";
                     displayAllParkedScooters();
                     break;
-                case '7':
+
+                // Personal scooters
+                case 'M':
+                case 'm':
                     cout << "Display all my scooters:" << endl;
                     displayMyScooters();
                     break;
-                case '8':
+                case 'R':
+                case 'r':
                     cout << "Reserve scooter:" << endl;
                     reserveScooter();
                     break;
-                case '9':
+                case 'U':
+                case 'u':
                     cout << "Use scooter:" << endl;
                     useScooter();
                     break;
@@ -178,8 +240,8 @@ namespace ui
                     cout << "Park scooter:" << endl;
                     parkScooter();
                     break;
-                case 'R':
-                case 'r':
+                case 'B':
+                case 'b':
                     cout << "+++ Closing app +++ ";
                     return true;
                 case 'X':
@@ -249,17 +311,17 @@ namespace ui
     // Manager & User methods
     void MainUI::displayAllScootersSortedByAge()
     {
-        ConcreteUI::callVectorNoFiler(controller::SortedDate);
+        ConcreteUI::callVectorSort(controller::SortedDate);
     }
 
     void MainUI::displayAllScootersSortedByID()
     {
-        ConcreteUI::callVectorNoFiler(controller::SortedId);
+        ConcreteUI::callVectorSort(controller::SortedId);
     }
 
     void MainUI::displayAllParkedScooters()
     {
-        ConcreteUI::callVectorNoFiler(controller::FilteredParked);
+        ConcreteUI::callVectorSort(controller::FilteredParked);
     }
 
     void MainUI::searchScooterByLocation()
@@ -415,6 +477,11 @@ namespace ui
             cout << "Scooter cannot be parked, it is not used" << endl;
             return;
         }
+        else if (currentScooter.getUser() != user)
+        {
+            cout << "Scooter cannot be used, it is used by another person!" << endl;
+            return;
+        }
         Scooter scooter = currentScooter;
         ConcreteUI::callRUP(controller::PARK, scooter, user);
     }
@@ -435,6 +502,11 @@ namespace ui
             cout << "Scooter cannot be used, it is not reserved" << endl;
             return;
         }
+        else if (currentScooter.getUser() != user)
+        {
+            cout << "Scooter cannot be used, it is reserved by another person!" << endl;
+            return;
+        }
         Scooter scooter = currentScooter;
         ConcreteUI::callRUP(controller::USE, scooter, user);
     }
@@ -442,6 +514,26 @@ namespace ui
     void MainUI::displayMyScooters()
     {
         ConcreteUI::callVectorAllScootersOfUser(this->user);
+    }
+
+    void MainUI::displayAllScootersSortedByModel()
+    {
+        ConcreteUI::callVectorSort(controller::SortedModel);
+    }
+
+    void MainUI::displayAllScootersSortedByKm()
+    {
+        ConcreteUI::callVectorSort(controller::SortedKm);
+    }
+
+    void MainUI::displayAllScootersSortedByLocation()
+    {
+        ConcreteUI::callVectorSort(controller::SortedLocation);
+    }
+
+    void MainUI::displayAllScootersSortedByStatus()
+    {
+        ConcreteUI::callVectorSort(controller::SortedStatus);
     }
 
 

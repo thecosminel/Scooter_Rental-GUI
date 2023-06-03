@@ -108,11 +108,11 @@ namespace ui {
         }
     }
 
-    void ConcreteUI::callVectorNoFiler(Operations operation)
+    void ConcreteUI::callVectorSort(Operations operation)
     {
         for (const auto& observer : observers)
         {
-            observer->scooterVectorNoFiler(operation);
+            observer->scooterVectorSorted(operation);
         }
     }
 

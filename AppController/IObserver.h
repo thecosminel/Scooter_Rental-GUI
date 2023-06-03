@@ -22,6 +22,10 @@ namespace controller {
         PARK,
         SortedId,
         SortedDate,
+        SortedModel,
+        SortedKm,
+        SortedLocation,
+        SortedStatus,
         FilteredParked,
         FilteredLocation,
         FilteredDates,
@@ -49,7 +53,7 @@ namespace controller {
 
         virtual void displayAllScootersOfAnUser(string user) = 0;
 
-        virtual void scooterVectorNoFiler(Operations operation) = 0;
+        virtual void scooterVectorSorted(Operations operation) = 0;
 
         virtual void scooterVectorFilterLocation(Operations operation, string location) = 0;
 

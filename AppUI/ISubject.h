@@ -44,7 +44,7 @@ namespace ui {
 
         virtual void callVectorAllScootersOfUser(string userName) = 0;
 
-        virtual void callVectorNoFiler(Operations operation) = 0;
+        virtual void callVectorSort(Operations operation) = 0;
 
         virtual void callFilterLocation(Operations operations, string location) = 0;
 

@@ -28,7 +28,8 @@ namespace repository
     void InMemoryRepository::addScooter(const Scooter &scooter)
     {
         int index = 0;
-        while (index < scooters.size() && compareNamesAlphabetically(scooters[index].getIdentifier(), scooter.getIdentifier()))
+        while (index < scooters.size() &&
+                compareStringsAlphabetically(scooters[index].getIdentifier(), scooter.getIdentifier()))
         {
             index++;
         }

@@ -10,7 +10,7 @@
 #include <fstream>
 
 using repository::CrudRepository, repository::ISubject;
-using utils::compareDates, utils::checkDateFormat, utils::compareNamesAlphabetically;
+using utils::compareDates, utils::checkDateFormat, utils::compareStringsAlphabetically;
 using std::ifstream;
 
 namespace repository

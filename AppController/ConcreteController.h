@@ -85,6 +85,11 @@ namespace controller {
         /// \return shared pointer to a vector of scooters that have been sorted by their age
         void sortScootersByManufacturingDate() override;
 
+        void sortScootersByModel() override;
+        void sortScootersByKm() override;
+        void sortScootersByLocation() override;
+        void sortScootersByStatus() override;
+
         // ------------------------------
         // IObserver override
         void update(const string &data) override;
@@ -109,7 +114,7 @@ namespace controller {
 
         void displayAllScootersOfAnUser(string user) override;
 
-        void scooterVectorNoFiler(Operations operation) override;
+        void scooterVectorSorted(Operations operation) override;
 
         void scooterVectorFilterLocation(Operations operation, string location) override;
 

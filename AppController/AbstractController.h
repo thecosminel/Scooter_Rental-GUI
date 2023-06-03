@@ -87,9 +87,16 @@ namespace controller {
         /// \return shared pointer to a vector of scooters that have been sorted by their ID
         virtual void sortScootersByID() = 0;
 
+
+
         /// Sort scooters by manufacturing date ascending
         /// \return shared pointer to a vector of scooters that have been sorted by their age
         virtual void sortScootersByManufacturingDate() = 0;
+
+        virtual void sortScootersByModel() = 0;
+        virtual void sortScootersByKm() = 0;
+        virtual void sortScootersByLocation() = 0;
+        virtual void sortScootersByStatus() = 0;
     };
 
 } // controller

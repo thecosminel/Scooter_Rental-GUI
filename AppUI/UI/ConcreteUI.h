@@ -56,7 +56,7 @@ namespace ui {
 
         void callVectorAllScootersOfUser(string userName) override;
 
-        void callVectorNoFiler(Operations operation) override;
+        void callVectorSort(Operations operation) override;
 
         void callFilterLocation(Operations operations, string location) override;
 

@@ -33,12 +33,18 @@ namespace utils {
     /// \return date 1 < date 2
     bool compareScooterByDate(const Scooter& scooter1, const Scooter& scooter2);
 
+    bool compareScooterByModel(const Scooter& scooter1, const Scooter& scooter2);
+    bool compareScooterByKm(const Scooter& scooter1, const Scooter& scooter2);
+    bool compareScooterByLocation(const Scooter& scooter1, const Scooter& scooter2);
+    bool compareScooterByStatus(const Scooter& scooter1, const Scooter& scooter2);
+
+
     /// Checks if a string is alphanumeric
     /// \param str
     /// \return true/false
     bool checkAlphanumericString(const string& str);
 
-    bool compareNamesAlphabetically(string name1, string name2);
+    bool compareStringsAlphabetically(string name1, string name2);
 
     string generateRandomID();
 

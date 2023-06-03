@@ -84,6 +84,34 @@ namespace controller
         ui->printScooterContainer(scooters);
     }
 
+    void ConcreteController::sortScootersByModel()
+    {
+        auto scooters = repo->getAllScootersFromRepo();
+        std::sort(scooters.begin(), scooters.end(), utils::compareScooterByModel);
+        ui->printScooterContainer(scooters);
+    }
+
+    void ConcreteController::sortScootersByKm()
+    {
+        auto scooters = repo->getAllScootersFromRepo();
+        std::sort(scooters.begin(), scooters.end(), utils::compareScooterByKm);
+        ui->printScooterContainer(scooters);
+    }
+
+    void ConcreteController::sortScootersByLocation()
+    {
+        auto scooters = repo->getAllScootersFromRepo();
+        std::sort(scooters.begin(), scooters.end(), utils::compareScooterByLocation);
+        ui->printScooterContainer(scooters);
+    }
+
+    void ConcreteController::sortScootersByStatus()
+    {
+        auto scooters = repo->getAllScootersFromRepo();
+        std::sort(scooters.begin(), scooters.end(), utils::compareScooterByStatus);
+        ui->printScooterContainer(scooters);
+    }
+
     // ------------------------------
     // IObserver override
     void ConcreteController::update(const string &data)
@@ -174,21 +202,33 @@ namespace controller
         ui->printScooterContainer(scooters);
     }
 
-    void ConcreteController::scooterVectorNoFiler(Operations operation)
+    void ConcreteController::scooterVectorSorted(Operations operation)
     {
         switch (operation)
         {
             case SortedId:
                 sortScootersByID();
                 break;
+            case SortedModel:
+                sortScootersByModel();
+                break;
             case SortedDate:
                 sortScootersByManufacturingDate();
+                break;
+            case SortedKm:
+                sortScootersByKm();
+                break;
+            case SortedLocation:
+                sortScootersByLocation();
+                break;
+            case SortedStatus:
+                sortScootersByStatus();
                 break;
             case FilteredParked:
                 filterParkedScooters();
                 break;
             default:
-                throw std::invalid_argument("Not a scooterVectorNoFile operation!!");
+                throw std::invalid_argument("Not a SortScooters operation!!");
         }
     }
 
@@ -237,8 +277,6 @@ namespace controller
             }
         } while (true);
     }
-
-
 
 
 } // controller

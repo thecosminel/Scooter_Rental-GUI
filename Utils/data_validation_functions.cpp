@@ -40,6 +40,34 @@ namespace utils
         return compareDates(date1, date2);
     }
 
+    bool compareScooterByModel(const Scooter& scooter1, const Scooter& scooter2)
+    {
+        string model1 = scooter1.getModel();
+        string model2 = scooter2.getModel();
+        return compareStringsAlphabetically(model1, model2);
+    }
+
+    bool compareScooterByKm(const Scooter& scooter1, const Scooter& scooter2)
+    {
+        double km1 = scooter1.getKilometers();
+        double km2 = scooter2.getKilometers();
+        return km1 <= km2;
+    }
+
+    bool compareScooterByLocation(const Scooter& scooter1, const Scooter& scooter2)
+    {
+        string location1 = scooter1.getLocation();
+        string location2 = scooter2.getLocation();
+        return compareStringsAlphabetically(location1, location2);
+    }
+
+    bool compareScooterByStatus(const Scooter& scooter1, const Scooter& scooter2)
+    {
+        auto status1 = static_cast<int>(scooter1.getStatus());
+        auto status2 = static_cast<int>(scooter2.getStatus());
+        return status1 <= status2;
+    }
+
     bool checkIdFormat(const string& ID)
     {
         if (ID.length() != 3) {
@@ -91,7 +119,7 @@ namespace utils
         return true;
     }
 
-    bool compareNamesAlphabetically(string name1, string name2)
+    bool compareStringsAlphabetically(string name1, string name2)
     {
         // Convert strings to lowercase
         for (char& c : name1)
