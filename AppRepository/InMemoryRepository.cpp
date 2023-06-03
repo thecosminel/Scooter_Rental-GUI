@@ -214,8 +214,7 @@ namespace repository
                 return scooter;
             }
         }
-        notify("No scooter with given ID found");
-        return {};
+        throw std::invalid_argument("Invalid identifier");
     }
 
 
@@ -329,6 +328,8 @@ namespace repository
 
     void InMemoryRepository::reserveScooter(Scooter scooter, string user)
     {
+        string identifier = scooter.getIdentifier();
+        Scooter matchingScooter = getScooterById(identifier);
         scooter.setUser(user);
         scooter.setStatus(scooter::RESERVED);
         updateScooterInfo(scooter);
@@ -336,6 +337,12 @@ namespace repository
 
     void InMemoryRepository::useScooter(Scooter scooter, string user)
     {
+        string identifier = scooter.getIdentifier();
+        Scooter matchingScooter = getScooterById(identifier);
+        if (matchingScooter.getStatus() != scooter::RESERVED)
+            throw std::invalid_argument("Scooter not reserved");
+        if (matchingScooter.getUser() != user)
+            throw std::invalid_argument("Scooters belongs to other user");
         scooter.setUser(user);
         scooter.setStatus(scooter::IN_USE);
         updateScooterInfo(scooter);
@@ -343,6 +350,12 @@ namespace repository
 
     void InMemoryRepository::parkScooter(Scooter scooter, string user)
     {
+        string identifier = scooter.getIdentifier();
+        Scooter matchingScooter = getScooterById(identifier);
+        if (matchingScooter.getStatus() != scooter::IN_USE)
+            throw std::invalid_argument("Scooter not IN-USE");
+        if (matchingScooter.getUser() != user)
+            throw std::invalid_argument("Scooters belongs to other user");
         scooter.setUser(user);
         scooter.setStatus(scooter::PARKED);
         updateScooterInfo(scooter);

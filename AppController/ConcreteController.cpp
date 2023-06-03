@@ -151,10 +151,6 @@ namespace controller
     void ConcreteController::scooterSetCurrent(string identifier)
     {
         Scooter requestedScooter = repo->getScooterById(identifier);
-        if (requestedScooter.checkIfNullScooter())
-        {
-            throw std::logic_error("No scooter with matching ID");
-        }
         ui->setCurrentScooter(requestedScooter);
     }
 

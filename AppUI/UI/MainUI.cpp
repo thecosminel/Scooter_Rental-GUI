@@ -452,13 +452,15 @@ namespace ui
             cout << endl << "Error: " << exception.what() << endl;
             return;
         }
-        if (currentScooter.getStatus() != PARKED)
+        Scooter scooter = currentScooter;
+        try {
+            ConcreteUI::callRUP(controller::RESERVE, scooter, user);
+        }
+        catch (const std::logic_error& exception)
         {
-            cout << "Scooter cannot be reserved, it is not parked" << endl;
+            cout << endl << "Error: " << exception.what() << endl;
             return;
         }
-        Scooter scooter = currentScooter;
-        ConcreteUI::callRUP(controller::RESERVE, scooter, user);
     }
 
     void MainUI::parkScooter()
@@ -472,18 +474,15 @@ namespace ui
             cout << endl << "Error: " << exception.what() << endl;
             return;
         }
-        if (currentScooter.getStatus() != IN_USE)
-        {
-            cout << "Scooter cannot be parked, it is not used" << endl;
-            return;
-        }
-        else if (currentScooter.getUser() != user)
-        {
-            cout << "Scooter cannot be used, it is used by another person!" << endl;
-            return;
-        }
         Scooter scooter = currentScooter;
-        ConcreteUI::callRUP(controller::PARK, scooter, user);
+        try {
+            ConcreteUI::callRUP(controller::PARK, scooter, user);
+        }
+        catch (const std::logic_error& exception)
+        {
+            cout << endl << "Error: " << exception.what() << endl;
+            return;
+        }
     }
 
     void MainUI::useScooter()
@@ -497,18 +496,15 @@ namespace ui
             cout << endl << "Error: " << exception.what() << endl;
             return;
         }
-        if (currentScooter.getStatus() != RESERVED)
-        {
-            cout << "Scooter cannot be used, it is not reserved" << endl;
-            return;
-        }
-        else if (currentScooter.getUser() != user)
-        {
-            cout << "Scooter cannot be used, it is reserved by another person!" << endl;
-            return;
-        }
         Scooter scooter = currentScooter;
-        ConcreteUI::callRUP(controller::USE, scooter, user);
+        try {
+            ConcreteUI::callRUP(controller::USE, scooter, user);
+        }
+        catch (const std::logic_error& exception)
+        {
+            cout << endl << "Error: " << exception.what() << endl;
+            return;
+        }
     }
 
     void MainUI::displayMyScooters()
