@@ -36,4 +36,4 @@ add_executable(ScooterRental_GUI
         AppUI/UI/MainUI.cpp
         AppUI/UI/MainUI.h
         Utils/UI_enterData.cpp
-        Utils/UI_enterData.h)
+        Utils/UI_enterData.h AppRepository/repo_tests.cpp AppRepository/repo_tests.h AppController/ctrl_tests.cpp AppController/ctrl_tests.h)
