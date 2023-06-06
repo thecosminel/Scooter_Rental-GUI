@@ -56,8 +56,12 @@ namespace controller {
         /// \return true if the scooter was successfully reserved, false otherwise
         virtual void reserveScooter(Scooter updatedScooter, const string& username) = 0;
 
+        /// User scooter
+        /// \param updatedScooter
+        /// \param username
         virtual void useScooter(Scooter updatedScooter, const string& username) = 0;
 
+        /// Use scooter
         virtual void parkScooter(Scooter updatedScooter, const string& username) = 0;
 
         // ----------------------------
@@ -95,9 +99,16 @@ namespace controller {
         /// \return shared pointer to a vector of scooters that have been sorted by their age
         virtual void sortScootersByManufacturingDate() = 0;
 
+        /// Sort by model
         virtual void sortScootersByModel() = 0;
+
+        /// Sort by km
         virtual void sortScootersByKm() = 0;
+
+        /// Sort by location
         virtual void sortScootersByLocation() = 0;
+
+        /// Sort by status
         virtual void sortScootersByStatus() = 0;
     };
 

@@ -53,10 +53,21 @@ namespace repository
 
         // -----------------------------------------------
         // Access
+        /// Check manager acc
+        /// \param user
+        /// \param pass
+        /// \return
         virtual bool checkManagerCredentials(string user, string pass) = 0;
 
+        /// Check user acc
+        /// \param user
+        /// \param pass
+        /// \return
         virtual bool checkUserCredentials(string user, string pass) = 0;
 
+        /// Create user acc
+        /// \param user
+        /// \param pass
         virtual void createUserAccount(string user, string pass) = 0;
 
         // -----------------------------------------------
@@ -98,10 +109,19 @@ namespace repository
 
 
         // User operations
+        /// Reserve scooter
+        /// \param scooter
+        /// \param user
         virtual void reserveScooter(Scooter scooter, string user) = 0;
 
+        /// Use scooter
+        /// \param scooter
+        /// \param user
         virtual void useScooter(Scooter scooter, string user) = 0;
 
+        /// Park scooter
+        /// \param scooter
+        /// \param user
         virtual void parkScooter(Scooter scooter, string user) = 0;
     };
 }

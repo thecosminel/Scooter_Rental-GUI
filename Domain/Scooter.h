@@ -87,6 +87,8 @@ namespace scooter
         /// \return True if they do
         bool checkIfSameIdentifier(const Scooter& scooter);
 
+        /// Check if null scooter
+        /// \return
         bool checkIfNullScooter();
     };
 }

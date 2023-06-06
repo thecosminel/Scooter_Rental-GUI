@@ -48,8 +48,14 @@ namespace controller {
         /// \return true if the scooter was successfully reserved, false otherwise
         void reserveScooter(Scooter scooter, const string& username) override;
 
+        /// Use scooter
+        /// \param usedScooter
+        /// \param username
         void useScooter(Scooter usedScooter, const string& username) override;
 
+        /// Park scooter
+        /// \param toParkScooter
+        /// \param username
         void parkScooter(Scooter toParkScooter, const string& username) override;
 
         // ----------------------------
@@ -92,14 +98,25 @@ namespace controller {
 
         // ------------------------------
         // IObserver override
+        /// Update scooter
         void update(const string &data) override;
 
+        /// Log in manager
+        /// \param user
+        /// \param pass
         void logInAsManager(string user, string pass) override;
 
+        /// Log in user
+        /// \param user
+        /// \param pass
         void logInAsUser(string user, string pass) override;
 
+        /// Create user account
+        /// \param user
+        /// \param pass
         void createUserAccount(string user, string pass) override;
 
+        /// Get scooter by id and save it in UI
         void scooterSetCurrent(string identifier) override;
 
         /// Create, Update, Remove scooter
@@ -112,14 +129,26 @@ namespace controller {
         /// \param scooter
         void scooterRUP(Operations operation , const Scooter& scooter, string user) override;
 
+        /// Print all scooters of user
+        /// \param user
         void displayAllScootersOfAnUser(string user) override;
 
+        /// Print all scooters
         void scooterVectorSorted(Operations operation) override;
 
+        /// Filter by location
+        /// \param operation
+        /// \param location
         void scooterVectorFilterLocation(Operations operation, string location) override;
 
+        /// Filter Filter by date
+        /// \param operation
+        /// \param dates
         void scooterVectorFilterDates(Operations operation, std::pair<string, string> dates) override;
 
+        /// Filter by km
+        /// \param operation
+        /// \param km
         void scooterVectorFilterKm(Operations operation, std::pair<double, double> km) override;
     };
 

@@ -11,7 +11,9 @@ namespace repository {
 
     class CsvFileRepository : public InMemoryRepository{
     private:
+        /// Save to csv
         void saveToFile();
+        /// Save accounts to csv
         void saveAccountsToFile();
 
     public:

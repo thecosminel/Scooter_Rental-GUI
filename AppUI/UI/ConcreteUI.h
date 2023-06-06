@@ -33,35 +33,73 @@ namespace ui {
         ~ConcreteUI() = default;
 
         // Printing methods
+        /// Print scooters container
+        /// \param scooters
         void printScooterContainer(vector<Scooter> scooters) override;
 
+        /// Print message
+        /// \param message
         void printMessage(string message) override;
 
         // Getters & setters
+        /// Get current scooter
+        /// \param identifier
         void getCurrentScooter(string identifier) override;
+        /// Set current scooter
+        /// \param scooter
         void setCurrentScooter(Scooter scooter) override;
 
         // ------------------------
         // ISubject
-
+        /// TRy log as manager
+        /// \param user
+        /// \param pass
         void tryToLogAsManager(string user, string pass) override;
+        /// Log in as user
+        /// \param user
+        /// \param pass
         void tryToLogAsUser(string user, string pass) override;
+        /// Crate user account
+        /// \param user
+        /// \param pass
         void createUserAccount(string user, string pass) override;
 
+        /// Request scooter
+        /// \param identifier
         void requestScooter (string identifier) override;
 
+        /// Create, update, delete
+        /// \param operation
+        /// \param scooter
         void callCUD(Operations operation, const Scooter &scooter) override;
 
+        /// Reserve, Update, Print
+        /// \param operation
+        /// \param scooter
+        /// \param user
         void callRUP(Operations operation, const Scooter &scooter, string user) override;
 
+        /// Get all user scooters
+        /// \param userName
         void callVectorAllScootersOfUser(string userName) override;
 
+        /// Sort scooters by attribute
+        /// \param operation
         void callVectorSort(Operations operation) override;
 
+        /// Filter by location
+        /// \param operations
+        /// \param location
         void callFilterLocation(Operations operations, string location) override;
 
+        /// Filter dates
+        /// \param operation
+        /// \param dates
         void callFilterDates(Operations operation, std::pair<string, string> dates) override;
 
+        /// Call filter km
+        /// \param operation
+        /// \param km
         void callFilterKm(Operations operation, std::pair<double, double> km) override;
     };
 

@@ -5,10 +5,11 @@
 #ifndef SCOOTER_RENTAL_GUI_REPO_TESTS_H
 #define SCOOTER_RENTAL_GUI_REPO_TESTS_H
 
+#include <iostream>
+#include <cassert>
+using std::cout, std::endl;
 
-class repo_tests {
-
-};
+void repo_test();
 
 
 #endif //SCOOTER_RENTAL_GUI_REPO_TESTS_H

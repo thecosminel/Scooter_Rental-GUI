@@ -18,7 +18,9 @@ namespace repository
 
     class InMemoryRepository : public CrudRepository, public ISubject{
     private:
+        /// Load csv
         void loadFromFile();
+        /// Load acc
         void loadAccountsFromFile();
 
     protected:
@@ -61,10 +63,21 @@ namespace repository
 
         // -----------------------------------------------
         // Access
+        /// Check manager
+        /// \param user
+        /// \param pass
+        /// \return
         bool checkManagerCredentials(string user, string pass) override;
 
+        /// Check user
+        /// \param user
+        /// \param pass
+        /// \return
         bool checkUserCredentials(string user, string pass) override;
 
+        /// Create user acc
+        /// \param user
+        /// \param pass
         void createUserAccount(string user, string pass) override;
 
         // -----------------------------------------------
@@ -105,10 +118,19 @@ namespace repository
 
 
         // User operations
+        /// Reserve scooter
+        /// \param scooter
+        /// \param user
         void reserveScooter(Scooter scooter, string user) override;
 
+        /// User scooter
+        /// \param scooter
+        /// \param user
         void useScooter(Scooter scooter, string user) override;
 
+        /// Park scooter
+        /// \param scooter
+        /// \param user
         void parkScooter(Scooter scooter, string user) override;
     };
 

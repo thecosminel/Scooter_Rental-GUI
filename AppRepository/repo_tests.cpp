@@ -3,3 +3,9 @@
 //
 
 #include "repo_tests.h"
+
+
+void repo_test()
+{
+    cout << "Alles gute in repo!";
+}

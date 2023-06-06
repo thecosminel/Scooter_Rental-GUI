@@ -18,10 +18,16 @@ namespace repository {
     public:
         ISubject() = default;
 
+        /// Attach
+        /// \param newObserver
         void attach(const shared_ptr<IObserver>& newObserver);
 
+        /// Detach
+        /// \param removedObserver
         void detach(const shared_ptr<IObserver>& removedObserver);
 
+        /// Notify
+        /// \param data
         void notify(const string& data);
     };
 

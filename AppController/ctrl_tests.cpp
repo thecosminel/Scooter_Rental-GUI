@@ -3,3 +3,8 @@
 //
 
 #include "ctrl_tests.h"
+
+void test_ctrl()
+{
+    cout << "Alles gute in ctrl!";
+}

@@ -40,16 +40,33 @@ namespace ui {
         /// \param scooter
         virtual void callCUD(Operations operation, const Scooter& scooter) = 0;
 
+        /// Blah blah blah
+        /// \param operation
+        /// \param scooter
+        /// \param user
         virtual void callRUP(Operations operation, const Scooter& scooter, string user) = 0;
 
+        /// Get all of user
+        /// \param userName
         virtual void callVectorAllScootersOfUser(string userName) = 0;
 
+        /// Sort by attribute
+        /// \param operation
         virtual void callVectorSort(Operations operation) = 0;
 
+        /// Filter loc
+        /// \param operations
+        /// \param location
         virtual void callFilterLocation(Operations operations, string location) = 0;
 
+        /// Filter date
+        /// \param operation
+        /// \param dates
         virtual void callFilterDates(Operations operation, std::pair<string, string> dates) = 0;
 
+        /// Filter km
+        /// \param operation
+        /// \param km
         virtual void callFilterKm(Operations operation, std::pair<double, double> km) = 0;
     };
 
