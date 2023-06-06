@@ -15,7 +15,7 @@ namespace ui {
             cout << "ID: " << scooter.getIdentifier() << "  ";
             cout << "Model: " << scooter.getModel();
             insertBlankSpaces(scooter.getModel());
-            cout << "Commissioning date: " << scooter.getDate();
+            cout << "Commission date: " << scooter.getDate();
             insertBlankSpaces(scooter.getDate());
             cout << "Km: ";
             printDoubleNumber(scooter.getKilometers());

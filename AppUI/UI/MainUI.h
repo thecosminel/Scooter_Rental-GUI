@@ -63,6 +63,8 @@ namespace ui
         void deleteExistingScooter();
         void modifyExistingScooter();
 
+        void showDetailed();
+
         // -------------------------
         // User UI only
         void reserveScooter();

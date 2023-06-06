@@ -53,6 +53,7 @@ namespace ui
             cout << "  5. Display all scooters sorted ascending by location" << endl;
             cout << "  6. Display all scooters sorted ascending by status" << endl;
             cout << "Search methods: " << endl;
+            cout << "  S. Show detailed scooter" << endl;
             cout << "  L. Search scooter by location" << endl;
             cout << "  7. Display scooters with km between two values" << endl;
             cout << "  8. Display scooters manufactured between two dates" << endl;
@@ -105,6 +106,10 @@ namespace ui
                     displayAllScootersSortedByStatus();
                     break;
                 // Search methods
+                case 's':
+                case 'S':
+                    cout << "Show detailed scooter:";
+                    showDetailed();
                 case 'L':
                 case 'l':
                     cout << "Search scooter by location: ";
@@ -158,11 +163,12 @@ namespace ui
             cout << "  6. Display all scooters sorted ascending by status" << endl;
 
             cout << "Search methods: " << endl;
-            cout << "  L. Search scooter by location" << endl;
             cout << "  7. Display scooters with km between two values" << endl;
             cout << "  8. Display scooters manufactured between two dates" << endl;
             cout << "  9. Display all parked scooters" << endl;
 
+            cout << "  S. Show detailed scooter" << endl;
+            cout << "  L. Search scooter by location" << endl;
             cout << "  M.  Display all my scooters" << endl;
             cout << "  R.  Reserve scooter" << endl;
             cout << "  U.  Use scooter" << endl;
@@ -200,6 +206,11 @@ namespace ui
                     displayAllScootersSortedByStatus();
                     break;
                     // Search methods
+                case 's':
+                case 'S':
+                    cout << "Show detailed scooter:";
+                    showDetailed();
+                    break;
                 case 'L':
                 case 'l':
                     cout << "Search scooter by location: ";
@@ -437,6 +448,22 @@ namespace ui
             }
         } while (!done);
         ConcreteUI::callCUD(controller::UPDATE, updatedScooter);
+    }
+
+    void MainUI::showDetailed()
+    {
+        string id = enterID();
+        try {
+            ConcreteUI::requestScooter(id);
+        }
+        catch (const std::logic_error& exception)
+        {
+            cout << endl << "Error: " << exception.what() << endl;
+            return;
+        }
+        vector<Scooter> detailedScooter;
+        detailedScooter.push_back(currentScooter);
+        ConcreteUI::printScooterContainer(detailedScooter);
     }
 
     // -------------------------
