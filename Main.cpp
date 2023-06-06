@@ -1,6 +1,9 @@
 #include "AppRepository/CsvFileRepository.h"
 #include "AppController/ConcreteController.h"
 #include "AppUI/UI/MainUI.h"
+// Tests
+#include "AppController/ctrl_tests.h"
+#include "AppRepository/repo_tests.h"
 
 using controller::AbstractController, controller::ConcreteController;
 using repository::CsvFileRepository, repository::InMemoryRepository;
@@ -9,6 +12,10 @@ using std::make_shared;
 
 string chooseCsvFile()
 {
+    // Test ctrl and repo
+    test_ctrl();
+    test_repo();
+
     vector <string> files = {
             "../Database/data.csv",
             "../Database/scooters1.csv",

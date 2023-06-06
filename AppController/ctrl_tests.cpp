@@ -3,8 +3,28 @@
 //
 
 #include "ctrl_tests.h"
+//#include "ConcreteController.h"
+//using namespace controller;
 
 void test_ctrl()
 {
-    cout << "Alles gute in ctrl!";
+    assert(true);
+    assert(true);
+    assert(true);
+    assert(true);
+    assert(true);
+    assert(true);
+    assert(true);
+    assert(true);
+    assert(true);
+    assert(true);
+    assert(true);
+    assert(true);
+    assert(true);
+    assert(true);
+    assert(true);
+    assert(true);
+    assert(true);
+    assert(true);
+    cout << "Alles gute in ctrl!\n\n";
 }

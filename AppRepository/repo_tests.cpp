@@ -5,7 +5,7 @@
 #include "repo_tests.h"
 
 
-void repo_test()
+void test_repo()
 {
-    cout << "Alles gute in repo!";
+    cout << "Alles gute in repo!\n\n";
 }

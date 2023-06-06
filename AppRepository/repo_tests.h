@@ -7,9 +7,12 @@
 
 #include <iostream>
 #include <cassert>
+#include "CsvFileRepository.h"
+
+using namespace repository;
 using std::cout, std::endl;
 
-void repo_test();
+void test_repo();
 
 
 #endif //SCOOTER_RENTAL_GUI_REPO_TESTS_H
