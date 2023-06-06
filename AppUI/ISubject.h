@@ -21,18 +21,33 @@ namespace ui {
     public:
         ISubject() = default;
 
+        /// Attatch observer
+        /// \param newObserver
         void attach(const shared_ptr<IObserver>& newObserver);
 
+        /// Detach observer
         void detach(const shared_ptr<IObserver>& removedObserver);
 
+        /// Notify observer
         void notify(const string& data);
 
+        /// Log in as manager
+        /// \param user
+        /// \param pass
         virtual void tryToLogAsManager(string user, string pass) = 0;
 
+        /// Log in as user
+        /// \param user
+        /// \param pass
         virtual void tryToLogAsUser(string user, string pass) = 0;
 
+        /// Create user acc
+        /// \param user
+        /// \param pass
         virtual void createUserAccount(string user, string pass) = 0;
 
+        /// Request scooter
+        /// \param identifier
         virtual void requestScooter (string identifier) = 0;
 
         /// Add, update, remove scooter
