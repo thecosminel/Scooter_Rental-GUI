@@ -13,6 +13,10 @@ namespace controller
     // Create, Update, Delete
     void ConcreteController::addScooterToRepo(Scooter newScooter)
     {
+        if (!loggedManager)
+        {
+            throw std::logic_error("Not logged in!!");
+        }
         string newIdentifier = generateNewId();
         newScooter.setIdentifier(newIdentifier);
         repo->addScooter(newScooter);
@@ -20,26 +24,46 @@ namespace controller
 
     void ConcreteController::deleteScooterFomRepo(Scooter removedScooter)
     {
+        if (!loggedManager)
+        {
+            throw std::logic_error("Not logged in!!");
+        }
         repo->deleteScooter(removedScooter);
     }
 
     void ConcreteController::updateScooterFromRepo(Scooter updatedScooter)
     {
+        if (!loggedManager)
+        {
+            throw std::logic_error("Not logged in!!");
+        }
         repo->updateScooterInfo(updatedScooter);
     }
 
     void ConcreteController::reserveScooter(Scooter scooter, const string &username)
     {
+        if (!loggedUser)
+        {
+            throw std::logic_error("Not logged in!!");
+        }
         repo->reserveScooter(scooter, username);
     }
 
     void ConcreteController::useScooter(Scooter usedScooter, const string &username)
     {
+        if (!loggedUser)
+        {
+            throw std::logic_error("Not logged in!!");
+        }
         repo->useScooter(usedScooter, username);
     }
 
     void ConcreteController::parkScooter(Scooter toParkScooter, const string& username)
     {
+        if (!loggedUser)
+        {
+            throw std::logic_error("Not logged in!!");
+        }
         repo->parkScooter(toParkScooter, username);
     }
 
@@ -123,6 +147,7 @@ namespace controller
     {
         if (repo->checkManagerCredentials(user, pass))
         {
+            loggedManager = true;
             ui->printMessage("Login as manager successful!");
         }
         else
@@ -135,6 +160,7 @@ namespace controller
     {
         if (repo->checkUserCredentials(user, pass))
         {
+            loggedUser = true;
             ui->printMessage("Login as client successful!");
         }
         else
@@ -194,6 +220,10 @@ namespace controller
 
     void ConcreteController::displayAllScootersOfAnUser(string user)
     {
+        if (!loggedUser)
+        {
+            throw std::logic_error("Not logged in!!");
+        }
         auto scooters = repo->getAllScootersOfAnUser(user);
         ui->printScooterContainer(scooters);
     }

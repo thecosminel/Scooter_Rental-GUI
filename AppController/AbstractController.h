@@ -18,6 +18,8 @@ namespace controller {
     protected:
         shared_ptr<CrudRepository> repo;
         shared_ptr<AbstractUI> ui;
+        bool loggedManager;
+        bool loggedUser;
 
     public:
         // ----------------------------
