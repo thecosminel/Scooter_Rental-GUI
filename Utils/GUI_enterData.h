@@ -24,12 +24,52 @@
 #include <QEventLoop>
 #include <string>
 
+#include "data_validation_functions.h"
+#include "GUI_printFunctions.h"
+
 using std::string, std::pair;
 
 namespace utils {
     /// Enter username and password
     /// \return
     pair<string, string> enterUsernameAndPassword();
+
+    /// Enter identifier
+    /// \return
+    string enterIdentifierGUI();
+
+    /// Enter model
+    /// \return
+    string enterModelGUI();
+
+    /// Enter location
+    /// \return
+    string enterLocationGUI();
+
+    /// Enter manufacturing date
+    /// \return
+    string enterManufacturingDateGUI();
+
+    /// Enter km
+    /// \return
+    double enterKmGUI();
+
+    /// Enter scooter status
+    /// \return
+    scooter::ScooterStatus enterStatusGUI();
+
+    // Enter multiple
+
+    /// Enter manufacturing dates (min, max)
+    /// \return
+    pair<string, string> enterManufacturingDatesGUI();
+
+    /// Enter min and max km
+    /// \return
+    pair<double, double> enterKmMultipleGUI();
+
+    // Modify function
+    char whatScooterAttributesToModifyGUI();
 
 } // utils
 

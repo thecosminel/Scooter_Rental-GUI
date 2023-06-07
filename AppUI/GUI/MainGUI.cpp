@@ -33,9 +33,6 @@ namespace gui
                 restartMainGui = runUser();
             }
 
-//            setGeometry(200, 200, 1000, 600);
-//            callVectorSort(Operations::SortedId);
-            show();
         } while (restartMainGui);
     }
 
@@ -55,77 +52,64 @@ namespace gui
             switch (choice) {
                 case 'A':
                 case 'a':
-                    cout << "Add new scooter: ";
                     addNewScooter();
                     break;
                 case 'D':
                 case 'd':
-                    cout << "Delete existing scooter: ";
                     deleteExistingScooter();
                     break;
                 case 'M':
                 case 'm':
-                    cout << "Modify existing scooter: ";
                     modifyExistingScooter();
                     break;
                     // All scooters sort methods
                 case '1':
-                    cout << "Display all scooters sorted ascending by ID: ";
                     displayAllScootersSortedByID();
                     break;
                 case '2':
-                    cout << "Display all scooters sorted ascending by model: ";
                     displayAllScootersSortedByModel();
                     break;
                 case '3':
-                    cout << "Display all scooters sorted ascending by age: ";
                     displayAllScootersSortedByAge();
                     break;
                 case '4':
-                    cout << "Display all scooters sorted ascending by km: ";
                     displayAllScootersSortedByKm();
                     break;
                 case '5':
-                    cout << "Display all scooters sorted ascending by location: ";
                     displayAllScootersSortedByLocation();
                     break;
                 case '6':
-                    cout << "Display all scooters sorted ascending by status: ";
                     displayAllScootersSortedByStatus();
                     break;
                     // Search methods
                 case 's':
                 case 'S':
-                    cout << "Show detailed scooter:";
                     showDetailed();
+                    break;
                 case 'L':
                 case 'l':
-                    cout << "Search scooter by location: ";
                     searchScooterByLocation();
                     break;
                 case '7':
-                    cout << "Display scooters with km between:  ";
                     displayScootersFilteredByKm();
                     break;
                 case '8':
-                    cout << "Display scooters with manufacturing date between:  ";
                     displayScootersFilteredByDates();
                     break;
 
                 case '9':
-                    cout << "Display all parked scooters: ";
                     displayAllParkedScooters();
                     break;
                 case 'B':
                 case 'b':
-                    cout << "+++ Closing app +++ ";
+                    printMessage("+++ Closing app +++ ");
                     return true;
                 case 'X':
                 case 'x':
-                    cout << "+++ Closing app +++ ";
+                    printMessage("+++ Closing app +++ ");
                     return false;
                 default:
-                    cout << "Not an option...";
+                    printMessage("????");
                     break;
             }
         } while (true);
@@ -366,6 +350,9 @@ namespace gui
 //        setUpTable();
         // Clear old table
         tableWidget_->clear();
+        tableWidget_->setColumnCount(6);
+        tableWidget_->setHorizontalHeaderLabels(
+                {"Identifier", "Model", "Commissioned Date", "Km", "Location", "Status"});
 
 
         int rowSize = static_cast<int>(scootersVec.size());
@@ -425,7 +412,10 @@ namespace gui
     // Implement from abstract
     void MainGUI::printScooterContainer(vector<Scooter> scootersVec)
     {
+
         populateTable(scootersVec);
+        setGeometry(200, 200, 1000, 600);
+        show();
     }
 
     void MainGUI::printMessage(std::string message)
@@ -434,6 +424,196 @@ namespace gui
     }
 
 
+    // ------------------------
+    // Manager & User methods
+    // Sort all
+    void MainGUI::displayAllScootersSortedByID()
+    {
+        ConcreteUI::callVectorSort(controller::SortedId);
+    }
 
+    void MainGUI::displayAllScootersSortedByModel()
+    {
+        ConcreteUI::callVectorSort(controller::SortedModel);
+    }
+
+    void MainGUI::displayAllScootersSortedByAge()
+    {
+        ConcreteUI::callVectorSort(controller::SortedDate);
+    }
+
+    void MainGUI::displayAllScootersSortedByKm()
+    {
+        ConcreteUI::callVectorSort(controller::SortedKm);
+    }
+
+    void MainGUI::displayAllScootersSortedByLocation()
+    {
+        ConcreteUI::callVectorSort(controller::SortedLocation);
+    }
+
+    void MainGUI::displayAllScootersSortedByStatus()
+    {
+        ConcreteUI::callVectorSort(controller::SortedStatus);
+    }
+
+    void MainGUI::displayAllParkedScooters()
+    {
+        ConcreteUI::callVectorSort(controller::FilteredParked);
+    }
+
+    void MainGUI::searchScooterByLocation()
+    {
+        string location = enterLocationGUI();
+        ConcreteUI::callFilterLocation(controller::FilteredLocation, location);
+    }
+
+    void MainGUI::displayScootersFilteredByDates()
+    {
+        pair<string, string> dates = enterManufacturingDatesGUI();
+        ConcreteUI::callFilterDates(controller::FilteredDates, dates);
+    }
+
+    void MainGUI::displayScootersFilteredByKm()
+    {
+        pair<double, double> km = enterKmMultipleGUI();
+        ConcreteUI::callFilterKm(controller::FilterKm, km);
+    }
+
+
+
+
+    // -------------------------
+    // Manager UI only
+
+    void MainGUI::addNewScooter()
+    {
+        printMessage("You have selected to add a new scooter to repo: ");
+        string identifier = "NIL";
+        string model = enterModelGUI();
+        string manufacturingDate = enterManufacturingDateGUI();
+        double km = enterKmGUI();
+        string location = enterLocationGUI();
+        ScooterStatus status = enterStatusGUI();
+        Scooter newScooter(identifier, model, manufacturingDate, km, location, status);
+        ConcreteUI::callCUD(controller::ADD,newScooter);
+    }
+
+    void MainGUI::deleteExistingScooter()
+    {
+        printMessage("You have selected to delete a scooter from repo: ");
+        string identifier = enterIdentifierGUI();
+        Scooter removedScooter(identifier, "", "10.10.2010", 1, "", scooter::UNKNOWN);
+        ConcreteUI::callCUD(controller::REMOVE, removedScooter);
+    }
+
+    void MainGUI::modifyExistingScooter()
+    {
+        printMessage("You have selected to modify a scooter from repo: ");
+        string identifier = enterIdentifierGUI();
+        try {
+            ConcreteUI::getCurrentScooter(identifier);
+        }
+        catch (const std::logic_error& exception)
+        {
+            printMessage("No scooter with given id found!");
+            return;
+        }
+
+        // Chose what to edit and do it
+        vector<Scooter> scooterInVector;
+        Scooter updatedScooter = currentScooter;
+        char choice;
+        bool done = false;
+        do
+        {
+            scooterInVector.clear();
+            scooterInVector.push_back(updatedScooter);
+            printScooterContainer(scooterInVector);
+            choice = whatScooterAttributesToModifyGUI();
+            switch (choice)
+            {
+                case '1':
+                {
+                    string model = enterModelGUI();
+                    updatedScooter.setModel(model);
+                    break;
+                }
+
+                case '2':
+                {
+                    string date = enterManufacturingDateGUI();
+                    updatedScooter.setDate(date);
+                    break;
+                }
+
+                case '3':
+                {
+                    double km = enterKmGUI();
+                    updatedScooter.setKilometers(km);
+                    break;
+                }
+
+                case '4':
+                {
+                    string location = enterLocationGUI();
+                    updatedScooter.setLocation(location);
+                    break;
+                }
+                case '5':
+                {
+                    ScooterStatus status = enterStatusGUI();
+                    updatedScooter.setStatus(status);
+                    break;
+                }
+                case 'x':
+                case 'X':
+                    done = true;
+                    break;
+                default:
+                    printMessage("Not an option!");
+            }
+        } while (!done);
+        ConcreteUI::callCUD(controller::UPDATE, updatedScooter);
+    }
+
+    void MainGUI::showDetailed()
+    {
+        string id = enterIdentifierGUI();
+        try {
+            ConcreteUI::requestScooter(id);
+        }
+        catch (const std::logic_error& exception)
+        {
+            printMessage("Scooter with given id not found!");
+            return;
+        }
+        vector<Scooter> detailedScooter;
+        detailedScooter.push_back(currentScooter);
+        printScooterContainer(detailedScooter);
+    }
+
+    // -------------------------
+    // User UI only
+
+    void MainGUI::reserveScooter()
+    {
+
+    }
+
+    void MainGUI::parkScooter()
+    {
+
+    }
+
+    void MainGUI::useScooter()
+    {
+
+    }
+
+    void MainGUI::displayMyScooters()
+    {
+
+    }
 
 }
