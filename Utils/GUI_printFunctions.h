@@ -1,5 +1,5 @@
-#ifndef SCOOTER_RENTAL_GUI_GUI_ENTERDATA_H
-#define SCOOTER_RENTAL_GUI_GUI_ENTERDATA_H
+#ifndef SCOOTERRENTAL_GUI_GUI_PRINTFUNCTIONS_H
+#define SCOOTERRENTAL_GUI_GUI_PRINTFUNCTIONS_H
 
 #include <QApplication>
 #include <QDebug>
@@ -19,18 +19,17 @@
 #include <QLineEdit>
 #include <QPushButton>
 #include <QFormLayout>
-#include <string>
-#include <utility>
-#include <QEventLoop>
+
+
 #include <string>
 
-using std::string, std::pair;
+using std::string;
 
-namespace utils {
-    /// Enter username and password
-    /// \return
-    pair<string, string> enterUsernameAndPassword();
+namespace utils
+{
+    void showErrorDialog(const std::string& errorMessage);
+
 
 } // utils
 
-#endif //SCOOTER_RENTAL_GUI_GUI_ENTERDATA_H
+#endif //SCOOTERRENTAL_GUI_GUI_PRINTFUNCTIONS_H

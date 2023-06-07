@@ -33,8 +33,8 @@ namespace gui
                 restartMainGui = runUser();
             }
 
-            setGeometry(200, 200, 1000, 600);
-            callVectorSort(Operations::SortedId);
+//            setGeometry(200, 200, 1000, 600);
+//            callVectorSort(Operations::SortedId);
             show();
         } while (restartMainGui);
     }
@@ -43,6 +43,10 @@ namespace gui
     {
         cout << "Manager" << endl;
         logInAsManager();
+        if (user.empty())
+        {
+            return true;
+        }
         return false;
     }
 
@@ -75,24 +79,24 @@ namespace gui
         layout.addWidget(&radioOption1);
         layout.addWidget(&radioOption2);
 
-        // Connect the button group's buttonClicked signal to a slot
+        // Connect the button group's buttonClicked signal to a lambda slot
         bool isFirstButtonPressed = false;
         QObject::connect(&buttonGroup, QOverload<QAbstractButton*>::of(&QButtonGroup::buttonClicked), [&](QAbstractButton* button) {
             isFirstButtonPressed = (button == &radioOption1);
-            QCoreApplication::exit();
+            window.close();
         });
 
         // Show the main window
         window.show();
 
-        // Create an event loop to wait for user input
-        QEventLoop eventLoop;
+        // Run the event loop of the parent application to allow the window to be displayed and interacted with
+        QCoreApplication::processEvents();
 
-        // Connect the buttonClicked signal to the QEventLoop's quit slot
-        QObject::connect(&buttonGroup, QOverload<QAbstractButton*>::of(&QButtonGroup::buttonClicked), &eventLoop, &QEventLoop::quit);
-
-        // Enter the event loop
-        eventLoop.exec();
+        // Run the event loop until the window is closed
+        while (window.isVisible())
+        {
+            QCoreApplication::processEvents();
+        }
 
         // Return the result
         if (isFirstButtonPressed)
@@ -104,66 +108,55 @@ namespace gui
     void MainGUI::logInAsManager()
     {
         pair<string, string> userAndPass;
-        userAndPass = enterUsernameAndPassword();
-        cout << "User: " << userAndPass.first << endl;
-        cout << "Pass: " << userAndPass.second << endl;
+        bool retry = true;
+        while (retry)
+        {
+            user = "";
+            password = "";
+            cout << "You have to log in..." << endl;
+            try {
+                userAndPass = enterUsernameAndPassword();
+                if(userAndPass.first.empty())
+                {
+                    return;
+                }
+                user = userAndPass.first;
+                password = userAndPass.second;
+                ConcreteUI::tryToLogAsManager(user, password);
+                retry = false;
+            }
+            catch (const std::invalid_argument& e)
+            {
+                showErrorDialog(e.what());
+                retry = true;
+            }
+        }
+//        cout << "User: " << userAndPass.first << endl;
+//        cout << "Pass: " << userAndPass.second << endl;
     }
 
     void MainGUI::logInAsUser()
     {
         pair<string, string> userAndPass;
         userAndPass = enterUsernameAndPassword();
-        cout << "User: " << userAndPass.first << endl;
-        cout << "Pass: " << userAndPass.second << endl;
-    }
-
-    pair<string, string> MainGUI::enterUsernameAndPassword()
-    {
-        // Create a QDialog as the input dialog
-        QDialog dialog;
-        QVBoxLayout layout(&dialog);
-
-        // Create a QLabel for the message
-        QLabel label("Enter Username and Password:", &dialog);
-        layout.addWidget(&label);
-
-        // Create a QLabel and QLineEdit for the username
-        QLabel usernameLabel("Username:", &dialog);
-        QLineEdit usernameLineEdit(&dialog);
-        layout.addWidget(&usernameLabel);
-        layout.addWidget(&usernameLineEdit);
-
-        // Create a QLabel and QLineEdit for the password
-        QLabel passwordLabel("Password:", &dialog);
-        QLineEdit passwordLineEdit(&dialog);
-        passwordLineEdit.setEchoMode(QLineEdit::Password);
-        layout.addWidget(&passwordLabel);
-        layout.addWidget(&passwordLineEdit);
-
-        // Create a QPushButton for submitting the inputs
-        QPushButton submitButton("Submit", &dialog);
-        layout.addWidget(&submitButton);
-
-        // Connect the submitButton's clicked signal to accept the dialog
-        QObject::connect(&submitButton, &QPushButton::clicked, &dialog, &QDialog::accept);
-
-        // Show the dialog
-        dialog.show();
-
-        // Start the event loop of the parent application to allow the dialog to be displayed and interacted with
-        QCoreApplication::processEvents();
-
-        // Run the event loop until the dialog is closed
-        while (dialog.isVisible())
-        {
-            QCoreApplication::processEvents();
-        }
-
-        // Retrieve the entered username and password
-        std::string username = usernameLineEdit.text().toStdString();
-        std::string password = passwordLineEdit.text().toStdString();
-
-        return std::make_pair(username, password);
+        user = userAndPass.first;
+        password = userAndPass.second;
+//        bool retry = true;
+//        while (retry)
+//        {
+//            cout << "You have to log in..." << endl;
+//            try {
+//                ConcreteUI::tryToLogAsManager(user, password);
+//                retry = false;
+//            }
+//            catch (const std::invalid_argument& e)
+//            {
+//                cout << "Exception: " << e.what() << endl;
+//                retry = true;
+//            }
+//        }
+//        cout << "User: " << userAndPass.first << endl;
+//        cout << "Pass: " << userAndPass.second << endl;
     }
 
 
@@ -266,7 +259,5 @@ namespace gui
     {
         cout << "To be implemented";
     }
-
-
 
 }
