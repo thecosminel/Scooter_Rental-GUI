@@ -19,10 +19,161 @@ namespace gui
 
     void MainGUI::runGui()
     {
-        setGeometry(200, 200, 1000, 600);
-        callVectorSort(Operations::SortedId);
-        show();
+        // Used to return to main GUI
+        bool restartMainGui;
+        do
+        {
+            selectUserType();
+            if (me == Manager)
+            {
+                restartMainGui = runManager();
+            }
+            else
+            {
+                restartMainGui = runUser();
+            }
+
+            setGeometry(200, 200, 1000, 600);
+            callVectorSort(Operations::SortedId);
+            show();
+        } while (restartMainGui);
     }
+
+    bool MainGUI::runManager()
+    {
+        cout << "Manager" << endl;
+        logInAsManager();
+        return false;
+    }
+
+    bool MainGUI::runUser()
+    {
+        cout << "User" << endl;
+        logInAsUser();
+        return false;
+    }
+
+    void MainGUI::selectUserType()
+    {
+        QWidget window;
+        QVBoxLayout layout(&window);
+
+        // Create a QLabel for the message
+        QLabel label("What are you?", &window);
+        layout.addWidget(&label);
+
+        // Create two radio buttons representing the options
+        QRadioButton radioOption1("Manager", &window);
+        QRadioButton radioOption2("User", &window);
+
+        // Create a button group and add the radio buttons to it
+        QButtonGroup buttonGroup(&window);
+        buttonGroup.addButton(&radioOption1);
+        buttonGroup.addButton(&radioOption2);
+
+        // Add the radio buttons to the layout
+        layout.addWidget(&radioOption1);
+        layout.addWidget(&radioOption2);
+
+        // Connect the button group's buttonClicked signal to a slot
+        bool isFirstButtonPressed = false;
+        QObject::connect(&buttonGroup, QOverload<QAbstractButton*>::of(&QButtonGroup::buttonClicked), [&](QAbstractButton* button) {
+            isFirstButtonPressed = (button == &radioOption1);
+            QCoreApplication::exit();
+        });
+
+        // Show the main window
+        window.show();
+
+        // Create an event loop to wait for user input
+        QEventLoop eventLoop;
+
+        // Connect the buttonClicked signal to the QEventLoop's quit slot
+        QObject::connect(&buttonGroup, QOverload<QAbstractButton*>::of(&QButtonGroup::buttonClicked), &eventLoop, &QEventLoop::quit);
+
+        // Enter the event loop
+        eventLoop.exec();
+
+        // Return the result
+        if (isFirstButtonPressed)
+            me = Manager;
+        else
+            me = User;
+    }
+
+    void MainGUI::logInAsManager()
+    {
+        pair<string, string> userAndPass;
+        userAndPass = enterUsernameAndPassword();
+        cout << "User: " << userAndPass.first << endl;
+        cout << "Pass: " << userAndPass.second << endl;
+    }
+
+    void MainGUI::logInAsUser()
+    {
+        pair<string, string> userAndPass;
+        userAndPass = enterUsernameAndPassword();
+        cout << "User: " << userAndPass.first << endl;
+        cout << "Pass: " << userAndPass.second << endl;
+    }
+
+    pair<string, string> MainGUI::enterUsernameAndPassword() // NOLINT
+    {
+        QWidget window;
+        QVBoxLayout layout(&window);
+
+        // Create a QLabel for the message
+        QLabel label("Enter Username and Password:", &window);
+        layout.addWidget(&label);
+
+        // Create a QLineEdit for the username
+        QLineEdit usernameLineEdit(&window);
+        layout.addWidget(&usernameLineEdit);
+
+        // Create a QLineEdit for the password
+        QLineEdit passwordLineEdit(&window);
+        passwordLineEdit.setEchoMode(QLineEdit::Password);
+        layout.addWidget(&passwordLineEdit);
+
+        // Create a QPushButton for submitting the inputs
+        QPushButton submitButton("Submit", &window);
+        layout.addWidget(&submitButton);
+
+        // Connect the submitButton's clicked signal to close the window
+        QObject::connect(&submitButton, &QPushButton::clicked, &window, &QWidget::close);
+
+        // Create a QButtonGroup for the radio buttons
+        QButtonGroup buttonGroup(&window);
+
+        // Create the radio buttons
+        QRadioButton radioOption1("Option 1", &window);
+        QRadioButton radioOption2("Option 2", &window);
+
+        // Add the radio buttons to the button group
+        buttonGroup.addButton(&radioOption1);
+        buttonGroup.addButton(&radioOption2);
+
+        // Add the radio buttons to the layout
+        layout.addWidget(&radioOption1);
+        layout.addWidget(&radioOption2);
+
+        // Show the main window
+        window.show();
+
+        // Create a QEventLoop to block the execution until the window is closed
+        QEventLoop eventLoop;
+        QObject::connect(&window, &QWidget::destroyed, &eventLoop, &QEventLoop::quit);
+
+        // Start the event loop
+        eventLoop.exec();
+
+        // Retrieve the entered username and password
+        std::string username = usernameLineEdit.text().toStdString();
+        std::string password = passwordLineEdit.text().toStdString();
+
+        return std::make_pair(username, password);
+    }
+
 
     // Qt stuff
     void MainGUI::setUpTable()
@@ -123,7 +274,6 @@ namespace gui
     {
         cout << "To be implemented";
     }
-
 
 
 

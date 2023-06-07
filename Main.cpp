@@ -8,11 +8,7 @@
 // Qt
 #include "AppUI/GUI/MainGUI.h"
 #include <QApplication>
-#include <QFileDialog>
-#include <QCheckBox>
-#include <QLabel>
-#include <QRadioButton>
-#include <QButtonGroup>
+
 
 using controller::AbstractController, controller::ConcreteController;
 using repository::CsvFileRepository, repository::InMemoryRepository;
@@ -132,27 +128,30 @@ int main(int argc, char *argv[])
     QApplication app(argc, argv);
 
 
-    // Select file
-    string fileName;
-    try {
-        fileName = selectCSV();
-    }
-    catch (const std::invalid_argument &e)
-    {
-        cout << "Error: " << e.what();
-        return 0;
-    }
+//    // Select file
+//    string fileName;
+//    try {
+//        fileName = selectCSV();
+//    }
+//    catch (const std::invalid_argument &e)
+//    {
+//        cout << "Error: " << e.what();
+//        return 0;
+//    }
+//
+//    // Select if data is to be saved persistent
+//    shared_ptr<InMemoryRepository> repo;
+//    if (selectIfSavePersistent())
+//    {
+//        repo = make_shared<CsvFileRepository>(fileName);
+//    }
+//    else
+//    {
+//        repo = make_shared<InMemoryRepository>(fileName);
+//    }
+    auto repo = make_shared<InMemoryRepository>("Database/data.csv");
 
-    // Select if data is to be saved persistent
-    shared_ptr<InMemoryRepository> repo;
-    if (selectIfSavePersistent())
-    {
-        repo = make_shared<CsvFileRepository>(fileName);
-    }
-    else
-    {
-        repo = make_shared<InMemoryRepository>(fileName);
-    }
+
 
     // Create GUI
     auto gui = make_shared<MainGUI>();

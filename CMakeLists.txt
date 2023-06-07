@@ -49,6 +49,6 @@ add_executable(ScooterRental_GUI
         AppRepository/repo_tests.cpp
         AppRepository/repo_tests.h
         AppController/ctrl_tests.cpp
-        AppController/ctrl_tests.h)
+        AppController/ctrl_tests.h Utils/GUI_enterData.h Utils/GUI_enterData.cpp)
 
 target_link_libraries(ScooterRental_GUI Qt5::Widgets)

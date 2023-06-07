@@ -11,21 +11,42 @@
 #include <QWidget>
 #include <QTableWidget>
 #include <QVBoxLayout>
+#include <QFileDialog>
+#include <QCheckBox>
+#include <QLabel>
+#include <QRadioButton>
+#include <QButtonGroup>
+#include <QLineEdit>
+#include <QPushButton>
+#include <QFormLayout>
+
 #include <utility>
 #include <vector>
+
 
 #include "../UI/ConcreteUI.h"
 #include "../Utils/data_validation_functions.h"
 #include "../Utils/UI_printFunctions.h"
+#include "../Utils/GUI_enterData.h"
+
 using utils::doubleToString, utils::getScooterStatusString;
 using ui::ConcreteUI;
 
+
 namespace gui
 {
-class MainGUI : public ConcreteUI, public QWidget {
+    enum UserType
+    {
+        Manager,
+        User
+    };
+
+
+    class MainGUI : public ConcreteUI, public QWidget {
     private:
         QTableWidget *tableWidget_;
         vector<Scooter> scooters;
+        UserType me;
 
     // Qt stuff
         void populateTable(const vector<Scooter>& scootersVec);
@@ -37,7 +58,30 @@ class MainGUI : public ConcreteUI, public QWidget {
         explicit MainGUI(QWidget *parent = nullptr);
         ~MainGUI() override;
 
+        // ------------------------
+        // Control methods
         void runGui();
+
+        /// Run manager
+        /// \return
+        bool runManager();
+
+        /// Run user
+        /// \return
+        bool runUser();
+
+        void selectUserType();
+
+        /// Log in manager
+        void logInAsManager();
+
+        /// Log in user
+        void logInAsUser();
+
+        /// Enter username and password
+        /// \return
+        pair<string, string> enterUsernameAndPassword();
+
 
 
         // Implement from abstract
