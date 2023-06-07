@@ -119,41 +119,45 @@ namespace gui
 
     pair<string, string> MainGUI::enterUsernameAndPassword()
     {
-        QWidget window;
-        QVBoxLayout layout(&window);
+        // Create a QDialog as the input dialog
+        QDialog dialog;
+        QVBoxLayout layout(&dialog);
 
         // Create a QLabel for the message
-        QLabel label("Enter Username and Password:", &window);
+        QLabel label("Enter Username and Password:", &dialog);
         layout.addWidget(&label);
 
         // Create a QLabel and QLineEdit for the username
-        QLabel usernameLabel("Username:", &window);
-        QLineEdit usernameLineEdit(&window);
+        QLabel usernameLabel("Username:", &dialog);
+        QLineEdit usernameLineEdit(&dialog);
         layout.addWidget(&usernameLabel);
         layout.addWidget(&usernameLineEdit);
 
         // Create a QLabel and QLineEdit for the password
-        QLabel passwordLabel("Password:", &window);
-        QLineEdit passwordLineEdit(&window);
+        QLabel passwordLabel("Password:", &dialog);
+        QLineEdit passwordLineEdit(&dialog);
         passwordLineEdit.setEchoMode(QLineEdit::Password);
         layout.addWidget(&passwordLabel);
         layout.addWidget(&passwordLineEdit);
 
         // Create a QPushButton for submitting the inputs
-        QPushButton submitButton("Submit", &window);
+        QPushButton submitButton("Submit", &dialog);
         layout.addWidget(&submitButton);
 
-        // Create a QEventLoop to block the execution until the submit button is clicked
-        QEventLoop eventLoop;
+        // Connect the submitButton's clicked signal to accept the dialog
+        QObject::connect(&submitButton, &QPushButton::clicked, &dialog, &QDialog::accept);
 
-        // Connect the submitButton's clicked signal to the eventLoop's quit slot
-        QObject::connect(&submitButton, &QPushButton::clicked, &eventLoop, &QEventLoop::quit);
+        // Show the dialog
+        dialog.show();
 
-        // Show the main window
-        window.show();
+        // Start the event loop of the parent application to allow the dialog to be displayed and interacted with
+        QCoreApplication::processEvents();
 
-        // Start the event loop
-        eventLoop.exec();
+        // Run the event loop until the dialog is closed
+        while (dialog.isVisible())
+        {
+            QCoreApplication::processEvents();
+        }
 
         // Retrieve the entered username and password
         std::string username = usernameLineEdit.text().toStdString();

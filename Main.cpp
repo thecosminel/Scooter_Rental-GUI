@@ -165,6 +165,7 @@ int main(int argc, char *argv[])
     gui->attach(ctrl);
 
     // Qt
+
     gui->runGui();
     QApplication::exec();
 
