@@ -1,4 +1,6 @@
 #include "GUI_enterData.h"
 
-namespace utils {
+namespace utils
+{
+
 } // utils

@@ -2,16 +2,34 @@
 #define SCOOTER_RENTAL_GUI_GUI_ENTERDATA_H
 
 #include <QApplication>
-#include <QDialog>
-#include <QFormLayout>
+#include <QDebug>
+#include <QVBoxLayout>
+#include <QWidget>
+#include <QHeaderView>
+#include <QDate>
+#include <QTableWidget>
+#include <QWidget>
+#include <QTableWidget>
+#include <QVBoxLayout>
+#include <QFileDialog>
+#include <QCheckBox>
+#include <QLabel>
+#include <QRadioButton>
+#include <QButtonGroup>
 #include <QLineEdit>
 #include <QPushButton>
-#include <QString>
+#include <QFormLayout>
 #include <string>
 #include <utility>
 #include <QEventLoop>
+#include <string>
+
+using std::string, std::pair;
 
 namespace utils {
+//    / Enter username and password
+//    / \return
+//    pair<string, string> enterUsernameAndPassword();
 
 } // utils
 

@@ -117,7 +117,7 @@ namespace gui
         cout << "Pass: " << userAndPass.second << endl;
     }
 
-    pair<string, string> MainGUI::enterUsernameAndPassword() // NOLINT
+    pair<string, string> MainGUI::enterUsernameAndPassword()
     {
         QWidget window;
         QVBoxLayout layout(&window);
@@ -126,43 +126,31 @@ namespace gui
         QLabel label("Enter Username and Password:", &window);
         layout.addWidget(&label);
 
-        // Create a QLineEdit for the username
+        // Create a QLabel and QLineEdit for the username
+        QLabel usernameLabel("Username:", &window);
         QLineEdit usernameLineEdit(&window);
+        layout.addWidget(&usernameLabel);
         layout.addWidget(&usernameLineEdit);
 
-        // Create a QLineEdit for the password
+        // Create a QLabel and QLineEdit for the password
+        QLabel passwordLabel("Password:", &window);
         QLineEdit passwordLineEdit(&window);
         passwordLineEdit.setEchoMode(QLineEdit::Password);
+        layout.addWidget(&passwordLabel);
         layout.addWidget(&passwordLineEdit);
 
         // Create a QPushButton for submitting the inputs
         QPushButton submitButton("Submit", &window);
         layout.addWidget(&submitButton);
 
-        // Connect the submitButton's clicked signal to close the window
-        QObject::connect(&submitButton, &QPushButton::clicked, &window, &QWidget::close);
+        // Create a QEventLoop to block the execution until the submit button is clicked
+        QEventLoop eventLoop;
 
-        // Create a QButtonGroup for the radio buttons
-        QButtonGroup buttonGroup(&window);
-
-        // Create the radio buttons
-        QRadioButton radioOption1("Option 1", &window);
-        QRadioButton radioOption2("Option 2", &window);
-
-        // Add the radio buttons to the button group
-        buttonGroup.addButton(&radioOption1);
-        buttonGroup.addButton(&radioOption2);
-
-        // Add the radio buttons to the layout
-        layout.addWidget(&radioOption1);
-        layout.addWidget(&radioOption2);
+        // Connect the submitButton's clicked signal to the eventLoop's quit slot
+        QObject::connect(&submitButton, &QPushButton::clicked, &eventLoop, &QEventLoop::quit);
 
         // Show the main window
         window.show();
-
-        // Create a QEventLoop to block the execution until the window is closed
-        QEventLoop eventLoop;
-        QObject::connect(&window, &QWidget::destroyed, &eventLoop, &QEventLoop::quit);
 
         // Start the event loop
         eventLoop.exec();

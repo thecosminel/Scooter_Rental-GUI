@@ -29,6 +29,7 @@
 #include "../Utils/UI_printFunctions.h"
 #include "../Utils/GUI_enterData.h"
 
+
 using utils::doubleToString, utils::getScooterStatusString;
 using ui::ConcreteUI;
 
@@ -78,11 +79,7 @@ namespace gui
         /// Log in user
         void logInAsUser();
 
-        /// Enter username and password
-        /// \return
         pair<string, string> enterUsernameAndPassword();
-
-
 
         // Implement from abstract
         void printScooterContainer(vector<Scooter> scootersVec) override;
