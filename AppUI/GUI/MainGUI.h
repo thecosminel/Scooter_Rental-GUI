@@ -19,6 +19,9 @@
 #include <QLineEdit>
 #include <QPushButton>
 #include <QFormLayout>
+#include <QMessageBox>
+#include <QTextEdit>
+#include <QTextBrowser>
 
 #include <utility>
 #include <vector>
@@ -67,8 +70,6 @@ namespace gui
         /// Run manager
         /// \return
         bool runManager();
-
-        char managerMenu();
 
         /// Run user
         /// \return

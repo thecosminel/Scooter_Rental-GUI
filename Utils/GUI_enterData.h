@@ -19,9 +19,9 @@
 #include <QLineEdit>
 #include <QPushButton>
 #include <QFormLayout>
-#include <string>
-#include <utility>
 #include <QEventLoop>
+
+#include <utility>
 #include <string>
 
 #include "data_validation_functions.h"
@@ -69,7 +69,21 @@ namespace utils {
     pair<double, double> enterKmMultipleGUI();
 
     // Modify function
+    /// Choose attribute to modify
+    /// \return
     char whatScooterAttributesToModifyGUI();
+
+    // Manager menu
+    /// Manager menu print and select
+    /// \return
+    char managerMenu();
+
+    // User menu
+    /// User menu print and select
+    /// \return
+    char userMenu();
+
+    bool tryLogAgain();
 
 } // utils
 

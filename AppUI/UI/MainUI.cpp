@@ -539,6 +539,8 @@ namespace ui
         ConcreteUI::callVectorAllScootersOfUser(this->user);
     }
 
+    // Sort methods
+
     void MainUI::displayAllScootersSortedByModel()
     {
         ConcreteUI::callVectorSort(controller::SortedModel);

@@ -1,6 +1,3 @@
-#include <QMessageBox>
-#include <QTextEdit>
-#include <QTextBrowser>
 #include "MainGUI.h"
 
 namespace gui
@@ -36,9 +33,59 @@ namespace gui
         } while (restartMainGui);
     }
 
+
+    void MainGUI::selectUserType()
+    {
+        QWidget window;
+        QVBoxLayout layout(&window);
+
+        // Create a QLabel for the message
+        QLabel label("What are you?", &window);
+        layout.addWidget(&label);
+
+        // Create two radio buttons representing the options
+        QRadioButton radioOption1("Manager", &window);
+        QRadioButton radioOption2("User", &window);
+
+        // Create a button group and add the radio buttons to it
+        QButtonGroup buttonGroup(&window);
+        buttonGroup.addButton(&radioOption1);
+        buttonGroup.addButton(&radioOption2);
+
+        // Add the radio buttons to the layout
+        layout.addWidget(&radioOption1);
+        layout.addWidget(&radioOption2);
+
+        // Connect the button group's buttonClicked signal to a lambda slot
+        bool isFirstButtonPressed = false;
+        QObject::connect(&buttonGroup, QOverload<QAbstractButton*>::of(&QButtonGroup::buttonClicked), [&](QAbstractButton* button) {
+            isFirstButtonPressed = (button == &radioOption1);
+            window.close();
+        });
+
+        // Show the main window
+        window.show();
+
+        // Run the event loop of the parent application to allow the window to be displayed and interacted with
+        QCoreApplication::processEvents();
+
+        // Run the event loop until the window is closed
+        while (window.isVisible())
+        {
+            QCoreApplication::processEvents();
+        }
+
+        // Return the result
+        if (isFirstButtonPressed)
+            me = Manager;
+        else
+            me = User;
+    }
+
+
+    // Manager Stuff
     bool MainGUI::runManager()
     {
-        cout << "Manager" << endl;
         logInAsManager();
         if (user.empty())
         {
@@ -96,10 +143,11 @@ namespace gui
                 case '8':
                     displayScootersFilteredByDates();
                     break;
-
                 case '9':
                     displayAllParkedScooters();
                     break;
+
+                 // Exit methods
                 case 'B':
                 case 'b':
                     printMessage("+++ Closing app +++ ");
@@ -109,101 +157,10 @@ namespace gui
                     printMessage("+++ Closing app +++ ");
                     return false;
                 default:
-                    printMessage("????");
+                    printMessage("Close the app using button: ~X. Close app~ ");
                     break;
             }
         } while (true);
-
-        return false;
-    }
-
-    char MainGUI::managerMenu() //NOLINT
-    {
-        QDialog dialog;
-        auto *layout = new QVBoxLayout(&dialog);
-
-        layout->addWidget(new QLabel("Choose option:", &dialog));
-        layout->addWidget(new QLabel("CUD methods:", &dialog));
-
-        auto *buttonA = new QPushButton("A. Add new scooter", &dialog);
-        QObject::connect(buttonA, &QPushButton::clicked, &dialog, [&dialog]() { dialog.done('A'); });
-        layout->addWidget(buttonA);
-
-        auto *buttonD = new QPushButton("D. Delete existing scooter", &dialog);
-        QObject::connect(buttonD, &QPushButton::clicked, &dialog, [&dialog]() { dialog.done('D'); });
-        layout->addWidget(buttonD);
-
-        auto *buttonM = new QPushButton("M. Modify existing scooter", &dialog);
-        QObject::connect(buttonM, &QPushButton::clicked, &dialog, [&dialog]() { dialog.done('M'); });
-        layout->addWidget(buttonM);
-
-        // Add more buttons for other options...
-
-        layout->addWidget(new QLabel("All scooters sort methods:", &dialog));
-
-        auto *button1 = new QPushButton("1. Display all scooters sorted ascending by ID", &dialog);
-        QObject::connect(button1, &QPushButton::clicked, &dialog, [&dialog]() { dialog.done('1'); });
-        layout->addWidget(button1);
-
-        auto *button2 = new QPushButton("2. Display all scooters sorted ascending by model", &dialog);
-        QObject::connect(button2, &QPushButton::clicked, &dialog, [&dialog]() { dialog.done('2'); });
-        layout->addWidget(button2);
-
-        auto *button3 = new QPushButton("3. Display all scooters sorted ascending by manufacturing date", &dialog);
-        QObject::connect(button3, &QPushButton::clicked, &dialog, [&dialog]() { dialog.done('3'); });
-        layout->addWidget(button3);
-
-        auto *button4 = new QPushButton("4. Display all scooters sorted ascending by Km", &dialog);
-        QObject::connect(button4, &QPushButton::clicked, &dialog, [&dialog]() { dialog.done('4'); });
-        layout->addWidget(button4);
-
-        auto *button5 = new QPushButton("5. Display all scooters sorted ascending by location", &dialog);
-        QObject::connect(button5, &QPushButton::clicked, &dialog, [&dialog]() { dialog.done('5'); });
-        layout->addWidget(button5);
-
-        auto *button6 = new QPushButton("6. Display all scooters sorted ascending by status", &dialog);
-        QObject::connect(button6, &QPushButton::clicked, &dialog, [&dialog]() { dialog.done('6'); });
-        layout->addWidget(button6);
-
-
-        // Add more buttons for the remaining sort methods...
-
-        layout->addWidget(new QLabel("Search methods:", &dialog));
-
-        auto *buttonS = new QPushButton("S. Show detailed scooter", &dialog);
-        QObject::connect(buttonS, &QPushButton::clicked, &dialog, [&dialog]() { dialog.done('S'); });
-        layout->addWidget(buttonS);
-
-        auto *buttonL = new QPushButton("L. Search scooter by location", &dialog);
-        QObject::connect(buttonL, &QPushButton::clicked, &dialog, [&dialog]() { dialog.done('L'); });
-        layout->addWidget(buttonL);
-
-        auto *button7 = new QPushButton("7. Display scooters with km between two values", &dialog);
-        QObject::connect(button7, &QPushButton::clicked, &dialog, [&dialog]() { dialog.done('7'); });
-        layout->addWidget(button7);
-
-        auto *button8 = new QPushButton("8. Display scooters manufactured between two dates", &dialog);
-        QObject::connect(button8, &QPushButton::clicked, &dialog, [&dialog]() { dialog.done('8'); });
-        layout->addWidget(button8);
-
-        auto *button9 = new QPushButton("9. Display all parked scooters", &dialog);
-        QObject::connect(button9, &QPushButton::clicked, &dialog, [&dialog]() { dialog.done('9'); });
-        layout->addWidget(button9);
-
-        auto *buttonB = new QPushButton("B. Return to main ui", &dialog);
-        QObject::connect(buttonB, &QPushButton::clicked, &dialog, [&dialog]() { dialog.done('B'); });
-        layout->addWidget(buttonB);
-
-        auto *buttonX = new QPushButton("X. Close app", &dialog);
-        QObject::connect(buttonX, &QPushButton::clicked, &dialog, [&dialog]() { dialog.done('X'); });
-        layout->addWidget(buttonX);
-
-        // Add more buttons for the remaining search methods...
-
-        dialog.setLayout(layout);
-
-        dialog.exec();
-        return static_cast<QChar>(dialog.result()).toLatin1();
     }
 
 
@@ -211,58 +168,90 @@ namespace gui
 
     bool MainGUI::runUser()
     {
-        cout << "User" << endl;
         logInAsUser();
-        return false;
-    }
-
-    void MainGUI::selectUserType()
-    {
-        QWidget window;
-        QVBoxLayout layout(&window);
-
-        // Create a QLabel for the message
-        QLabel label("What are you?", &window);
-        layout.addWidget(&label);
-
-        // Create two radio buttons representing the options
-        QRadioButton radioOption1("Manager", &window);
-        QRadioButton radioOption2("User", &window);
-
-        // Create a button group and add the radio buttons to it
-        QButtonGroup buttonGroup(&window);
-        buttonGroup.addButton(&radioOption1);
-        buttonGroup.addButton(&radioOption2);
-
-        // Add the radio buttons to the layout
-        layout.addWidget(&radioOption1);
-        layout.addWidget(&radioOption2);
-
-        // Connect the button group's buttonClicked signal to a lambda slot
-        bool isFirstButtonPressed = false;
-        QObject::connect(&buttonGroup, QOverload<QAbstractButton*>::of(&QButtonGroup::buttonClicked), [&](QAbstractButton* button) {
-            isFirstButtonPressed = (button == &radioOption1);
-            window.close();
-        });
-
-        // Show the main window
-        window.show();
-
-        // Run the event loop of the parent application to allow the window to be displayed and interacted with
-        QCoreApplication::processEvents();
-
-        // Run the event loop until the window is closed
-        while (window.isVisible())
+        if (user.empty())
         {
-            QCoreApplication::processEvents();
+            return true;
         }
 
-        // Return the result
-        if (isFirstButtonPressed)
-            me = Manager;
-        else
-            me = User;
+        char choice;
+        do
+        {
+            choice = userMenu();
+            switch (choice) {
+                    // All scooters sort methods
+                case '1':
+                    displayAllScootersSortedByID();
+                    break;
+                case '2':
+                    displayAllScootersSortedByModel();
+                    break;
+                case '3':
+                    displayAllScootersSortedByAge();
+                    break;
+                case '4':
+                    displayAllScootersSortedByKm();
+                    break;
+                case '5':
+                    displayAllScootersSortedByLocation();
+                    break;
+                case '6':
+                    displayAllScootersSortedByStatus();
+                    break;
+                    // Search methods
+                case '7':
+                    displayScootersFilteredByKm();
+                    break;
+                case '8':
+                    displayScootersFilteredByDates();
+                    break;
+                case '9':
+                    displayAllParkedScooters();
+                    break;
+                case 'L':
+                case 'l':
+                    searchScooterByLocation();
+                    break;
+                case 's':
+                case 'S':
+                    showDetailed();
+                    break;
+
+                    // Personal scooters - user methods
+                case 'M':
+                case 'm':
+                    displayMyScooters();
+                    break;
+                case 'R':
+                case 'r':
+                    reserveScooter();
+                    break;
+                case 'U':
+                case 'u':
+                    useScooter();
+                    break;
+                case 'p':
+                case 'P':
+                    parkScooter();
+                    break;
+
+                    // Exit methods
+                case 'B':
+                case 'b':
+                    printMessage("+++ Closing app +++ ");
+                    return true;
+                case 'X':
+                case 'x':
+                    printMessage("+++ Closing app +++ ");
+                    return false;
+                default:
+                    printMessage("Close the app using button: ~X. Close app~ ");
+                    break;
+            }
+        } while (true);
     }
+
+
 
     void MainGUI::logInAsManager()
     {
@@ -272,7 +261,6 @@ namespace gui
         {
             user = "";
             password = "";
-            cout << "You have to log in..." << endl;
             try {
                 userAndPass = enterUsernameAndPassword();
                 if(userAndPass.first.empty())
@@ -295,25 +283,43 @@ namespace gui
     void MainGUI::logInAsUser()
     {
         pair<string, string> userAndPass;
-        userAndPass = enterUsernameAndPassword();
-        user = userAndPass.first;
-        password = userAndPass.second;
-//        bool retry = true;
-//        while (retry)
-//        {
-//            cout << "You have to log in..." << endl;
-//            try {
-//                ConcreteUI::tryToLogAsManager(user, password);
-//                retry = false;
-//            }
-//            catch (const std::invalid_argument& e)
-//            {
-//                cout << "Exception: " << e.what() << endl;
-//                retry = true;
-//            }
-//        }
-//        cout << "User: " << userAndPass.first << endl;
-//        cout << "Pass: " << userAndPass.second << endl;
+        bool retry = true;
+        while (retry)
+        {
+            user = "";
+            password = "";
+            try {
+                userAndPass = enterUsernameAndPassword();
+                if(userAndPass.first.empty())
+                {
+                    return;
+                }
+                user = userAndPass.first;
+                password = userAndPass.second;
+                ConcreteUI::tryToLogAsUser(user, password);
+                return;
+            }
+            catch (const std::invalid_argument& e)
+            {
+                printMessageWithQt(e.what());
+                // Chose if try again or create new account
+                retry = tryLogAgain();
+
+            }
+        }
+        // Chose to create new account
+        // Log in should work 100%
+        pair<string, string> userPass = enterUsernameAndPassword();
+        this->user = userPass.first;
+        this->password = userPass.second;
+        ConcreteUI::createUserAccount(user, password);
+        try {
+            ConcreteUI::tryToLogAsUser(user, password);
+        }
+        catch (const std::invalid_argument& e)
+        {
+            printMessage("Create new account didn't work :( --- really don't know why");
+        }
     }
 
 
@@ -598,22 +604,75 @@ namespace gui
 
     void MainGUI::reserveScooter()
     {
-
+        string identifier = enterIdentifierGUI();
+        // Check if identifier exists
+        try {
+            ConcreteUI::getCurrentScooter(identifier);
+        }
+        catch (const std::logic_error& exception)
+        {
+            printMessage(exception.what());
+            return;
+        }
+        // Check if not reserved
+        Scooter scooter = currentScooter;
+        try {
+            ConcreteUI::callRUP(controller::RESERVE, scooter, user);
+        }
+        catch (const std::logic_error& exception)
+        {
+            printMessage(exception.what());
+            return;
+        }
     }
 
     void MainGUI::parkScooter()
     {
-
+        string identifier = enterIdentifierGUI();
+        try {
+            ConcreteUI::getCurrentScooter(identifier);
+        }
+        catch (const std::logic_error& exception)
+        {
+            printMessage(exception.what());
+            return;
+        }
+        Scooter scooter = currentScooter;
+        try {
+            ConcreteUI::callRUP(controller::PARK, scooter, user);
+        }
+        catch (const std::logic_error& exception)
+        {
+            printMessage(exception.what());
+            return;
+        }
     }
 
     void MainGUI::useScooter()
     {
-
+        string identifier = enterIdentifierGUI();
+        try {
+            ConcreteUI::getCurrentScooter(identifier);
+        }
+        catch (const std::logic_error& exception)
+        {
+            printMessage(exception.what());
+            return;
+        }
+        Scooter scooter = currentScooter;
+        try {
+            ConcreteUI::callRUP(controller::USE, scooter, user);
+        }
+        catch (const std::logic_error& exception)
+        {
+            printMessage(exception.what());
+            return;
+        }
     }
 
     void MainGUI::displayMyScooters()
     {
-
+        ConcreteUI::callVectorAllScootersOfUser(this->user);
     }
 
 }

@@ -90,7 +90,7 @@ namespace scooter
 
         /// Check if null scooter
         /// \return
-        bool checkIfNullScooter();
+        bool checkIfNullScooter(); //NOLINT
     };
 }
 
