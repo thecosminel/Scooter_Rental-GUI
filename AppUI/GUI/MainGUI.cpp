@@ -74,7 +74,6 @@ namespace gui
 
         // Resize to fit
         tableWidget_->resizeColumnsToContents();
-        show();
     }
 
     void MainGUI::handleCellClicked(int row, int column)
