@@ -7,7 +7,8 @@ namespace repository
     repository::InMemoryRepository::InMemoryRepository(const string& fileName)
     {
         dataFileName = fileName;
-        accountsFileName = "../Database/Accounts/accounts.csv";
+//        accountsFileName = "../Database/Accounts/accounts.csv";
+        accountsFileName = "Database/Accounts/accounts.csv";
         loadAccountsFromFile();
         loadFromFile();
     }

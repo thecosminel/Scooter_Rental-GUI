@@ -12,14 +12,15 @@ using std::make_shared;
 
 string chooseCsvFile()
 {
-    // Test ctrl and repo
-    test_ctrl();
-    test_repo();
-
+//    vector <string> files = {
+//            "../Database/data.csv",
+//            "../Database/scooters1.csv",
+//            "../Database/scooters2.csv"
+//    };
     vector <string> files = {
-            "../Database/data.csv",
-            "../Database/scooters1.csv",
-            "../Database/scooters2.csv"
+            "Database/data.csv",
+            "Database/scooters1.csv",
+            "Database/scooters2.csv"
     };
     cout << "Available CSV files: " << endl;
     for (int i = 1; i <= files.size(); ++i)
@@ -61,6 +62,10 @@ bool choseRepository()
 
 int main()
 {
+    // Test ctrl and repo
+    test_ctrl();
+    test_repo();
+
     string chosenFile = chooseCsvFile();
 
     // Create layers
