@@ -2,12 +2,17 @@
 #include "AppController/ConcreteController.h"
 #include "AppUI/UI/MainUI.h"
 // Tests
-#include "AppController/ctrl_tests.h"
-#include "AppRepository/repo_tests.h"
+//#include "AppController/ctrl_tests.h"
+//#include "AppRepository/repo_tests.h"
+
+// Qt
+#include "AppUI/GUI/MainGUI.h"
+#include <QApplication>
 
 using controller::AbstractController, controller::ConcreteController;
 using repository::CsvFileRepository, repository::InMemoryRepository;
 using ui::MainUI;
+using namespace gui;
 using std::make_shared;
 
 string chooseCsvFile()
@@ -60,37 +65,45 @@ bool choseRepository()
 }
 
 
-int main()
+int main(int argc, char *argv[])
 {
-    // Test ctrl and repo
-    test_ctrl();
-    test_repo();
-
-    string chosenFile = chooseCsvFile();
-
-    // Create layers
-    shared_ptr<InMemoryRepository> repo;
-    if (choseRepository())
-    {
-        repo = make_shared<CsvFileRepository>(chosenFile);
-    }
-    else
-    {
-        repo = make_shared<InMemoryRepository>(chosenFile);
-    }
-    auto ui = make_shared<MainUI>();
-    auto ctrl = make_shared<ConcreteController>(repo, ui);
-
-    // ISubject & IObserver attach
-    repo->attach(ctrl);
-    ui->attach(ctrl);
-
-    // Run programm
-    ui->run();
-
-    // ISubject & IObserver detach
-    ui->detach(ctrl);
-    repo->detach(ctrl);
-
+    // Qt
+    QApplication app(argc, argv);
+    MainGUI mainGUI;
+    mainGUI.show();
+    return QApplication::exec();
     return 0;
+
+
+    // Test ctrl and repo
+//    test_ctrl();
+//    test_repo();
+
+//    string chosenFile = chooseCsvFile();
+//
+//    // Create layers
+//    shared_ptr<InMemoryRepository> repo;
+//    if (choseRepository())
+//    {
+//        repo = make_shared<CsvFileRepository>(chosenFile);
+//    }
+//    else
+//    {
+//        repo = make_shared<InMemoryRepository>(chosenFile);
+//    }
+//    auto ui = make_shared<MainUI>();
+//    auto ctrl = make_shared<ConcreteController>(repo, ui);
+//
+//    // ISubject & IObserver attach
+//    repo->attach(ctrl);
+//    ui->attach(ctrl);
+//
+//    // Run programm
+//    ui->run();
+//
+//    // ISubject & IObserver detach
+//    ui->detach(ctrl);
+//    repo->detach(ctrl);
+//
+//    return 0;
 }
