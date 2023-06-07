@@ -98,6 +98,7 @@ namespace controller
     void ConcreteController::sortScootersByID()
     {
         auto scooters = repo->getAllScootersFromRepo();
+        std::sort(scooters.begin(), scooters.end(), utils::compareScooterById);
         ui->printScooterContainer(scooters);
     }
 

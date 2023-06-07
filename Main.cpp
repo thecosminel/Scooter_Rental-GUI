@@ -72,20 +72,21 @@ int main(int argc, char *argv[])
     shared_ptr<InMemoryRepository> repo = make_shared<InMemoryRepository>("Database/data.csv");
     auto gui = make_shared<MainGUI>();
     auto ctrl = make_shared<ConcreteController>(repo, gui);
-
     // ISubject & IObserver attach
     repo->attach(ctrl);
     gui->attach(ctrl);
 
     // Qt
     gui->setGeometry(200, 200, 1000, 600);
+    gui->callVectorSort(Operations::SortedId);
     gui->show();
+    QApplication::exec();
 
 
     // ISubject & IObserver detach
     gui->detach(ctrl);
     repo->detach(ctrl);
-    return QApplication::exec();
+    return 0;
 
 
 //     Test ctrl and repo

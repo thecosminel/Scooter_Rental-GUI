@@ -29,6 +29,14 @@ namespace utils
         return true;
     }
 
+
+    bool compareScooterById (const Scooter& scooter1, const Scooter& scooter2)
+    {
+        string id1 = scooter1.getIdentifier();
+        string id2 = scooter2.getIdentifier();
+        return compareStringsAlphabetically(id1, id2);
+    }
+
     bool compareScooterByDate(const Scooter& scooter1, const Scooter& scooter2)
     {
         string date1 = scooter1.getDate();

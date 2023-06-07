@@ -27,16 +27,21 @@ class MainGUI : public ConcreteUI, public QWidget {
         QTableWidget *tableWidget_;
         vector<Scooter> scooters;
 
+    // Qt stuff
+        void populateTable(const vector<Scooter>& scootersVec);
+        void setUpTable();
+
+        void handleCellClicked(int row, int column);
+
     public:
         explicit MainGUI(QWidget *parent = nullptr);
         ~MainGUI() override;
 
-        // Qt stuff
-        void populateTable();
+
 
 
         // Implement from abstract
-        void printScooterContainer(vector<scooter::Scooter>) override;
+        void printScooterContainer(vector<Scooter> scootersVec) override;
 
         void printMessage(std::string message) override;
     };
