@@ -68,6 +68,8 @@ namespace gui
         /// \return
         bool runManager();
 
+        char managerMenu();
+
         /// Run user
         /// \return
         bool runUser();
@@ -84,6 +86,55 @@ namespace gui
         void printScooterContainer(vector<Scooter> scootersVec) override;
 
         void printMessage(std::string message) override;
+
+        // ------------------------
+        // Manager & User methods
+        // Sort all
+        /// Sort by id
+        void displayAllScootersSortedByID();
+
+        /// Sort by km
+        void displayAllScootersSortedByModel();
+        /// Sort by age
+        void displayAllScootersSortedByAge();
+        /// Sort by km
+        void displayAllScootersSortedByKm();
+        /// Sort by location
+        void displayAllScootersSortedByLocation();
+        /// Sort by status
+        void displayAllScootersSortedByStatus();
+        // Filter
+        /// Display all parked
+        void displayAllParkedScooters();
+        /// Search by loc
+        void searchScooterByLocation();
+        /// Filter dates
+        void displayScootersFilteredByDates();
+        /// Filter km
+        void displayScootersFilteredByKm();
+
+        // -------------------------
+        // Manager UI only
+        /// Add new scooter
+        void addNewScooter();
+        /// Delete scooter
+        void deleteExistingScooter();
+        /// Modify scooter
+        void modifyExistingScooter();
+
+        /// Show detailed scooter
+        void showDetailed();
+
+        // -------------------------
+        // User UI only
+        /// Reserve scooter
+        void reserveScooter();
+        /// Park scooter
+        void parkScooter();
+        /// Use scooter
+        void useScooter();
+        /// Display my scooter
+        void displayMyScooters();
     };
 }
 

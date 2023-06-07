@@ -27,7 +27,7 @@ using std::string;
 
 namespace utils
 {
-    void showErrorDialog(const std::string& errorMessage);
+    void printMessageWithQt(const std::string& errorMessage);
 
 
 } // utils
