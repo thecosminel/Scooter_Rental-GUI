@@ -596,4 +596,65 @@ namespace utils
             return false;
     }
 
+    // Main.cpp
+    bool selectIfSavePersistent()
+    {
+        QWidget window;
+        QVBoxLayout layout(&window);
+
+        // Create a QLabel for the message
+        QLabel label("Do you want to save the data persistent?", &window);
+        layout.addWidget(&label);
+
+        // Create two radio buttons representing the options
+        QRadioButton radioOption1("Yes - use CsvRepository", &window);
+        QRadioButton radioOption2("No  - use InMemoryRepository", &window);
+
+        // Create a button group and add the radio buttons to it
+        QButtonGroup buttonGroup(&window);
+        buttonGroup.addButton(&radioOption1);
+        buttonGroup.addButton(&radioOption2);
+
+        // Add the radio buttons to the layout
+        layout.addWidget(&radioOption1);
+        layout.addWidget(&radioOption2);
+
+        // Connect the button group's buttonClicked signal to a lambda slot
+        bool isFirstButtonPressed = false;
+        QObject::connect(&buttonGroup, QOverload<QAbstractButton*>::of(&QButtonGroup::buttonClicked), [&](QAbstractButton* button) {
+            isFirstButtonPressed = (button == &radioOption1);
+            window.close();
+        });
+
+        // Show the main window
+        window.show();
+
+        // Run the event loop of the parent application to allow the window to be displayed and interacted with
+        QCoreApplication::processEvents();
+
+        // Run the event loop until the window is closed
+        while (window.isVisible())
+        {
+            QCoreApplication::processEvents();
+        }
+
+        // Return
+        if (isFirstButtonPressed)
+            return true;
+        else
+            return false;
+    }
+
+    string selectCSV()
+    {
+        QString fileName = QFileDialog::getOpenFileName(nullptr, "Open CSV File", QString(), "CSV Files (*.csv)");
+        // Convert QString to std::string
+        string str = fileName.toStdString();
+        if (fileName.isEmpty())
+        {
+            throw std::invalid_argument("No file selected");
+        }
+        return str;
+    }
+
 } // utils

@@ -87,6 +87,14 @@ namespace utils {
     /// \return
     bool tryLogAgain();
 
+    // Main.cpp
+    /// Use CsvRepo / InMemoryRepo
+    /// \return true = CSV
+    bool selectIfSavePersistent();
+
+    /// Select CSV file
+    string selectCSV();
+
 } // utils
 
 #endif //SCOOTER_RENTAL_GUI_GUI_ENTERDATA_H
