@@ -2,6 +2,7 @@
 #define SCOOTER_RENTAL_GUI_SCOOTER_H
 
 #include <string>
+#include <iomanip>
 
 using std::string, std::move;
 
@@ -89,7 +90,7 @@ namespace scooter
 
         /// Check if null scooter
         /// \return
-        bool checkIfNullScooter();
+        bool checkIfNullScooter(); //NOLINT
     };
 }
 

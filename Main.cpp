@@ -5,92 +5,70 @@
 #include "AppController/ctrl_tests.h"
 #include "AppRepository/repo_tests.h"
 
+// Qt
+#include "AppUI/GUI/MainGUI.h"
+#include <QApplication>
+
+
 using controller::AbstractController, controller::ConcreteController;
 using repository::CsvFileRepository, repository::InMemoryRepository;
 using ui::MainUI;
+using namespace gui;
 using std::make_shared;
 
-string chooseCsvFile()
+
+int main(int argc, char *argv[])
 {
-//    vector <string> files = {
-//            "../Database/data.csv",
-//            "../Database/scooters1.csv",
-//            "../Database/scooters2.csv"
-//    };
-    vector <string> files = {
-            "Database/data.csv",
-            "Database/scooters1.csv",
-            "Database/scooters2.csv"
-    };
-    cout << "Available CSV files: " << endl;
-    for (int i = 1; i <= files.size(); ++i)
-    {
-        cout << i << " -> " << files[i-1] << endl;
+    QApplication app(argc, argv);
+
+
+    // Select file
+    string fileName;
+    try {
+        fileName = selectCSV();
     }
-    while (true)
+    catch (const std::invalid_argument &e)
     {
-        int filesSize = static_cast<int>(files.size());
-        cout << "File wanted: (choose number)" << endl;
-        int index;
-        cin >> index;
-        if (index >= 1 && index <= filesSize)
-        {
-            return files[index-1];
-        }
-        cout << "Out of range index!!" << endl;
+        cout << "Error: " << e.what();
+        return 0;
     }
-}
 
-bool choseRepository()
-{
-    cout << "Do you want to save the data persistent?" << endl;
-    cout << "  1. Yes" << endl;
-    cout << "  2. No" << endl;
-    while(true)
-    {
-        char choice;
-        cout << "My choice: " << endl;
-        cin >> choice;
-        if (choice == '1')
-            return true;
-        else if (choice == '2')
-            return false;
-        cout << "Not an option..." << endl;
-    }
-}
-
-
-int main()
-{
-    // Test ctrl and repo
-    test_ctrl();
-    test_repo();
-
-    string chosenFile = chooseCsvFile();
-
-    // Create layers
+    // Select if data is to be saved persistent
     shared_ptr<InMemoryRepository> repo;
-    if (choseRepository())
+    if (selectIfSavePersistent())
     {
-        repo = make_shared<CsvFileRepository>(chosenFile);
+        repo = make_shared<CsvFileRepository>(fileName);
     }
     else
     {
-        repo = make_shared<InMemoryRepository>(chosenFile);
+        repo = make_shared<InMemoryRepository>(fileName);
     }
-    auto ui = make_shared<MainUI>();
-    auto ctrl = make_shared<ConcreteController>(repo, ui);
+
+
+    // Create GUI
+    auto gui = make_shared<MainGUI>();
+
+    // Create Ctrl
+    auto ctrl = make_shared<ConcreteController>(repo, gui);
+
 
     // ISubject & IObserver attach
     repo->attach(ctrl);
-    ui->attach(ctrl);
+    gui->attach(ctrl);
 
-    // Run programm
-    ui->run();
+    // Run
+    gui->runGui();
+    QApplication::exec();
+
 
     // ISubject & IObserver detach
-    ui->detach(ctrl);
+    gui->detach(ctrl);
     repo->detach(ctrl);
+
+
+    //     Test ctrl and repo
+    test_ctrl();
+    test_repo();
 
     return 0;
 }

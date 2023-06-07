@@ -27,6 +27,12 @@ namespace utils {
     /// \return date 1 < date 2
     bool compareDates(const string& date1, const string& date2);
 
+
+    /// Checks if (identifier 1 < identifier 2)
+    /// \param scooter1
+    /// \param scooter2
+    /// \return
+    bool compareScooterById (const Scooter& scooter1, const Scooter& scooter2);
     /// Checks if (date 1 < date 2)
     /// \param scooter1
     /// \param scooter2
@@ -71,6 +77,11 @@ namespace utils {
     /// Generate access key (not needed anymore)
     /// \return
     string generateAccessKey();
+
+    /// Convert double to string (only 2 digits after .)
+    /// \param value
+    /// \return
+    string doubleToString(double value);
 }
 
 #endif

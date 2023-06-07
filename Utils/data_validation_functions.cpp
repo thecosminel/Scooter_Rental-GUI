@@ -29,6 +29,14 @@ namespace utils
         return true;
     }
 
+
+    bool compareScooterById (const Scooter& scooter1, const Scooter& scooter2)
+    {
+        string id1 = scooter1.getIdentifier();
+        string id2 = scooter2.getIdentifier();
+        return compareStringsAlphabetically(id1, id2);
+    }
+
     bool compareScooterByDate(const Scooter& scooter1, const Scooter& scooter2)
     {
         string date1 = scooter1.getDate();
@@ -172,5 +180,20 @@ namespace utils
         }
 
         return accessKey;
+    }
+
+    std::string doubleToString(double value) {
+        // Convert the double to a string
+        std::string stringValue = std::to_string(value);
+
+        // Find the position of the decimal point
+        size_t decimalPos = stringValue.find('.');
+
+        if (decimalPos != std::string::npos) {
+            // Extract the substring with the first two digits after the decimal point
+            stringValue = stringValue.substr(0, decimalPos + 3);
+        }
+
+        return stringValue;
     }
 }

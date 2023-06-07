@@ -335,6 +335,8 @@ namespace repository
     {
         string identifier = scooter.getIdentifier();
         Scooter matchingScooter = getScooterById(identifier);
+        if (matchingScooter.getStatus() != scooter::PARKED)
+            throw std::invalid_argument("Scooter not reserved");
         scooter.setUser(user);
         scooter.setStatus(scooter::RESERVED);
         updateScooterInfo(scooter);
