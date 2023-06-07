@@ -8,6 +8,11 @@
 // Qt
 #include "AppUI/GUI/MainGUI.h"
 #include <QApplication>
+#include <QFileDialog>
+#include <QCheckBox>
+#include <QLabel>
+#include <QRadioButton>
+#include <QButtonGroup>
 
 using controller::AbstractController, controller::ConcreteController;
 using repository::CsvFileRepository, repository::InMemoryRepository;
@@ -64,22 +69,104 @@ bool choseRepository()
     }
 }
 
+string selectCSV()
+{
+    QString fileName = QFileDialog::getOpenFileName(nullptr, "Open CSV File", QString(), "CSV Files (*.csv)");
+    // Convert QString to std::string
+    string str = fileName.toStdString();
+    if (fileName.isEmpty())
+    {
+        throw std::invalid_argument("No file selected");
+    }
+    return str;
+}
+
+bool selectIfSavePersistent()
+{
+    QWidget window;
+    QVBoxLayout layout(&window);
+
+    // Create a QLabel for the message
+    QLabel label("Do you want to persistently save the data?", &window);
+    layout.addWidget(&label);
+
+    // Create two radio buttons representing the options
+    QRadioButton radioOption1("Yes", &window);
+    QRadioButton radioOption2("No", &window);
+
+    // Create a button group and add the radio buttons to it
+    QButtonGroup buttonGroup(&window);
+    buttonGroup.addButton(&radioOption1);
+    buttonGroup.addButton(&radioOption2);
+
+    // Add the radio buttons to the layout
+    layout.addWidget(&radioOption1);
+    layout.addWidget(&radioOption2);
+
+    // Connect the button group's buttonClicked signal to a slot
+    bool isFirstButtonPressed = false;
+    QObject::connect(&buttonGroup, QOverload<QAbstractButton*>::of(&QButtonGroup::buttonClicked), [&](QAbstractButton* button) {
+        isFirstButtonPressed = (button == &radioOption1);
+        QCoreApplication::exit();
+    });
+
+    // Show the main window
+    window.show();
+
+    // Create an event loop to wait for user input
+    QEventLoop eventLoop;
+
+    // Connect the buttonClicked signal to the QEventLoop's quit slot
+    QObject::connect(&buttonGroup, QOverload<QAbstractButton*>::of(&QButtonGroup::buttonClicked), &eventLoop, &QEventLoop::quit);
+
+    // Enter the event loop
+    eventLoop.exec();
+
+    // Return the result
+    return isFirstButtonPressed;
+}
+
 
 int main(int argc, char *argv[])
 {
     QApplication app(argc, argv);
 
-    shared_ptr<InMemoryRepository> repo = make_shared<InMemoryRepository>("Database/data.csv");
+
+    // Select file
+    string fileName;
+    try {
+        fileName = selectCSV();
+    }
+    catch (const std::invalid_argument &e)
+    {
+        cout << "Error: " << e.what();
+        return 0;
+    }
+
+    // Select if data is to be saved persistent
+    shared_ptr<InMemoryRepository> repo;
+    if (selectIfSavePersistent())
+    {
+        repo = make_shared<CsvFileRepository>(fileName);
+    }
+    else
+    {
+        repo = make_shared<InMemoryRepository>(fileName);
+    }
+
+    // Create GUI
     auto gui = make_shared<MainGUI>();
+
+    // Create Ctrl
     auto ctrl = make_shared<ConcreteController>(repo, gui);
+
+
     // ISubject & IObserver attach
     repo->attach(ctrl);
     gui->attach(ctrl);
 
     // Qt
-    gui->setGeometry(200, 200, 1000, 600);
-    gui->callVectorSort(Operations::SortedId);
-    gui->show();
+    gui->runGui();
     QApplication::exec();
 
 

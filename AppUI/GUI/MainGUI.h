@@ -37,7 +37,7 @@ class MainGUI : public ConcreteUI, public QWidget {
         explicit MainGUI(QWidget *parent = nullptr);
         ~MainGUI() override;
 
-
+        void runGui();
 
 
         // Implement from abstract

@@ -17,6 +17,13 @@ namespace gui
         delete tableWidget_;
     }
 
+    void MainGUI::runGui()
+    {
+        setGeometry(200, 200, 1000, 600);
+        callVectorSort(Operations::SortedId);
+        show();
+    }
+
     // Qt stuff
     void MainGUI::setUpTable()
     {
