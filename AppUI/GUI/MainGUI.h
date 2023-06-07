@@ -40,6 +40,7 @@ using ui::ConcreteUI;
 
 namespace gui
 {
+    /// User type
     enum UserType
     {
         Manager,
@@ -54,17 +55,27 @@ namespace gui
         UserType me;
 
     // Qt stuff
+        /// Print table
+        /// \param scootersVec
         void populateTable(const vector<Scooter>& scootersVec);
+        /// Initial table setting
         void setUpTable();
 
+        /// Handle cell clicked in table
+        /// \param row
+        /// \param column
         void handleCellClicked(int row, int column);
 
     public:
+        /// Constructor
+        /// \param parent
         explicit MainGUI(QWidget *parent = nullptr);
+        /// Destructor
         ~MainGUI() override;
 
         // ------------------------
         // Control methods
+        /// Use to run the GUI
         void runGui();
 
         /// Run manager
@@ -75,6 +86,7 @@ namespace gui
         /// \return
         bool runUser();
 
+        /// Select user type Manager/User
         void selectUserType();
 
         /// Log in manager
@@ -84,8 +96,12 @@ namespace gui
         void logInAsUser();
 
         // Implement from abstract
+        /// Implement print scooter container
+        /// \param scootersVec
         void printScooterContainer(vector<Scooter> scootersVec) override;
 
+        /// Print message
+        /// \param message
         void printMessage(std::string message) override;
 
         // ------------------------

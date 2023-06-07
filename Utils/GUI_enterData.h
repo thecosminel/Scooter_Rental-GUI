@@ -83,6 +83,8 @@ namespace utils {
     /// \return
     char userMenu();
 
+    /// Chose if try to log in again or create new acc
+    /// \return
     bool tryLogAgain();
 
 } // utils
