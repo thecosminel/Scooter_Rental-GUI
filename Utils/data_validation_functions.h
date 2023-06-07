@@ -71,6 +71,11 @@ namespace utils {
     /// Generate access key (not needed anymore)
     /// \return
     string generateAccessKey();
+
+    /// Convert double to string (only 2 digits after .)
+    /// \param value
+    /// \return
+    string doubleToString(double value);
 }
 
 #endif

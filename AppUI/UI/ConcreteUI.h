@@ -32,14 +32,7 @@ namespace ui {
         /// Default destructor
         ~ConcreteUI() = default;
 
-        // Printing methods
-        /// Print scooters container
-        /// \param scooters
-        void printScooterContainer(vector<Scooter> scooters) override;
 
-        /// Print message
-        /// \param message
-        void printMessage(string message) override;
 
         // Getters & setters
         /// Get current scooter

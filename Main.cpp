@@ -67,15 +67,28 @@ bool choseRepository()
 
 int main(int argc, char *argv[])
 {
-    // Qt
     QApplication app(argc, argv);
-    MainGUI mainGUI;
-    mainGUI.show();
+
+    shared_ptr<InMemoryRepository> repo = make_shared<InMemoryRepository>("Database/data.csv");
+    auto gui = make_shared<MainGUI>();
+    auto ctrl = make_shared<ConcreteController>(repo, gui);
+
+    // ISubject & IObserver attach
+    repo->attach(ctrl);
+    gui->attach(ctrl);
+
+    // Qt
+    gui->setGeometry(200, 200, 1000, 600);
+    gui->show();
+
+
+    // ISubject & IObserver detach
+    gui->detach(ctrl);
+    repo->detach(ctrl);
     return QApplication::exec();
-    return 0;
 
 
-    // Test ctrl and repo
+//     Test ctrl and repo
 //    test_ctrl();
 //    test_repo();
 
@@ -104,6 +117,6 @@ int main(int argc, char *argv[])
 //    // ISubject & IObserver detach
 //    ui->detach(ctrl);
 //    repo->detach(ctrl);
-//
-//    return 0;
+
+    return 0;
 }

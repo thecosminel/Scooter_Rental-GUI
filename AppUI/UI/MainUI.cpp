@@ -395,7 +395,7 @@ namespace ui
             scooterInVector.clear();
             scooterInVector.push_back(updatedScooter);
             cout << "Current updated scooter:" << endl;
-            ConcreteUI::printScooterContainer(scooterInVector);
+            printScooterContainer(scooterInVector);
             cout << "What do you want to modify: " << endl;
             cout << "  1. Model" << endl;
             cout << "  2. Manufacturing date" << endl;
@@ -463,7 +463,7 @@ namespace ui
         }
         vector<Scooter> detailedScooter;
         detailedScooter.push_back(currentScooter);
-        ConcreteUI::printScooterContainer(detailedScooter);
+        printScooterContainer(detailedScooter);
     }
 
     // -------------------------
@@ -557,6 +557,35 @@ namespace ui
     void MainUI::displayAllScootersSortedByStatus()
     {
         ConcreteUI::callVectorSort(controller::SortedStatus);
+    }
+
+    void MainUI::printScooterContainer(vector<Scooter> scooters)
+    {
+        Scooter scooter;
+        cout << endl;
+        for (int i = 0; i < scooters.size(); ++i)
+        {
+            scooter = scooters[i];
+            printIndexing(i);
+            cout << "ID: " << scooter.getIdentifier() << "  ";
+            cout << "Model: " << scooter.getModel();
+            insertBlankSpaces(scooter.getModel());
+            cout << "Commission date: " << scooter.getDate();
+            insertBlankSpaces(scooter.getDate());
+            cout << "Km: ";
+            printDoubleNumber(scooter.getKilometers());
+            cout << "Location: " << scooter.getLocation();
+            insertBlankSpaces(scooter.getLocation());
+            cout << "Status: " << getScooterStatusString(scooter.getStatus());
+            cout << endl;
+        }
+        cout << endl;
+    }
+
+    void  MainUI::printMessage(string message)
+    {
+        cout << endl << endl;
+        cout << "Message: " << message << endl;
     }
 
 

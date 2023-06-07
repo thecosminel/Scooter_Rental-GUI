@@ -15,7 +15,7 @@ include_directories(Domain)
 
 add_executable(ScooterRental_GUI
         Main.cpp
-        AppUI/GUI/GUI.h AppUI/GUI/MainGUI.h AppUI/GUI/MainGUI.cpp
+        AppUI/GUI/MainGUI.h AppUI/GUI/MainGUI.cpp
         Domain/Scooter.cpp
         Domain/Scooter.h
         AppRepository/CrudRepository.h

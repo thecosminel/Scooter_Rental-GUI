@@ -2,6 +2,7 @@
 #define SCOOTER_RENTAL_GUI_SCOOTER_H
 
 #include <string>
+#include <iomanip>
 
 using std::string, std::move;
 

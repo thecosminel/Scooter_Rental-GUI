@@ -97,6 +97,15 @@ namespace ui
         /// Display my scooter
         void displayMyScooters();
 
+        // Printing methods
+        /// Print scooters container
+        /// \param scooters
+        void printScooterContainer(vector<Scooter> scooters) override;
+
+        /// Print message
+        /// \param message
+        void printMessage(string message) override;
+
     };
 
 } // ui
