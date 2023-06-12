@@ -7,7 +7,7 @@
 
 #include <iostream>
 #include <cassert>
-#include "CsvFileRepository.h"
+#include "../AppRepository/CsvFileRepository.h"
 
 using namespace repository;
 using std::cout, std::endl;

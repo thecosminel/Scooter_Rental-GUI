@@ -8,7 +8,7 @@
 #include <cctype>
 #include <random>
 
-using std::string;
+using std::string, std::lexicographical_compare;
 using scooter::Scooter;
 
 namespace utils {
@@ -70,6 +70,12 @@ namespace utils {
     /// \param name2
     /// \return
     bool compareStringsAlphabetically(string name1, string name2);
+
+    /// The rule is a > A > b > B and so on..
+    /// \param a
+    /// \param b
+    /// \return true if inequality matches
+    bool customCharCompare(char a, char b);
 
     /// Generate random id of 3 letters
     string generateRandomID();

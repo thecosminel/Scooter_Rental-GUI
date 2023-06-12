@@ -18,19 +18,22 @@ namespace repository
 
     class InMemoryRepository : public CrudRepository, public ISubject{
     private:
-        /// Load csv
-        void loadFromFile();
-        /// Load acc
-        void loadAccountsFromFile();
+
+        /// Load from memory
+        void loadScootersFromMemory();
+
+        /// Load acc from memory
+        void loadAccountsFromMemory();
 
     protected:
-        string dataFileName;
         string accountsFileName;
 
     public:
         // Constructors & destructors
         /// Constructor
-        explicit InMemoryRepository(const string& fileName = "../Database/data.csv");
+        explicit InMemoryRepository();
+
+        explicit InMemoryRepository(const string& accountsFileName);
 
         /// Default copy constructor
         InMemoryRepository(InMemoryRepository &repository) = default;

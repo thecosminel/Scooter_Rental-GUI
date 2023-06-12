@@ -1,5 +1,5 @@
 Identifier,Model,ManufacturingDate,Km,Location,User,Status
-aab,Honda-Navi,11.02.2019,1220.22,Selimbar,,1
+aab,Honda-Navi,11.02.2019,1,Selimbar,,4
 aac,Ola-S1,03.06.2022,55500.5,Zamca,,3
 aad,Yamaha,19.09.2030,5.5,Salcea,,4
 aaa,Yamaha,03.10.2023,300,Medias,thecosminel,1
@@ -8,7 +8,7 @@ aaf,Swagtron-5,09.11.2019,15,Manhattanstur,,2
 aag,E-Twow-GT,01.03.2020,3000,Itcani,,0
 aah,InMotion-S1,08.05.2020,4512,Pakistan,,3
 aai,Apollo-City,24.11.2021,1452.13,Avrig,geo,1
-aaj,Dual-Storm,08.11.2021,144.3,Turnisor,,0
+aaj,Dual-Storm,08.11.2021,144.3,Turnisor,test,2
 aak,Varla-One,05.04.2022,2478.9,Tiglari,,1
 sCn,Saniuta,11.02.1878,300,Neamt,,4
 WRc,AOVO,23.04.2023,10.4,Cluj-Napoca,,0

@@ -1,9 +1,9 @@
 #ifndef SCOOTER_RENTAL_GUI_CONCRETEUI_H
 #define SCOOTER_RENTAL_GUI_CONCRETEUI_H
 
-#include "../AbstractUI.h"
-#include "../../Utils/UI_printFunctions.h"
-#include "../ISubject.h"
+#include "AbstractUI.h"
+#include "../Utils/UI_printFunctions.h"
+#include "ISubject.h"
 
 #include <iostream>
 
