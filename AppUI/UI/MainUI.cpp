@@ -395,7 +395,7 @@ namespace ui
             scooterInVector.clear();
             scooterInVector.push_back(updatedScooter);
             cout << "Current updated scooter:" << endl;
-            printScooterContainer(scooterInVector);
+            updateScooterContainer(scooterInVector);
             cout << "What do you want to modify: " << endl;
             cout << "  1. Model" << endl;
             cout << "  2. Manufacturing date" << endl;
@@ -463,7 +463,7 @@ namespace ui
         }
         vector<Scooter> detailedScooter;
         detailedScooter.push_back(currentScooter);
-        printScooterContainer(detailedScooter);
+        updateScooterContainer(detailedScooter);
     }
 
     // -------------------------
@@ -561,7 +561,7 @@ namespace ui
         ConcreteUI::callVectorSort(controller::SortedStatus);
     }
 
-    void MainUI::printScooterContainer(vector<Scooter> scooters)
+    void MainUI::updateScooterContainer(vector<Scooter> scooters)
     {
         Scooter scooter;
         cout << endl;
@@ -584,7 +584,7 @@ namespace ui
         cout << endl;
     }
 
-    void  MainUI::printMessage(string message)
+    void  MainUI::updateMessage(string message)
     {
         cout << endl << endl;
         cout << "Message: " << message << endl;

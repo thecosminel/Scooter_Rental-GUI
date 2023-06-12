@@ -38,10 +38,10 @@ namespace ui {
         // ------------------------
         // Printing methods
         /// Print scooter container define
-        virtual void printScooterContainer(vector<Scooter>) = 0;
+        virtual void updateScooterContainer(vector<Scooter>) = 0;
         /// Print message
         /// \param message
-        virtual void printMessage(string message) = 0;
+        virtual void updateMessage(string message) = 0;
 
         // Getters & setters
         /// Get current

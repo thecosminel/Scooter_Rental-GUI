@@ -70,26 +70,26 @@ namespace controller
     void ConcreteController::filterScootersByLocation(string location)
     {
         auto scooters = repo->getAllScootersByLocation(location);
-        ui->printScooterContainer(scooters);
+        ui->updateScooterContainer(scooters);
     }
 
     void ConcreteController::filterScootersByKmBetweenTwoValues(double kmMin, double kmMax)
     {
         auto scooters = repo->getAllScootersByKmBetweenTwoValues(kmMin, kmMax);
-        ui->printScooterContainer(scooters);
+        ui->updateScooterContainer(scooters);
 
     }
 
     void ConcreteController::filterScootersByAgeBetweenTwoDates(string dateMin, string dateMax)
     {
         auto scooters = repo->getAllScootersByAgeBetweenTwoDates(dateMin, dateMax);
-        ui->printScooterContainer(scooters);
+        ui->updateScooterContainer(scooters);
     }
 
     void ConcreteController::filterParkedScooters()
     {
         auto scooters = repo->getAllParkedScooters();
-        ui->printScooterContainer(scooters);
+        ui->updateScooterContainer(scooters);
     }
 
 
@@ -99,49 +99,49 @@ namespace controller
     {
         auto scooters = repo->getAllScootersFromRepo();
         std::sort(scooters.begin(), scooters.end(), utils::compareScooterById);
-        ui->printScooterContainer(scooters);
+        ui->updateScooterContainer(scooters);
     }
 
     void ConcreteController::sortScootersByManufacturingDate()
     {
         auto scooters = repo->getAllScootersFromRepo();
         std::sort(scooters.begin(), scooters.end(), compareScooterByDate);
-        ui->printScooterContainer(scooters);
+        ui->updateScooterContainer(scooters);
     }
 
     void ConcreteController::sortScootersByModel()
     {
         auto scooters = repo->getAllScootersFromRepo();
         std::sort(scooters.begin(), scooters.end(), utils::compareScooterByModel);
-        ui->printScooterContainer(scooters);
+        ui->updateScooterContainer(scooters);
     }
 
     void ConcreteController::sortScootersByKm()
     {
         auto scooters = repo->getAllScootersFromRepo();
         std::sort(scooters.begin(), scooters.end(), utils::compareScooterByKm);
-        ui->printScooterContainer(scooters);
+        ui->updateScooterContainer(scooters);
     }
 
     void ConcreteController::sortScootersByLocation()
     {
         auto scooters = repo->getAllScootersFromRepo();
         std::sort(scooters.begin(), scooters.end(), utils::compareScooterByLocation);
-        ui->printScooterContainer(scooters);
+        ui->updateScooterContainer(scooters);
     }
 
     void ConcreteController::sortScootersByStatus()
     {
         auto scooters = repo->getAllScootersFromRepo();
         std::sort(scooters.begin(), scooters.end(), utils::compareScooterByStatus);
-        ui->printScooterContainer(scooters);
+        ui->updateScooterContainer(scooters);
     }
 
     // ------------------------------
     // IObserver override
     void ConcreteController::update(const string &data)
     {
-        ui->printMessage(data);
+        ui->updateMessage(data);
     }
 
     void ConcreteController::logInAsManager(string user, string pass)
@@ -149,7 +149,7 @@ namespace controller
         if (repo->checkManagerCredentials(user, pass))
         {
             loggedManager = true;
-            ui->printMessage("Login as manager successful!");
+            ui->updateMessage("Login as manager successful!");
         }
         else
         {
@@ -162,7 +162,7 @@ namespace controller
         if (repo->checkUserCredentials(user, pass))
         {
             loggedUser = true;
-            ui->printMessage("Login as client successful!");
+            ui->updateMessage("Login as client successful!");
         }
         else
         {
@@ -226,7 +226,7 @@ namespace controller
             throw std::logic_error("Not logged in!!");
         }
         auto scooters = repo->getAllScootersOfAnUser(user);
-        ui->printScooterContainer(scooters);
+        ui->updateScooterContainer(scooters);
     }
 
     void ConcreteController::scooterVectorSorted(Operations operation)

@@ -150,14 +150,14 @@ namespace gui
                  // Exit methods
                 case 'B':
                 case 'b':
-                    printMessage("+++ Closing app +++ ");
+                    updateMessage("+++ Closing app +++ ");
                     return true;
                 case 'X':
                 case 'x':
-                    printMessage("+++ Closing app +++ ");
+                    updateMessage("+++ Closing app +++ ");
                     return false;
                 default:
-                    printMessage("Close the app using button: ~X. Close app~ ");
+                    updateMessage("Close the app using button: ~X. Close app~ ");
                     break;
             }
         } while (true);
@@ -238,14 +238,14 @@ namespace gui
                     // Exit methods
                 case 'B':
                 case 'b':
-                    printMessage("+++ Closing app +++ ");
+                    updateMessage("+++ Closing app +++ ");
                     return true;
                 case 'X':
                 case 'x':
-                    printMessage("+++ Closing app +++ ");
+                    updateMessage("+++ Closing app +++ ");
                     return false;
                 default:
-                    printMessage("Close the app using button: ~X. Close app~ ");
+                    updateMessage("Close the app using button: ~X. Close app~ ");
                     break;
             }
         } while (true);
@@ -318,7 +318,7 @@ namespace gui
         }
         catch (const std::invalid_argument& e)
         {
-            printMessage("Create new account didn't work :( --- really don't know why");
+            updateMessage("Create new account didn't work :( --- really don't know why");
         }
     }
 
@@ -416,7 +416,7 @@ namespace gui
 
 
     // Implement from abstract
-    void MainGUI::printScooterContainer(vector<Scooter> scootersVec)
+    void MainGUI::updateScooterContainer(vector<Scooter> scootersVec)
     {
 
         populateTable(scootersVec);
@@ -424,7 +424,7 @@ namespace gui
         show();
     }
 
-    void MainGUI::printMessage(std::string message)
+    void MainGUI::updateMessage(std::string message)
     {
         printMessageWithQt(message);
     }
@@ -494,7 +494,7 @@ namespace gui
 
     void MainGUI::addNewScooter()
     {
-        printMessage("You have selected to add a new scooter to repo: ");
+        updateMessage("You have selected to add a new scooter to repo: ");
         string identifier = "NIL";
         string model = enterModelGUI();
         string manufacturingDate = enterManufacturingDateGUI();
@@ -507,7 +507,7 @@ namespace gui
 
     void MainGUI::deleteExistingScooter()
     {
-        printMessage("You have selected to delete a scooter from repo: ");
+        updateMessage("You have selected to delete a scooter from repo: ");
         string identifier = enterIdentifierGUI();
         Scooter removedScooter(identifier, "", "10.10.2010", 1, "", scooter::UNKNOWN);
         ConcreteUI::callCUD(controller::REMOVE, removedScooter);
@@ -515,14 +515,14 @@ namespace gui
 
     void MainGUI::modifyExistingScooter()
     {
-        printMessage("You have selected to modify a scooter from repo: ");
+        updateMessage("You have selected to modify a scooter from repo: ");
         string identifier = enterIdentifierGUI();
         try {
             ConcreteUI::getCurrentScooter(identifier);
         }
         catch (const std::logic_error& exception)
         {
-            printMessage("No scooter with given id found!");
+            updateMessage("No scooter with given id found!");
             return;
         }
 
@@ -535,7 +535,7 @@ namespace gui
         {
             scooterInVector.clear();
             scooterInVector.push_back(updatedScooter);
-            printScooterContainer(scooterInVector);
+            updateScooterContainer(scooterInVector);
             choice = whatScooterAttributesToModifyGUI();
             switch (choice)
             {
@@ -577,7 +577,7 @@ namespace gui
                     done = true;
                     break;
                 default:
-                    printMessage("Not an option!");
+                    updateMessage("Not an option!");
             }
         } while (!done);
         ConcreteUI::callCUD(controller::UPDATE, updatedScooter);
@@ -591,12 +591,12 @@ namespace gui
         }
         catch (const std::logic_error& exception)
         {
-            printMessage("Scooter with given id not found!");
+            updateMessage("Scooter with given id not found!");
             return;
         }
         vector<Scooter> detailedScooter;
         detailedScooter.push_back(currentScooter);
-        printScooterContainer(detailedScooter);
+        updateScooterContainer(detailedScooter);
     }
 
     // -------------------------
@@ -611,7 +611,7 @@ namespace gui
         }
         catch (const std::logic_error& exception)
         {
-            printMessage(exception.what());
+            updateMessage(exception.what());
             return;
         }
         // Check if not reserved
@@ -621,7 +621,7 @@ namespace gui
         }
         catch (const std::logic_error& exception)
         {
-            printMessage(exception.what());
+            updateMessage(exception.what());
             return;
         }
     }
@@ -634,7 +634,7 @@ namespace gui
         }
         catch (const std::logic_error& exception)
         {
-            printMessage(exception.what());
+            updateMessage(exception.what());
             return;
         }
         Scooter scooter = currentScooter;
@@ -643,7 +643,7 @@ namespace gui
         }
         catch (const std::logic_error& exception)
         {
-            printMessage(exception.what());
+            updateMessage(exception.what());
             return;
         }
     }
@@ -656,7 +656,7 @@ namespace gui
         }
         catch (const std::logic_error& exception)
         {
-            printMessage(exception.what());
+            updateMessage(exception.what());
             return;
         }
         Scooter scooter = currentScooter;
@@ -665,7 +665,7 @@ namespace gui
         }
         catch (const std::logic_error& exception)
         {
-            printMessage(exception.what());
+            updateMessage(exception.what());
             return;
         }
     }

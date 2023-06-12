@@ -98,11 +98,11 @@ namespace gui
         // Implement from abstract
         /// Implement print scooter container
         /// \param scootersVec
-        void printScooterContainer(vector<Scooter> scootersVec) override;
+        void updateScooterContainer(vector<Scooter> scootersVec) override;
 
         /// Print message
         /// \param message
-        void printMessage(std::string message) override;
+        void updateMessage(std::string message) override;
 
         // ------------------------
         // Manager & User methods

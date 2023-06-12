@@ -100,11 +100,11 @@ namespace ui
         // Printing methods
         /// Print scooters container
         /// \param scooters
-        void printScooterContainer(vector<Scooter> scooters) override;
+        void updateScooterContainer(vector<Scooter> scooters) override;
 
         /// Print message
         /// \param message
-        void printMessage(string message) override;
+        void updateMessage(string message) override;
 
     };
 
