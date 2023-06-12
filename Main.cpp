@@ -2,8 +2,8 @@
 #include "AppController/ConcreteController.h"
 #include "AppUI/UI/MainUI.h"
 // Tests
-#include "AppController/ctrl_tests.h"
-#include "AppRepository/repo_tests.h"
+#include "Tests/ctrl_tests.h"
+#include "Tests/repo_tests.h"
 
 // Qt
 #include "AppUI/GUI/MainGUI.h"
@@ -22,26 +22,26 @@ int main(int argc, char *argv[])
     QApplication app(argc, argv);
 
 
-    // Select file
-    string fileName;
-    try {
-        fileName = selectCSV();
-    }
-    catch (const std::invalid_argument &e)
-    {
-        cout << "Error: " << e.what();
-        return 0;
-    }
-
     // Select if data is to be saved persistent
     shared_ptr<InMemoryRepository> repo;
     if (selectIfSavePersistent())
     {
+        // Select file
+        string fileName;
+        try {
+            fileName = selectCSV();
+        }
+        catch (const std::invalid_argument &e)
+        {
+            cout << "Error: " << e.what();
+            return 0;
+        }
+        // Create repo using selected csv
         repo = make_shared<CsvFileRepository>(fileName);
     }
     else
     {
-        repo = make_shared<InMemoryRepository>(fileName);
+        repo = make_shared<InMemoryRepository>();
     }
 
 

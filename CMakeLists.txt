@@ -30,15 +30,15 @@ add_executable(ScooterRental_GUI
         AppController/IObserver.h
         AppController/IObserver.cpp
         AppRepository/CsvFileRepository.h
-        AppRepository/CsvRepository.cpp
+        AppRepository/CsvFileRepository.cpp
         AppController/AbstractController.h
         AppController/AbstractController.cpp
         AppController/ConcreteController.cpp
         AppController/ConcreteController.h
         AppUI/AbstractUI.cpp
         AppUI/AbstractUI.h
-        AppUI/UI/ConcreteUI.cpp
-        AppUI/UI/ConcreteUI.h
+        AppUI/ConcreteUI.cpp
+        AppUI/ConcreteUI.h
         AppUI/ISubject.cpp
         AppUI/ISubject.h
         Utils/UI_printFunctions.cpp
@@ -47,9 +47,9 @@ add_executable(ScooterRental_GUI
         AppUI/UI/MainUI.h
         Utils/UI_enterData.cpp
         Utils/UI_enterData.h
-        AppRepository/repo_tests.cpp
-        AppRepository/repo_tests.h
-        AppController/ctrl_tests.cpp
-        AppController/ctrl_tests.h Utils/GUI_enterData.h Utils/GUI_enterData.cpp Utils/GUI_printFunctions.h Utils/GUI_printFunctions.cpp)
+        Tests/repo_tests.cpp
+        Tests/repo_tests.h
+        Tests/ctrl_tests.cpp
+        Tests/ctrl_tests.h Utils/GUI_enterData.h Utils/GUI_enterData.cpp Utils/GUI_printFunctions.h Utils/GUI_printFunctions.cpp)
 
 target_link_libraries(ScooterRental_GUI Qt5::Widgets)

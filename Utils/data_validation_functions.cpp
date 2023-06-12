@@ -129,20 +129,22 @@ namespace utils
 
     bool compareStringsAlphabetically(string name1, string name2)
     {
-        // Convert strings to lowercase
-        for (char& c : name1)
-        {
-            c = tolower(c); //NOLINT
-        }
-        for (char& c : name2)
-        {
-            c = tolower(c); //NOLINT
-        }
-        if (name1 <= name2)
+        bool result = std::lexicographical_compare(name1.begin(), name1.end(), name2.begin(), name2.end(),
+                                                   customCharCompare);
+        if (result)
         {
             return true;
         }
         return false;
+    }
+
+    bool customCharCompare(char a, char b)
+    {
+        if (tolower(a) == tolower(b))
+        {
+            return a > b;
+        }
+        return tolower(a) < tolower(b);
     }
 
     string generateRandomID() {

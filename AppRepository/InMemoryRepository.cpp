@@ -4,13 +4,16 @@ namespace repository
 {
 
     // Constructors & destructors
-    repository::InMemoryRepository::InMemoryRepository(const string& fileName)
+    repository::InMemoryRepository::InMemoryRepository()
     {
-        dataFileName = fileName;
-//        accountsFileName = "../Database/Accounts/accounts.csv";
         accountsFileName = "Database/Accounts/accounts.csv";
-        loadAccountsFromFile();
-        loadFromFile();
+        loadAccountsFromMemory();
+        loadScootersFromMemory();
+    }
+
+    repository::InMemoryRepository::InMemoryRepository(const string& accountsFileName)
+    {
+        this->accountsFileName =  accountsFileName;
     }
 
     InMemoryRepository &repository::InMemoryRepository::operator=(const repository::InMemoryRepository &other) {
@@ -225,79 +228,41 @@ namespace repository
 
     // -----------------------------------------------
     // New methods
-    void InMemoryRepository::loadAccountsFromFile()
+    void InMemoryRepository::loadScootersFromMemory()
     {
-        ifstream file(accountsFileName);
-        std::string line;
-        std::getline(file, line);
-        if (file.is_open())
-        {
-            while (std::getline(file, line))
-            {
-                std::stringstream ss(line);
-                string user;
-                string password;
-                string userType;
-                std::getline(ss, user, ',');
-                std::getline(ss, password, ',');
-                std::getline(ss, userType, ',');
-                pair<string, string> userPass;
-                userPass.first = user;
-                userPass.second = password;
-                if (userType == "manager")
-                    managerAccounts.push_back(userPass);
-                else
-                    userAccounts.push_back(userPass);
-            }
-            file.close();
-        }
+        // Add 10 scooters stored in memory
+        Scooter scooter1("aaa", "Ola-S1", "03.06.2022", 55500.5, "Zamca", scooter::UNKNOWN);
+        Scooter scooter2("aab", "Honda-Navi", "11.02.2019", 1, "Selimbar", scooter::OUT_OF_SERVICE);
+        Scooter scooter3("aac", "Yamaha 1", "19.09.2030", 5.5, "Salcea", scooter::UNKNOWN);
+        Scooter scooter4("aad", "Yamaha 2", "03.10.2023", 300.13, "Medias", scooter::PARKED);
+        Scooter scooter5("afc", "Emv-Scoot", "09.11.2019", 30, "Sibiu", scooter::IN_USE);
+        Scooter scooter6("ACs", "Swagtron-5", "01.03.2020", 15.2, "Manhattanstur", scooter::PARKED);
+        Scooter scooter7("afv", "E-Twow-GT", "08.05.2020", 1002.23, "Itcani", scooter::PARKED);
+        Scooter scooter8("gjd", "InMotion-S1", "14.11.2021", 87.323, "Pakistan", scooter::MAINTENANCE);
+        Scooter scooter9("fgF", "Apollo-City", "12.07.2022", 44.444, "Avrig", scooter::MAINTENANCE);
+        Scooter scooter10("OkK", "Varla-One", "23.04.2023", 290.23, "Turnisor", scooter::OUT_OF_SERVICE);
+        scooters.push_back(scooter1);
+        scooters.push_back(scooter2);
+        scooters.push_back(scooter3);
+        scooters.push_back(scooter4);
+        scooters.push_back(scooter5);
+        scooters.push_back(scooter6);
+        scooters.push_back(scooter7);
+        scooters.push_back(scooter8);
+        scooters.push_back(scooter9);
+        scooters.push_back(scooter10);
     }
 
-    void InMemoryRepository::loadFromFile()
+    void InMemoryRepository::loadAccountsFromMemory()
     {
-        ifstream file(dataFileName);
-        std::string line;
-        std::getline(file, line);
-        if (file.is_open())
-        {
-
-            while (std::getline(file, line)) {
-                std::stringstream ss(line);
-                std::string element;
-
-                std::string identifier;
-                std::string model;
-                std::string date;
-                double kilometers;
-                std::string location;
-                int status;
-                std::string user;
-
-                // Read each element separated by commas
-                std::getline(ss, identifier, ',');
-                std::getline(ss, model, ',');
-                std::getline(ss, date, ',');
-                if (!checkDateFormat(date))
-                {
-                    throw std::invalid_argument("File contains invalid dates!");
-                }
-                ss >> kilometers;
-                ss.ignore(); // Ignore the comma after 'kilometers'
-                std::getline(ss, location, ',');
-                std::getline(ss, user, ',');
-                ss >> status;
-
-                auto scooterStatus = static_cast<ScooterStatus>(status);
-                Scooter scooter(identifier, model, date, kilometers, location, scooterStatus);
-                scooter.setUser(user);
-                scooters.push_back(scooter);
-            }
-            file.close();
-        }
-        else
-        {
-            throw std::invalid_argument("Invalid file");
-        }
+        pair<string, string> manager1{"Tud", "bmw"};
+        pair<string, string> manager2{"1", ""};
+        pair<string, string> user1{"geo", "bos"};
+        pair<string, string> user2{"ana", "mere"};
+        managerAccounts.push_back(manager1);
+        managerAccounts.push_back(manager2);
+        userAccounts.push_back(user1);
+        userAccounts.push_back(user2);
     }
 
     vector<Scooter> InMemoryRepository::getAllScootersOfAnUser(string userName)
@@ -324,6 +289,7 @@ namespace repository
     vector<string> InMemoryRepository::getAllIdentifiers()
     {
         vector<string> identifiers;
+        identifiers.reserve(scooters.size());
         for (const auto& scooter : scooters)
         {
             identifiers.push_back(scooter.getIdentifier());
@@ -336,7 +302,7 @@ namespace repository
         string identifier = scooter.getIdentifier();
         Scooter matchingScooter = getScooterById(identifier);
         if (matchingScooter.getStatus() != scooter::PARKED)
-            throw std::invalid_argument("Scooter not reserved");
+            throw std::invalid_argument("Scooter not reserved as it is not available");
         scooter.setUser(user);
         scooter.setStatus(scooter::RESERVED);
         updateScooterInfo(scooter);
@@ -347,7 +313,7 @@ namespace repository
         string identifier = scooter.getIdentifier();
         Scooter matchingScooter = getScooterById(identifier);
         if (matchingScooter.getStatus() != scooter::RESERVED)
-            throw std::invalid_argument("Scooter not reserved");
+            throw std::invalid_argument("Scooter not reserved as it is not reserved");
         if (matchingScooter.getUser() != user)
             throw std::invalid_argument("Scooters belongs to other user");
         scooter.setUser(user);
@@ -360,13 +326,15 @@ namespace repository
         string identifier = scooter.getIdentifier();
         Scooter matchingScooter = getScooterById(identifier);
         if (matchingScooter.getStatus() != scooter::IN_USE)
-            throw std::invalid_argument("Scooter not IN-USE");
+            throw std::invalid_argument("Scooter not reserved as it is not in use");
         if (matchingScooter.getUser() != user)
             throw std::invalid_argument("Scooters belongs to other user");
         scooter.setUser(user);
         scooter.setStatus(scooter::PARKED);
         updateScooterInfo(scooter);
     }
+
+
 
 
 }
