@@ -2,6 +2,7 @@ cmake_minimum_required(VERSION 3.24.2)
 project(ScooterRental_GUI)
 
 set(CMAKE_CXX_STANDARD 20)
+set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -static-libstdc++ -static-libgcc")
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 set(Qt5_DIR "C:/Qt/5.15.14/mingw81_64/lib/cmake/Qt5")
